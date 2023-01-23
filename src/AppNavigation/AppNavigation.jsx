@@ -8,29 +8,30 @@ import Messages from '../SendMessages'
 import SendMessage from '../SendMessages'
 import Message from '../Message'
 import Farma from '../Farma'
+import Register from '../Regista'
 
 function AppNavigation() {
   let element = useRoutes([
     {
       path: '/',
-      element: <LogIn />,
+      element: <Register />,
       children: [{ index: true }],
     },
     {
       element: <AppIndex />,
       children: [
-        { index: true, element: <LogIn /> },
+        { index: true, element: <Register /> },
         {
           path: '/dashboard',
           element: <Dashboard />,
         },
         {
-            path: '/messages',
-            element: <Message/>,
-          },
+          path: '/messages',
+          element: <Message />,
+        },
         {
           path: '/send-message',
-          element: <SendMessage/>,
+          element: <SendMessage />,
         },
         {
           path: '/notification',
@@ -40,7 +41,6 @@ function AppNavigation() {
           path: '/farmer',
           element: <Farma />,
         },
-        
       ],
     },
   ])
