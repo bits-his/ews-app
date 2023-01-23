@@ -1,18 +1,27 @@
 import React, { useState } from "react";
-import { Button, Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
+import {
+  Button,
+  Card,
+  CardBody,
+  Col,
+  Container,
+  Input,
+  Label,
+  Row,
+} from "reactstrap";
 
 export default function Farma() {
-  const _form = [
-    csv,
-    excel,
-    first_name,
-    last_name,
-    lga,
-    state,
-    phone,
-    address_farmer,
-    farm_address,
-  ];
+  const _form = {
+    csv: "",
+    excel: "",
+    first_name: "",
+    last_name: "",
+    lga: "",
+    state: "",
+    phone: "",
+    address_farmer: "",
+    farm_address: "",
+  };
   const [form, setForm] = useState(_form);
 
   const handleChange = ({ target: { name, value } }) =>
@@ -105,7 +114,7 @@ export default function Farma() {
                 />
               </Col>
             </Row>
-            <Button>Submit</Button>
+           <center><Button className="mt-2">Submit</Button></center> 
           </CardBody>
         </Card>
       </Container>

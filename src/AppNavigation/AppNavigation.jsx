@@ -2,8 +2,11 @@ import React from 'react'
 import { useRoutes } from 'react-router-dom'
 import LogIn from '../Auth/LogIn'
 import AppIndex from './AppIndex'
-import Messages from '../Messages'
 import Notification from '../Notification'
+import Dashboard from '../Dashboard'
+import Messages from '../SendMessages'
+import SendMessage from '../SendMessages'
+import Message from '../Message'
 import Farma from '../Farma'
 
 function AppNavigation() {
@@ -18,15 +21,23 @@ function AppNavigation() {
       children: [
         { index: true, element: <LogIn /> },
         {
-          path: '/messages',
-          element: <Messages />,
+          path: '/dashboard',
+          element: <Dashboard />,
+        },
+        {
+            path: '/messages',
+            element: <Message/>,
+          },
+        {
+          path: '/send-message',
+          element: <SendMessage/>,
         },
         {
           path: '/notification',
           element: <Notification />,
         },
         {
-          path: '/farma',
+          path: '/farmer',
           element: <Farma />,
         },
         

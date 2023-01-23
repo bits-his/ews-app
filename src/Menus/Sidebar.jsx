@@ -11,27 +11,27 @@ export default function Sidebar() {
   const sidebar = [
     {
       item: 'Dashboard',
-      icon: <GoDashboard size="1.5rem" />,
+      icon: <GoDashboard size="2.5rem" className="sidebar_icon" />,
     },
     {
       item: 'Messages',
-      icon: <BsChatLeftText size="1.5rem" />,
+      icon: <BsChatLeftText size="2.5rem" className="sidebar_icon" />,
     },
     {
       item: 'Admin',
-      icon: <HiOutlineUsers size="1.5rem" />,
+      icon: <HiOutlineUsers size="2.5rem" className="sidebar_icon" />,
     },
     {
       item: 'Farmers',
-      icon: <GiFarmer size="1.9rem" />,
+      icon: <GiFarmer size="2.9rem" className="sidebar_icon" />,
     },
     {
       item: 'Feedbacks',
-      icon: <VscFeedback size="1.8rem" />,
+      icon: <VscFeedback size="2.8rem" className="sidebar_icon" />,
     },
     {
       item: 'Settings',
-      icon: <CiSettings size="1.8rem" />,
+      icon: <CiSettings size="2.8rem" className="sidebar_icon" />,
     },
   ]
   return (
@@ -39,7 +39,7 @@ export default function Sidebar() {
       {sidebar.map((item) => (
         <div className="sidebar_item">
           <p className="sidebar_item_p">
-            {item.icon} {item.item}
+            {item.icon} <span>{item.item}</span>
           </p>
         </div>
       ))}

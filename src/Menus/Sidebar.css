@@ -12,8 +12,9 @@
   margin: 0px 10px 0px 10px;
 }
 .sidebar_item_p:hover {
-  background-color: #244f80;
+  /* background-color: #244f80; */
   border-radius: 30px;
+  /* padding: 10px; */
   cursor: pointer;
 }
 .logo {
@@ -21,4 +22,16 @@
   border-radius: 50%;
   width: 100px;
   height: 100px;
+}
+
+.sidebar_icon {
+  background-color: #244f80;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.sidebar_item :hover {
+  /* .sidebar_icon {
+    border: 1px solid #ffcd06;
+  } */
 }
