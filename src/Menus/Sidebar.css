@@ -1,0 +1,24 @@
+:root {
+  --primaryColor: #001f43;
+  --secondaryColor: #ffcd06;
+}
+.sidebar {
+  background-color: var(--primaryColor);
+  color: white;
+  height: 100vh;
+}
+.sidebar_item_p {
+  padding: 15px;
+  margin: 0px 10px 0px 10px;
+}
+.sidebar_item_p:hover {
+  background-color: #244f80;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.logo {
+  background-color: white;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}

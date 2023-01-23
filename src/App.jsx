@@ -2,14 +2,17 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import Messages from './AppNavigation/Messages'
+import AppNavigation from './AppNavigation/AppNavigation'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
     <Messages />
+    <div>
+      <AppNavigation />
+    </div>
     </>
+    
   )
 }
 
