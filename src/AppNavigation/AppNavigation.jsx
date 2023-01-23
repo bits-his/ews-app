@@ -7,6 +7,7 @@ import Dashboard from '../Dashboard'
 import Messages from '../SendMessages'
 import SendMessage from '../SendMessages'
 import Message from '../Message'
+import Farma from '../Farma'
 
 function AppNavigation() {
   let element = useRoutes([
@@ -35,6 +36,11 @@ function AppNavigation() {
           path: '/notification',
           element: <Notification />,
         },
+        {
+          path: '/farmer',
+          element: <Farma />,
+        },
+        
       ],
     },
   ])
