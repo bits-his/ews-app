@@ -38,7 +38,7 @@ export default function Sidebar() {
     <div className="sidebar">
       {sidebar.map((item) => (
         <div className="sidebar_item">
-          <p>
+          <p className="sidebar_item_p">
             {item.icon} {item.item}
           </p>
         </div>

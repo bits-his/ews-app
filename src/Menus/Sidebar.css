@@ -7,15 +7,18 @@
   color: white;
   height: 100vh;
 }
-.sidebar_item{
-    padding: 20px;
+.sidebar_item_p {
+  padding: 15px;
+  margin: 0px 10px 0px 10px;
 }
-.sidebar_item:hover{
-    
+.sidebar_item_p:hover {
+  background-color: #244f80;
+  border-radius: 30px;
+  cursor: pointer;
 }
-.logo{
-    background-color: white;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
+.logo {
+  background-color: white;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
 }
