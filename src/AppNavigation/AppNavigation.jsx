@@ -2,8 +2,9 @@ import React from 'react'
 import { useRoutes } from 'react-router-dom'
 import LogIn from '../Auth/LogIn'
 import AppIndex from './AppIndex'
-import Messages from '../Messages'
 import Notification from '../Notification'
+import Dashboard from '../Dashboard'
+import Messages from '../Messages'
 
 function AppNavigation() {
   let element = useRoutes([
@@ -17,8 +18,12 @@ function AppNavigation() {
       children: [
         { index: true, element: <LogIn /> },
         {
+          path: '/dashboard',
+          element: <Dashboard />,
+        },
+        {
           path: '/messages',
-          element: <Messages />,
+          element: <Messages/>,
         },
         {
           path: '/notification',
