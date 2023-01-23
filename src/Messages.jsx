@@ -36,11 +36,18 @@ export default function Messages() {
   }
 
   return (
-    <Card body className="form_input">
+    <Card body className="form_input dashboard_card shadow-sm m-3">
+      <h3 className='card_title'>Message</h3>
       <Form onSubmit={handleAdd}>
         {JSON.stringify(form)}
         <Row className="m-0 p-0">
-          <Col>
+          <Col
+            className="col-md-12"
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+            }}
+          >
             <Input
               className="title_input"
               type="text"
@@ -60,7 +67,13 @@ export default function Messages() {
           </Col>
         </Row>
         <Row className="m-0 p-0">
-          <Col>
+          <Col
+            className="col-md-12"
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+            }}
+          >
             <Input
               className="option_input"
               type="select"
@@ -108,8 +121,8 @@ export default function Messages() {
               onChange={(e) => handle(e)}
             />
           </Col>
-          <button>Send</button>
         </Row>
+        <button className="primary_button">Send</button>
       </Form>
     </Card>
   )
