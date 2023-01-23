@@ -4,7 +4,9 @@ import LogIn from '../Auth/LogIn'
 import AppIndex from './AppIndex'
 import Notification from '../Notification'
 import Dashboard from '../Dashboard'
-import Messages from '../Messages'
+import Messages from '../SendMessages'
+import SendMessage from '../SendMessages'
+import Message from '../Message'
 
 function AppNavigation() {
   let element = useRoutes([
@@ -22,8 +24,12 @@ function AppNavigation() {
           element: <Dashboard />,
         },
         {
-          path: '/messages',
-          element: <Messages/>,
+            path: '/messages',
+            element: <Message/>,
+          },
+        {
+          path: '/send-message',
+          element: <SendMessage/>,
         },
         {
           path: '/notification',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Card, Col, Form, Input, Row } from 'reactstrap'
 
-export default function Messages() {
+export default function SendMessage() {
   const [form, setForm] = useState({
     title: '',
     org_name: '',
@@ -36,8 +36,8 @@ export default function Messages() {
   }
 
   return (
-    <Card body className="form_input dashboard_card shadow-sm m-3">
-      <h3 className='card_title'>Message</h3>
+    <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
+      <h3 className='card_title'>Send Message</h3>
       <Form onSubmit={handleAdd}>
         {JSON.stringify(form)}
         <Row className="m-0 p-0">

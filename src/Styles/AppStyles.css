@@ -1,28 +1,28 @@
 :root {
-    --primaryColor: #001f43;
-    --secondaryColor: #ffcd06;
-  }
-.dashboard_card{
-    border-radius: 30px !important;
-    /* border: none !important; */
-    height: 90vh !important;
+  --primaryColor: #001f43;
+  --secondaryColor: #ffcd06;
+}
+.dashboard_card {
+  border-radius: 30px !important;
+  /* border: none !important; */
+  height: 90vh !important;
 }
 .primary_button {
-    background-color: var(--primaryColor);
-    color: white;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 30px;
-    outline: 2px solid var(--secondaryColor);
-    outline-offset: 3px;
-    box-shadow: 0 8px 12px 0 var(--primaryColor);
-  }
-  .primary_button:hover {
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .card_title{
-    font-weight: bold;
+  background-color: var(--primaryColor);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 30px;
+  outline: 2px solid var(--secondaryColor);
+  outline-offset: 3px;
+  box-shadow: 0 8px 12px 0 var(--primaryColor);
+}
+.primary_button:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
 
-  }
+.card_title {
+  font-weight: bold;
+  color: #001f43;
+}
