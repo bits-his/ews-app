@@ -4,6 +4,7 @@ import LogIn from '../Auth/LogIn'
 import AppIndex from './AppIndex'
 import Messages from '../Messages'
 import Notification from '../Notification'
+import Farma from '../Farma'
 
 function AppNavigation() {
   let element = useRoutes([
@@ -24,6 +25,11 @@ function AppNavigation() {
           path: '/notification',
           element: <Notification />,
         },
+        {
+          path: '/farma',
+          element: <Farma />,
+        },
+        
       ],
     },
   ])
