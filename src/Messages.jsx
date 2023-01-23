@@ -44,7 +44,10 @@ export default function Messages() {
       <Form onSubmit={handleAdd}>
         {JSON.stringify(form)}
         <Row className='m-0 p-0'>
-          <Col>
+          <Col className='col-md-12' style={{
+            display: 'flex',
+            flexDirection: 'row'
+          }}>
             <Input 
               className='title_input'
               type='text'
@@ -64,7 +67,10 @@ export default function Messages() {
           </Col>
         </Row>
         <Row className='m-0 p-0'>
-          <Col>
+          <Col className='col-md-12' style={{
+            display: 'flex',
+            flexDirection: 'row'
+          }}>
             <Input 
               className='option_input'
               type='select'
@@ -112,8 +118,11 @@ export default function Messages() {
               onChange={(e)=> handle(e)}
             />
           </Col>
-          <button>Send</button>
         </Row>
+        <button className='col-md-2' style={{
+          marginLeft: 627,
+          borderRadius: '10px'
+        }}>Send</button>
       </Form>
     </Card>
   )
