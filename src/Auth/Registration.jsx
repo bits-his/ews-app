@@ -7,6 +7,12 @@ import './Register.css'
 export default function Registration() {
   const [value, setValue] = useState(null)
   const [display, setDisplay] = useState(false)
+  const [form, SetForm] = useState({
+    org_name: '',
+    org_phone: '',
+    org_mail: '',
+    password: ''
+  })
 
   const registrationForm = [
     {
@@ -16,10 +22,37 @@ export default function Registration() {
       password: '',
     },
   ]
+
+  const handleAdd = (e) => {
+        e.preventDefault()
+        if(
+            form.org_name === '' || 
+            form.org_phone === '' || 
+            form.org_mail === '' || 
+            form.password === '' 
+        ){
+          alert('All values are required')
+        }
+        if(form.org_name&&form.org_phone&&form.org_mail&&form.password){
+          SetForm({
+            org_name: '',
+            org_phone: '',
+            org_mail: '',
+            password: ''
+          })
+        }
+  }
+
+  function handle(e) {
+        const newData = {...form}
+        newData[e.target.id ] = e.target.value
+        SetForm(newData)
+        console.log(newData);
+  }
   return (
     <div>
       <div className="sign-in-body">
-        <form className="">
+        <form className="" onSubmit={handleAdd}>
           <>
             <Row>
               {/* <Col md={1}></Col> */}
@@ -28,6 +61,9 @@ export default function Registration() {
                   <input
                     className="mb-4 input_field p-3"
                     type="text"
+                    id='org_name'
+                    value={form.org_name}
+                    onChange={(e)=> handle(e)}
                     placeholder="Organization Name"
                   />
                 </div>
@@ -35,6 +71,9 @@ export default function Registration() {
                   <input
                     className="mb-4 input_field p-3"
                     type="tel"
+                    id='org_phone'
+                    value={form.org_phone}
+                    onChange={(e)=> handle(e)}
                     placeholder="Organization Phone"
                   />
                 </div>
@@ -42,6 +81,9 @@ export default function Registration() {
                   <input
                     className="mb-4 input_field p-3"
                     type="email"
+                    id='org_mail'
+                    value={form.org_mail}
+                    onChange={(e)=> handle(e)}
                     placeholder="Organization Email"
                   />
                 </div>
@@ -50,6 +92,9 @@ export default function Registration() {
                     <input
                       className="mb-4 input_field p-3"
                       type={display ? 'password' : 'text'}
+                      id='password'
+                      value={form.password}
+                      onChange={(e)=> handle(e)}
                       placeholder="Password"
                     />
                     <i
