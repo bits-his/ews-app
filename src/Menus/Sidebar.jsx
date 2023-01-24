@@ -49,8 +49,7 @@ export default function Sidebar() {
           // }`}
           <div  onClick={()=>goto(item.link)}>
             <p className="sidebar_item_p">
-             <span className={`sidebar_item ${location.pathname==item.link && "active_side_item"}`}>{item.icon}</span>
-             
+             <span>{item.icon}</span> <span>{item.item}</span>
             </p>
           </div>
         ))}

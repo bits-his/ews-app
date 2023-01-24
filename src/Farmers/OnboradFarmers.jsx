@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Card, Col, Row } from 'reactstrap'
 
-export default function Farmers() {
+export default function OnboardFarmers() {
   const _form = {
     csv: '',
     excel: '',
@@ -132,9 +132,11 @@ export default function Farmers() {
               value={form.f_address}
               onChange={handleChange}
             />
-            <button className="primary_button mt-4">Submit</button>
           </Col>
         </Row>
+        <div>
+          <button className="primary_button mt-4">Submit</button>
+        </div>
       </Card>
     </div>
   )
