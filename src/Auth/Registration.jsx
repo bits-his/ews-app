@@ -11,7 +11,7 @@ export default function Registration() {
     org_name: '',
     org_phone: '',
     org_mail: '',
-    password: ''
+    password: '',
   })
 
   const registrationForm = [
@@ -24,30 +24,30 @@ export default function Registration() {
   ]
 
   const handleAdd = (e) => {
-        e.preventDefault()
-        if(
-            form.org_name === '' || 
-            form.org_phone === '' || 
-            form.org_mail === '' || 
-            form.password === '' 
-        ){
-          alert('All values are required')
-        }
-        if(form.org_name&&form.org_phone&&form.org_mail&&form.password){
-          SetForm({
-            org_name: '',
-            org_phone: '',
-            org_mail: '',
-            password: ''
-          })
-        }
+    e.preventDefault()
+    if (
+      form.org_name === '' ||
+      form.org_phone === '' ||
+      form.org_mail === '' ||
+      form.password === ''
+    ) {
+      alert('All values are required')
+    }
+    if (form.org_name && form.org_phone && form.org_mail && form.password) {
+      SetForm({
+        org_name: '',
+        org_phone: '',
+        org_mail: '',
+        password: '',
+      })
+    }
   }
 
   function handle(e) {
-        const newData = {...form}
-        newData[e.target.id ] = e.target.value
-        SetForm(newData)
-        console.log(newData);
+    const newData = { ...form }
+    newData[e.target.id] = e.target.value
+    SetForm(newData)
+    console.log(newData)
   }
   return (
     <div>
@@ -61,9 +61,9 @@ export default function Registration() {
                   <input
                     className="mb-4 input_field p-3"
                     type="text"
-                    id='org_name'
+                    id="org_name"
                     value={form.org_name}
-                    onChange={(e)=> handle(e)}
+                    onChange={(e) => handle(e)}
                     placeholder="Organization Name"
                   />
                 </div>
@@ -71,9 +71,9 @@ export default function Registration() {
                   <input
                     className="mb-4 input_field p-3"
                     type="tel"
-                    id='org_phone'
+                    id="org_phone"
                     value={form.org_phone}
-                    onChange={(e)=> handle(e)}
+                    onChange={(e) => handle(e)}
                     placeholder="Organization Phone"
                   />
                 </div>
@@ -81,9 +81,9 @@ export default function Registration() {
                   <input
                     className="mb-4 input_field p-3"
                     type="email"
-                    id='org_mail'
+                    id="org_mail"
                     value={form.org_mail}
-                    onChange={(e)=> handle(e)}
+                    onChange={(e) => handle(e)}
                     placeholder="Organization Email"
                   />
                 </div>
@@ -92,9 +92,9 @@ export default function Registration() {
                     <input
                       className="mb-4 input_field p-3"
                       type={display ? 'password' : 'text'}
-                      id='password'
+                      id="password"
                       value={form.password}
-                      onChange={(e)=> handle(e)}
+                      onChange={(e) => handle(e)}
                       placeholder="Password"
                     />
                     <i
@@ -123,6 +123,11 @@ export default function Registration() {
               {/* <Col md={1}></Col> */}
             </Row>
           </>
+          {/* <div className="text-center mt-3">
+              <p className="auth_info p-0">
+                Already have an account? | Log in here.
+              </p>
+            </div> */}
         </form>
       </div>
     </div>

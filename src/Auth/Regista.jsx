@@ -15,7 +15,7 @@ export default function Register() {
           <div className="text-center mt-3">
             <img src={logo} className="auth_logo" alt="logo" />
           </div>
-          <Card className="card p-5 input shadow mt-3">
+          <Card className="card p-4 input shadow mt-3">
             <Row className='mb-3'>
               <div className="switch_div">
                 <div>
@@ -38,7 +38,7 @@ export default function Register() {
                       }}
                       onClick={() => setPage(false)}
                     >
-                      Login
+                      Log in
                     </span>
                     <span
                       style={{
@@ -58,6 +58,7 @@ export default function Register() {
               </div>
             </Row>
             {!page ? <Signin /> : <Registration />}
+            
           </Card>
         </Col>
         <Col md={4}></Col>

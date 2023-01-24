@@ -14,30 +14,30 @@ export default function Sidebar() {
   const sidebar = [
     {
       item: 'Dashboard',
-      icon: <GoDashboard size="2.5rem" className="sidebar_icon" />,
-      link:'/dashboard',
+      icon: <GoDashboard size="2.2rem" className="sidebar_icon" />,
+      link: '/dashboard',
     },
     {
       item: 'Messages',
-      icon: <BsChatLeftText size="2.5rem" className="sidebar_icon" />,
-      link:'/messages',
+      icon: <BsChatLeftText size="2.2rem" className="sidebar_icon" />,
+      link: '/messages',
     },
     {
       item: 'Admin',
-      icon: <HiOutlineUsers size="2.5rem" className="sidebar_icon" />,
+      icon: <HiOutlineUsers size="2.2rem" className="sidebar_icon" />,
     },
     {
       item: 'Farmers',
-      icon: <GiFarmer size="2.9rem" className="sidebar_icon" />,
-      link:'/farmers',
+      icon: <GiFarmer size="2.6rem" className="sidebar_icon" />,
+      link: '/farmers',
     },
     {
       item: 'Feedbacks',
-      icon: <VscFeedback size="2.8rem" className="sidebar_icon" />,
+      icon: <VscFeedback size="2.5rem" className="sidebar_icon" />,
     },
     {
       item: 'Settings',
-      icon: <CiSettings size="2.8rem" className="sidebar_icon" />,
+      icon: <CiSettings size="2.5rem" className="sidebar_icon" />,
     },
   ]
   return (
@@ -47,9 +47,10 @@ export default function Sidebar() {
         {sidebar.map((item) => (
           //   className={`sidemenu ${location.pathname === "/sole-agents" && "active_side_menu"
           // }`}
-          <div  onClick={()=>goto(item.link)}>
+          <div onClick={() => goto(item.link)}>
             <p className="sidebar_item_p">
-             <span>{item.icon}</span> <span className='ml-3'>{item.item}</span>
+              <span>{item.icon}</span>
+              <span style={{ marginLeft: 5 }}>{item.item}</span>
             </p>
           </div>
         ))}
