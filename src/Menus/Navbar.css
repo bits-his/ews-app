@@ -2,22 +2,29 @@
   --primaryColor: #001f43;
   --secondaryColor: #ffcd06;
 }
-.navbar {
+.navbar_ {
   /* height: 50px; */
   /* box-shadow: 0 4px 6px 0 var(--primaryColor); */
-  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.5);
+  box-shadow: 0 4px 4px 0 rgba(207, 207, 207, 0.5);
 
   background-color: white;
 }
 
 .ass_name {
+  display: inline;
   font-weight: bold;
 }
 
 .navbar_div {
-  display: flex;
+  /* display: flex; */
   height: 50px;
-  align-items: center;
+  /* align-items: center; */
+}
+
+.name_profile{
+    margin-top: 5px;
+    margin-right: 10px;
+    float: right;
 }
 
 .profile {

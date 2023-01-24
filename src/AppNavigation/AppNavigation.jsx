@@ -2,13 +2,12 @@ import React from 'react'
 import { useRoutes } from 'react-router-dom'
 import LogIn from '../Auth/LogIn'
 import AppIndex from './AppIndex'
-import Notification from '../Notification'
 import Dashboard from '../Dashboard'
-import Messages from '../SendMessages'
-import SendMessage from '../SendMessages'
-import Message from '../Message'
-import Farmers from '../Farmers'
 import Register from '../Regista'
+import Message from '../Messages/Message'
+import SendMessage from '../Messages/SendMessages'
+import Farmers from '../Farmers/Farmers'
+import OnboardFarmers from '../Farmers/OnboradFarmers'
 
 function AppNavigation() {
   let element = useRoutes([
@@ -34,12 +33,12 @@ function AppNavigation() {
           element: <SendMessage />,
         },
         {
-          path: '/notification',
-          element: <Notification />,
-        },
-        {
           path: '/farmers',
           element: <Farmers />,
+        },
+        {
+          path: '/onboard-farmers',
+          element: <OnboardFarmers/>,
         },
       ],
     },

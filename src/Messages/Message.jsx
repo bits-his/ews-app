@@ -33,11 +33,7 @@ export default function Message() {
         </Row>
         <Row className="mt-5">
           {messageCard.map((item) => (
-            <Col md={3}>
-              {/* <Card className="message_card shadow p-3"> */}
-                <CardText className="message_card_title">{item.title}</CardText>
-              {/* </Card> */}
-            </Col>
+            <p className="">{item.title}</p>
           ))}
         </Row>
       </Card>
