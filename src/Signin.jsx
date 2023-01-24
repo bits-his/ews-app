@@ -6,12 +6,38 @@ import { useState } from "react";
 
 export default function Signin() {
   const [display, setDisplay] = useState(false);
-  
+  const [signinForm, setSigninForm] = useState({
+    username: '',
+    password: ''
+  })
+  const handleAdd = (e) => {
+        e.preventDefault()
+        if(
+            signinForm.username === '' || 
+            signinForm.password === ''
+        ){
+          alert('All values are required')
+        }
+        if(signinForm.username&&signinForm.password){
+          setSigninForm({
+            username: '',
+            password: ''
+          })
+        }
+  }
+
+  function handle(e) {
+        const newData = {...signinForm}
+        newData[e.target.id ] = e.target.value
+        setSigninForm(newData)
+        console.log(newData);
+  }
+
   return (
     <div>
       <div className="signin-main">
         <div className="sign-in-body">
-          <form>
+          <form onSubmit={handleAdd}>
             <>
               <Row>
                 {/* <Col md={1}></Col> */}
@@ -19,16 +45,22 @@ export default function Signin() {
                   <div class="form-row">
                     <input
                       class="mb-4 input_field p-3"
+                      id="username"
+                      value={signinForm.username}
                       type="text"
                       placeholder="username"
+                      onChange={(e)=> handle(e)}
                     />
                   </div>
                   <div class="form-row">
                     <div className="d-flex">
                       <input
                         class="mb-4 input_field p-3"
+                        id="password"
+                        value={signinForm.password}
                         type={display ? "password" : "text"}
                         placeholder="password "
+                        onChange={(e)=> handle(e)}
                       />
                       <i
                         className={
