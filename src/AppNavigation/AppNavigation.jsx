@@ -7,7 +7,7 @@ import Dashboard from '../Dashboard'
 import Messages from '../SendMessages'
 import SendMessage from '../SendMessages'
 import Message from '../Message'
-import Farma from '../Farma'
+import Farmers from '../Farmers'
 import Register from '../Regista'
 
 function AppNavigation() {
@@ -38,8 +38,8 @@ function AppNavigation() {
           element: <Notification />,
         },
         {
-          path: '/farmer',
-          element: <Farma />,
+          path: '/farmers',
+          element: <Farmers />,
         },
       ],
     },

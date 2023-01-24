@@ -8,20 +8,22 @@
   height: 100vh;
 }
 .sidebar_item_p {
-  padding: 15px;
+  padding: 10px;
   margin: 0px 10px 0px 10px;
 }
 .sidebar_item_p:hover {
   /* background-color: #244f80; */
-  border-radius: 30px;
+  border-right: 4px solid #ffcd06;
+  /* border-radius: 30px; */
   /* padding: 10px; */
   cursor: pointer;
 }
 .logo {
-  background-color: white;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  margin: 0px 10px 0px 10px;
+  width: 150px;
+  /* margin-left: auto;
+  margin-right: auto; */
+  display: block;
 }
 
 .sidebar_icon {
@@ -30,8 +32,18 @@
   border-radius: 50%;
 }
 
+.sidebar_item{
+  width: 50px;
+  height: 50px;
+}
+
 .sidebar_item :hover {
   /* .sidebar_icon {
     border: 1px solid #ffcd06;
   } */
+}
+
+.active_side_item{
+  border: 1px solid #ffcd06;
+  /* border-radius: 50%; */
 }

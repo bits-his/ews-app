@@ -37,92 +37,77 @@ export default function SendMessage() {
 
   return (
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
-      <h3 className='card_title'>Send Message</h3>
+      <h3 className="card_title">Send Message</h3>
       <Form onSubmit={handleAdd}>
-        {JSON.stringify(form)}
-        <Row className="m-0 p-0">
-          <Col
-            className="col-md-12"
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-            }}
-          >
-            <Input
-              className="title_input"
+        {/* {JSON.stringify(form)} */}
+        <Row>
+          <Col md={6}>
+            <input
+              className="input_field p-2 mt-3"
               type="text"
               id="title"
-              placeholder="Tittle"
+              placeholder="Message Title"
               value={form.title}
               onChange={(e) => handle(e)}
             />
-            <Input
-              className="title_input"
-              type="text"
-              id="org_name"
-              placeholder="Org name"
-              value={form.org_name}
-              onChange={(e) => handle(e)}
-            />
-          </Col>
-        </Row>
-        <Row className="m-0 p-0">
-          <Col
-            className="col-md-12"
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-            }}
-          >
-            <Input
-              className="option_input"
+            <select
+              className="input_field p-2 mt-3"
               type="select"
               id="member_type"
               value={form.member_type}
               onChange={(e) => handle(e)}
             >
-              <option>Member type</option>
+              <option>Member Type</option>
               <option value="1">1</option>
               <option value="1">1</option>
               <option value="1">1</option>
-            </Input>
-            <Input
-              className="option_input"
+            </select>
+            <textarea
+              className="input_field mt-3 p-2"
+              type="textarea"
+              id="messages"
+              rows="10"
+              placeholder="Write message"
+              value={form.messages}
+              onChange={(e) => handle(e)}
+            />
+          </Col>
+          <Col md={6}>
+            <input
+              className="input_field p-2 mt-3"
+              type="text"
+              id="org_name"
+              placeholder="Organization Name"
+              value={form.org_name}
+              onChange={(e) => handle(e)}
+            />
+            <select
+              className="input_field p-2 mt-3"
               type="select"
               id="target_farmer"
               value={form.target_farmer}
               onChange={(e) => handle(e)}
             >
-              <option>Target farmer</option>
+              <option>Target Farmer</option>
               <option value="1">1</option>
               <option value="1">1</option>
               <option value="1">1</option>
-            </Input>
-            <Input
-              className="option_input"
+            </select>
+            <select
+              className="input_field p-2 mt-3"
               type="select"
               id="target"
               value={form.target}
               onChange={(e) => handle(e)}
             >
-              <option>Target</option>
+              <option>Location</option>
               <option value="1">1</option>
               <option value="1">1</option>
               <option value="1">1</option>
-            </Input>
-          </Col>
-          <Col>
-            <Input
-              className="textarea_input"
-              type="textarea"
-              id="messages"
-              placeholder="while........"
-              value={form.messages}
-              onChange={(e) => handle(e)}
-            />
+            </select>
           </Col>
         </Row>
-        <button className="primary_button">Send</button>
+        <button className="primary_button mt-3">Send</button>
       </Form>
     </Card>
   )

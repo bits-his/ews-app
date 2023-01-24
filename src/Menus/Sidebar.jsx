@@ -6,16 +6,21 @@ import { GiFarmer } from 'react-icons/gi'
 import { VscFeedback } from 'react-icons/vsc'
 import { CiSettings } from 'react-icons/ci'
 import { Row } from 'reactstrap'
+import logo from '../Images/Knowtify.png'
 import './Sidebar.css'
+import { useNavigate } from 'react-router-dom'
 export default function Sidebar() {
+  const goto = useNavigate()
   const sidebar = [
     {
       item: 'Dashboard',
       icon: <GoDashboard size="2.5rem" className="sidebar_icon" />,
+      link:'/dashboard',
     },
     {
       item: 'Messages',
       icon: <BsChatLeftText size="2.5rem" className="sidebar_icon" />,
+      link:'/messages',
     },
     {
       item: 'Admin',
@@ -24,6 +29,7 @@ export default function Sidebar() {
     {
       item: 'Farmers',
       icon: <GiFarmer size="2.9rem" className="sidebar_icon" />,
+      link:'/farmers',
     },
     {
       item: 'Feedbacks',
@@ -36,13 +42,19 @@ export default function Sidebar() {
   ]
   return (
     <div className="sidebar">
-      {sidebar.map((item) => (
-        <div className="sidebar_item">
-          <p className="sidebar_item_p">
-            {item.icon} <span>{item.item}</span>
-          </p>
-        </div>
-      ))}
+      <img src={logo} alt="logo" className="logo" />
+      <div className="mt-3">
+        {sidebar.map((item) => (
+          //   className={`sidemenu ${location.pathname === "/sole-agents" && "active_side_menu"
+          // }`}
+          <div  onClick={()=>goto(item.link)}>
+            <p className="sidebar_item_p">
+             <span className={`sidebar_item ${location.pathname==item.link && "active_side_item"}`}>{item.icon}</span>
+             
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

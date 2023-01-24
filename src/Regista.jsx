@@ -18,7 +18,7 @@ export default function Register() {
                 <Col md={4}>
                   <Row>
                     <Col md={4}></Col>
-                    <Col md={4}>
+                    <Col md={4}> 
                       <ButtonGroup>
                         <Button
                           style={{
@@ -49,7 +49,7 @@ export default function Register() {
               </Row>
             </header>
 
-            <form>{!page ? <Registration /> : <Signin />}</form>
+            {!page ? <Registration /> : <Signin />}
           </Card>
         </Col>
         <Col md={4}></Col>

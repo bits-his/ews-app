@@ -7,39 +7,48 @@ import './Register.css'
 export default function Registration() {
   const [value, setValue] = useState(null)
   const [display, setDisplay] = useState(false)
+
+  const registrationForm = [
+    {
+      name: '',
+      email: '',
+      phone1: '',
+      password: '',
+    },
+  ]
   return (
     <div>
       <div className="sign-in-body">
-        <form>
+        <form className="">
           <>
             <Row>
               {/* <Col md={1}></Col> */}
               <Col md={12}>
-                <div class="form-row">
+                <div className="form-row">
                   <input
-                    class="mb-4 input_field p-3"
+                    className="mb-4 input_field p-3"
                     type="text"
                     placeholder="Organization Name"
                   />
                 </div>
-                <div class="form-row">
+                <div className="form-row">
                   <input
-                    class="mb-4 input_field p-3"
+                    className="mb-4 input_field p-3"
                     type="tel"
                     placeholder="Organization Phone"
                   />
                 </div>
-                <div class="form-row">
+                <div className="form-row">
                   <input
-                    class="mb-4 input_field p-3"
+                    className="mb-4 input_field p-3"
                     type="email"
                     placeholder="Organization Email"
                   />
                 </div>
-                <div class="form-row">
+                <div className="form-row">
                   <div className="d-flex">
                     <input
-                      class="mb-4 input_field p-3"
+                      className="mb-4 input_field p-3"
                       type={display ? 'password' : 'text'}
                       placeholder="Password"
                     />
@@ -58,11 +67,11 @@ export default function Registration() {
                 <div>
                   <button
                     type="submit "
-                    class="primary_button"
+                    className="primary_button"
                     style={{ width: '100%' }}
                   >
                     Register
-                    {/* <BiChevronRight size={40} /> */}
+                    <BiChevronRight size={20} />
                   </button>
                 </div>
               </Col>

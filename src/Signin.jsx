@@ -13,8 +13,8 @@ export default function Signin() {
           <form>
             <>
               <Row>
-                <Col md={1}></Col>
-                <Col md={10}>
+                {/* <Col md={1}></Col> */}
+                <Col md={12}>
                   <div class="form-row">
                     <input
                       class="mb-4 input_field p-3"
@@ -37,13 +37,13 @@ export default function Signin() {
                         onClick={() => setDisplay(!display)}
                       ></i>
                     </div>
-                    <button className="btn btn-rounded w-25">
+                    <button className="primary_button" style={{width:'100%'}}>
                       Go
-                      <BiChevronRight size={45} />
+                      <BiChevronRight size={20} />
                     </button>
                   </div>
                 </Col>
-                <Col md={1}></Col>
+                {/* <Col md={1}></Col> */}
               </Row>
             </>
           </form>

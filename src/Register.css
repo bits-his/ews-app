@@ -48,8 +48,8 @@ li {
   border-radius: 5px;
 }
 
-.input:focus{
-outline: 1px solid red !important;
+.input_field:focus{
+outline: 1px solid #002147;
 }
 
 form {
