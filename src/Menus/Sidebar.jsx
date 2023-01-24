@@ -49,7 +49,7 @@ export default function Sidebar() {
           // }`}
           <div  onClick={()=>goto(item.link)}>
             <p className="sidebar_item_p">
-             <span>{item.icon}</span> <span>{item.item}</span>
+             <span>{item.icon}</span> <span className='ml-3'>{item.item}</span>
             </p>
           </div>
         ))}

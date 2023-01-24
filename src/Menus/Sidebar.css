@@ -29,10 +29,10 @@
 .sidebar_icon {
   background-color: #244f80;
   padding: 10px;
-  border-radius: 50%;
+  border-radius: 20%;
 }
 
-.sidebar_item{
+.sidebar_item {
   width: 50px;
   height: 50px;
 }
@@ -43,7 +43,7 @@
   } */
 }
 
-.active_side_item{
+.active_side_item {
   border: 1px solid #ffcd06;
   /* border-radius: 50%; */
 }
