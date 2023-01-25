@@ -1,6 +1,5 @@
 import React from 'react'
 import { useRoutes } from 'react-router-dom'
-import LogIn from '../Auth/LogIn'
 import AppIndex from './AppIndex'
 import Dashboard from '../Dashboard'
 import Register from '../Auth/Regista'

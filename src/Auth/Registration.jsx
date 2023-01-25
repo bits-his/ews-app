@@ -1,58 +1,47 @@
 import React, { useState } from 'react'
 import { BiChevronRight } from 'react-icons/bi'
+import { useNavigate } from 'react-router-dom'
 
 import { Row, Col, Button } from 'reactstrap'
+import { server_url, _post } from '../utils/Helper'
 import './Register.css'
 
 export default function Registration() {
-  const [value, setValue] = useState(null)
+  const goto = useNavigate()
+
+  // const [value, setValue] = useState(null)
   const [display, setDisplay] = useState(false)
-  const [form, SetForm] = useState({
-    org_name: '',
-    org_phone: '',
-    org_mail: '',
+  const form = {
+    name: '',
+    email: '',
+    phone1: '',
     password: '',
-  })
+  }
 
-  const registrationForm = [
-    {
-      name: '',
-      email: '',
-      phone1: '',
-      password: '',
-    },
-  ]
+  const [registrationForm, setRegistration] = useState(form)
 
-  const handleAdd = (e) => {
+  const handleChange = ({ target: { name, value } }) => {
+    setRegistration((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const submit = (e) => {
     e.preventDefault()
-    if (
-      form.org_name === '' ||
-      form.org_phone === '' ||
-      form.org_mail === '' ||
-      form.password === ''
-    ) {
-      alert('All values are required')
-    }
-    if (form.org_name && form.org_phone && form.org_mail && form.password) {
-      SetForm({
-        org_name: '',
-        org_phone: '',
-        org_mail: '',
-        password: '',
-      })
-    }
+    _post(
+      `users/create`,
+      registrationForm,
+      (resp) => {
+        console.log(resp)
+      },
+      (e) => {
+        console.log(e)
+      },
+    )
   }
 
-  function handle(e) {
-    const newData = { ...form }
-    newData[e.target.id] = e.target.value
-    SetForm(newData)
-    console.log(newData)
-  }
   return (
     <div>
       <div className="sign-in-body">
-        <form className="" onSubmit={handleAdd}>
+        <form className="">
           <>
             <Row>
               {/* <Col md={1}></Col> */}
@@ -62,8 +51,9 @@ export default function Registration() {
                     className="mb-4 input_field p-3"
                     type="text"
                     id="org_name"
-                    value={form.org_name}
-                    onChange={(e) => handle(e)}
+                    name="name"
+                    value={registrationForm.name}
+                    onChange={handleChange}
                     placeholder="Organization Name"
                   />
                 </div>
@@ -72,8 +62,9 @@ export default function Registration() {
                     className="mb-4 input_field p-3"
                     type="tel"
                     id="org_phone"
-                    value={form.org_phone}
-                    onChange={(e) => handle(e)}
+                    name="phone1"
+                    value={registrationForm.phone1}
+                    onChange={handleChange}
                     placeholder="Organization Phone"
                   />
                 </div>
@@ -82,8 +73,9 @@ export default function Registration() {
                     className="mb-4 input_field p-3"
                     type="email"
                     id="org_mail"
-                    value={form.org_mail}
-                    onChange={(e) => handle(e)}
+                    name="email"
+                    value={registrationForm.email}
+                    onChange={handleChange}
                     placeholder="Organization Email"
                   />
                 </div>
@@ -93,8 +85,9 @@ export default function Registration() {
                       className="mb-4 input_field p-3"
                       type={display ? 'password' : 'text'}
                       id="password"
-                      value={form.password}
-                      onChange={(e) => handle(e)}
+                      name="password"
+                      value={registrationForm.password}
+                      onChange={handleChange}
                       placeholder="Password"
                     />
                     <i
@@ -106,28 +99,20 @@ export default function Registration() {
                     ></i>
                   </div>
                 </div>
-                {/* <Button className="btn btn-rounded w-25 input">
-                  <BiChevronRight size={45} />
-                </Button> */}
                 <div>
                   <button
                     type="submit "
                     className="primary_button"
                     style={{ width: '100%' }}
+                    onClick={submit}
                   >
                     Register
                     <BiChevronRight size={20} />
                   </button>
                 </div>
               </Col>
-              {/* <Col md={1}></Col> */}
             </Row>
           </>
-          {/* <div className="text-center mt-3">
-              <p className="auth_info p-0">
-                Already have an account? | Log in here.
-              </p>
-            </div> */}
         </form>
       </div>
     </div>
