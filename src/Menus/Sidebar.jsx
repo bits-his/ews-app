@@ -62,6 +62,7 @@ export default function Sidebar() {
               )}
             </span>
           </p>
+        </div>{' '}
           {showSubMenu ? (
             <div className="submenu">
               <p className="submenu_item" onClick={() => goto('/send-message')}>
@@ -75,7 +76,6 @@ export default function Sidebar() {
               </p>
             </div>
           ) : null}
-        </div>{' '}
         <div>
           <p className="sidebar_item_p">
             <span>
