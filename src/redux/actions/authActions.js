@@ -1,35 +1,12 @@
-import toast from 'react-hot-toast';
-import { API_URL, _postApi } from '../../api';
+import { server_url, _post, _get } from '../../utils/Helper';
 import store from '../store';
-import {CREATE_USER, ERROR_LOG, AUTH_USER, LOGOUT } from './constants'
-
-export function createUser(data,cb=(f)=>f,err=(f)=>f) {
-  return (dispatch) => {
-    _postApi(`agents?query_type=create`,
-      data, resp => {
-        if (resp.success){
-        dispatch({
-          type: CREATE_USER,
-          payload: resp.results
-        })
-        cb()
-        }
-      }, error => {
-        console.error(error);
-        dispatch({
-          type: ERROR_LOG,
-          payload: error
-        })
-        err()
-      })
-  }
-}
+import {ERROR_LOG, AUTH_USER, LOGOUT } from './constants'
 
 export function signup(objs = {}, success = (f) => f, error = (f) => f) {
   return (dispatch) => {
     //   dispatch({ type: types.LOADING });
 
-    fetch(`${API_URL}/users/create`, {
+    fetch(`${server_url}/users/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,17 +51,15 @@ export function signup(objs = {}, success = (f) => f, error = (f) => f) {
         }
       })
       .catch((error) => {
-        //   dispatch({ type: LOADING_SIGNUP });
         console.log({ error });
       });
   };
 }
 
-export function login({ email, password }, success, error) {
+export function login({ email, password }, success=(f)=>f, error=(f)=>f) {
   return (dispatch) => {
     //   dispatch({ type: types.LOADING });
-
-    fetch(`${API_URL}/users/login`, {
+    fetch(`${server_url}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +99,7 @@ export function login({ email, password }, success, error) {
 export async function getUserProfile(_token) {
   try {
     // console.log(_token);
-    let response = await fetch(`${API_URL}/users/verify-token`, {
+    let response = await fetch(`${server_url}/users/verify-token`, {
       method: "GET",
       headers: {
         authorization: _token,
@@ -172,14 +147,14 @@ export function init(callback = (f) => f, error = f => f) {
   };
 }
 
-export function logout(history) {
+export function logout(navigate) {
   return (dispatch) => {
     localStorage.removeItem("@@token");
     dispatch({ type: LOGOUT });
-    history("/login");
+    navigate("/");
   };
 }
 
 export const getRoleLink = () => {
-  return store.getState().auth.user.role || 'agent'
+  return store.getState().auth.user.role || 'staff'
 }

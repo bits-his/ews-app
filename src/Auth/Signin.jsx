@@ -4,9 +4,11 @@ import { BiChevronRight } from 'react-icons/bi'
 import { Row, Col, Button } from 'reactstrap'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { server_url, _post } from '../utils/Helper'
+import { login } from '../redux/actions/authActions'
+import { useDispatch } from 'react-redux'
 export default function Signin() {
   const goto = useNavigate()
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const [display, setDisplay] = useState(false)
   const [emailResult, setEmailResult] = useState('')
@@ -24,12 +26,12 @@ export default function Signin() {
     e.preventDefault()
     console.log(signinForm)
     setLoading(true)
-    _post(
-      `users/login`,
+    dispatch(login(
       signinForm,
       (resp) => {
         if (resp.success) {
           setLoading(false)
+          goto('/dashboard')
         } else {
           setLoading(false)
 
@@ -43,7 +45,7 @@ export default function Signin() {
         setLoading(false)
         console.log(e)
       },
-    )
+    ))
   }
   return (
     <div>
@@ -75,7 +77,7 @@ export default function Signin() {
                       <input
                         className="mb-4 input_field p-3"
                         id="password"
-                        type={display ? 'password' : 'text'}
+                        type={display ?'text': 'password' }
                         placeholder="password "
                         name="password"
                         value={signinForm.name}

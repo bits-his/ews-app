@@ -15,32 +15,26 @@ const authReducer = (state = defaultState, action = {}) => {
 			return {
 				...state,
 				users: [...state.users, action.payload.user],
-				agents: [...state.agents, action.payload.agent]
 			};
 		case AUTH_USER:
 			return {
 				...state,
 				user: action.payload.user,
-				agent: action.payload.agent,
-				business: action.payload.business,
-				selected_business: action.payload.business[0],
 				authenticated: action.payload.success
 			};
 		case UPDATE_USER:
 			return {
 				...state,
-				user: action.payload.user,
-				agent: action.payload.agent
+				user: action.payload.user
 			};
 		case UPDATE_USERS:
 			return {
 				...state,
-				users: [...state.users, action.payload.user],
-				agents: [...state.agents, action.payload.agent]
+				users: [...state.users, action.payload.user]
 			};
 
 		case LOGOUT:
-			return { ...state, user: {}, agent: {}, authenticated: false };
+			return { ...state, user: {}, authenticated: false };
 		default:
 			return state;
 	}
