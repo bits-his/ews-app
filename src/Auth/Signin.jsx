@@ -4,61 +4,82 @@ import { BiChevronRight } from 'react-icons/bi'
 import { Row, Col, Button } from 'reactstrap'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { server_url, _post } from '../utils/Helper'
 export default function Signin() {
   const goto = useNavigate()
+  const [loading, setLoading] = useState(false)
   const [display, setDisplay] = useState(false)
+  const [emailResult, setEmailResult] = useState('')
+  const [passwordResult, setPasswordResult] = useState('')
   const [signinForm, setSigninForm] = useState({
-    username: '',
+    email: '',
     password: '',
   })
-  const handleAdd = (e) => {
+
+  const handleChange = ({ target: { name, value } }) => {
+    setSigninForm((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const submit = (e) => {
     e.preventDefault()
-    if (signinForm.username === '' || signinForm.password === '') {
-      alert('All values are required')
-    }
-    if (signinForm.username && signinForm.password) {
-      setSigninForm({
-        username: '',
-        password: '',
-      })
-    }
-  }
+    console.log(signinForm)
+    setLoading(true)
+    _post(
+      `users/login`,
+      signinForm,
+      (resp) => {
+        if (resp.success) {
+          setLoading(false)
+        } else {
+          setLoading(false)
 
-  function handle(e) {
-    const newData = { ...signinForm }
-    newData[e.target.id] = e.target.value
-    setSigninForm(newData)
-    console.log(newData)
+          // alert(resp.email ? resp.email : resp.password)
+          setEmailResult(resp.email)
+          setPasswordResult(resp.password)
+        }
+        console.log(resp)
+      },
+      (e) => {
+        setLoading(false)
+        console.log(e)
+      },
+    )
   }
-
   return (
     <div>
       <div className="signin-main">
         <div className="sign-in-body">
-          <form onSubmit={handleAdd}>
+          <form>
             <>
               <Row>
                 {/* <Col md={1}></Col> */}
                 <Col md={12}>
-                  <div class="form-row">
+                  <div className="form-row">
+                    <p style={{ color: 'red', margin: 0, fontSize: 12 }}>
+                      {emailResult}
+                    </p>
                     <input
-                      class="mb-4 input_field p-3"
+                      className="mb-4 input_field p-3"
                       id="username"
-                      value={signinForm.username}
                       type="text"
-                      placeholder="username"
-                      onChange={(e) => handle(e)}
+                      placeholder="Email"
+                      name="email"
+                      value={signinForm.email}
+                      onChange={handleChange}
                     />
                   </div>
-                  <div class="form-row">
-                    <div className="d-flex">
+                  <div className="form-row">
+                      <p style={{ color: 'red', margin: 0, fontSize: 12 }}>
+                        {passwordResult}
+                      </p>
                       <input
-                        class="mb-4 input_field p-3"
+                        className="mb-4 input_field p-3"
                         id="password"
-                        value={signinForm.password}
                         type={display ? 'password' : 'text'}
                         placeholder="password "
-                        onChange={(e) => handle(e)}
+                        name="password"
+                        value={signinForm.name}
+                        onChange={handleChange}
                       />
                       <i
                         className={
@@ -67,24 +88,29 @@ export default function Signin() {
                         style={{ marginLeft: -43, marginTop: 30 }}
                         onClick={() => setDisplay(!display)}
                       ></i>
+                    <div className="text-center mt-3">
+                      <p className="auth_info p-0">
+                        Forget password? | Click here to reset.
+                      </p>
                     </div>
                     <button
                       className="primary_button"
                       style={{ width: '100%' }}
+                      onClick={submit}
                     >
-                      Go
-                      <BiChevronRight size={20} />
+                      {loading ? (
+                        <span>Loading...</span>
+                      ) : (
+                        <span>
+                          Go <BiChevronRight size={20} />
+                        </span>
+                      )}
                     </button>
                   </div>
                 </Col>
                 {/* <Col md={1}></Col> */}
               </Row>
             </>
-            <div className="text-center mt-3">
-              <p className="auth_info p-0">
-                Forget password? | Click here to reset.
-              </p>
-            </div>
           </form>
         </div>
       </div>
