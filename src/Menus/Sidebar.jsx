@@ -20,7 +20,11 @@ import logo from '../Images/Knowtify.png'
 import './Sidebar.css'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { logout } from '../redux/actions/authActions'
+
 export default function Sidebar() {
+  const dispatch = useDispatch()
   const [showSubMenu, setShowSubMenu] = useState(false)
   const drop = () => {
     setShowSubMenu((p) => !p)
@@ -115,7 +119,7 @@ export default function Sidebar() {
         {/* ))} */}
       </div>
       <div className="logout_div">
-        <p className="sidebar_item_l">
+        <p className="sidebar_item_l" onClick={()=>dispatch(logout(goto))}>
           <span>
             <AiOutlineLogout size="2.5rem" className="sidebar_icon_2" />
           </span>
