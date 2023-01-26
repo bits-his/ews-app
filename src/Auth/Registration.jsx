@@ -10,7 +10,7 @@ export default function Registration() {
   const goto = useNavigate()
 
   // const [value, setValue] = useState(null)
-  const [loading, setLoading] = useState('')
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState({})
   const [display, setDisplay] = useState(false)
 
@@ -29,19 +29,22 @@ export default function Registration() {
 
   const submit = (e) => {
     e.preventDefault()
-
+    setLoading(true)
     _post(
       `users/create`,
       registrationForm,
       (resp) => {
         console.log(resp)
         if (resp.success) {
+          setLoading(false)
           goto('/dashboard')
         } else {
+          setLoading(false)
           setError(resp)
         }
       },
       (e) => {
+        setLoading(false)
         console.log(e)
       },
     )
@@ -127,8 +130,14 @@ export default function Registration() {
                     style={{ width: '100%' }}
                     onClick={submit}
                   >
-                    Register
-                    <BiChevronRight size={20} />
+                    {loading ? (
+                      <span>Loading...</span>
+                    ) : (
+                      <span>
+                        Register
+                        <BiChevronRight size={20} />
+                      </span>
+                    )}
                   </button>
                 </div>
               </Col>

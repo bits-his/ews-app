@@ -12,7 +12,7 @@ export default function AppIndex() {
           <Sidebar />
         </Col>
         <Col md={10} className="p-0 m-0 _outlet">
-          <Navbar />
+          {/* <Navbar /> */}
           <Outlet />
         </Col>
       </Row>
