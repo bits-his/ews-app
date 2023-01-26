@@ -24,7 +24,7 @@ export default function Message() {
       <Card className="dashboard_card m-3 shadow-sm p-4">
         <Row>
           <Col md={6}>
-            <h3 className="card_title">Message</h3>
+            <h3 className="card_title mb-4">Message</h3>
           </Col>
           <Col md={6}>
             {/* <button
@@ -47,11 +47,16 @@ export default function Message() {
           <button
             className="message_button"
             onClick={() => setShowTable(false)}
+            style={{ backgroundColor: !showTable ? primaryColor : null }}
           >
             <MdSend size="1.2rem" /> Sent
           </button>
 
-          <button className="message_button" onClick={() => setShowTable(true)}>
+          <button
+            className="message_button"
+            onClick={() => setShowTable(true)}
+            style={{ backgroundColor: showTable ? primaryColor : null }}
+          >
             <MdCancelScheduleSend size="1.2rem" /> Failed
           </button>
         </div>

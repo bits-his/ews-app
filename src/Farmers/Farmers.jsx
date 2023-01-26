@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Card, Col, Row } from 'reactstrap'
+import { Card, Col, Row, Table } from 'reactstrap'
 
 export default function Farmers() {
   const goto = useNavigate()
@@ -21,6 +21,30 @@ export default function Farmers() {
             </button>
           </Col>
         </Row>
+        <Table responsive size="sm mt-5">
+          <thead>
+            <tr>
+              <th>SN</th>
+              <th>Table failed</th>
+              <th>Table failed</th>
+              <th>Table failed</th>
+              <th>Table failed</th>
+              <th>Table failed</th>
+              <th>Table failed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Table cell</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+            </tr>
+          </tbody>
+        </Table>
       </Card>
     </div>
   )
