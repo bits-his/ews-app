@@ -48,8 +48,8 @@ li {
   border-radius: 5px;
 }
 
-.input_field:focus{
-outline: 1px solid #002147;
+.input_field:focus {
+  outline: 1px solid #0021474e;
 }
 
 form {
@@ -80,3 +80,27 @@ form {
   /* margin-top: 10rem; */
   border-radius: 30px !important;
 }
+
+.login_register {
+  /* font-weight: bold; */
+  color: #002147;
+  font-size: 20px;
+}
+
+.auth_logo {
+  width: 200px;
+}
+.switch_div {
+  display: flex;
+  justify-content: center;
+  /* height: 20px; */
+  /* width: 100%; */
+}
+.auth_info {
+  font-size: 12px;
+}
+
+
+
+/* ///////////////////////// */
+

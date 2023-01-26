@@ -5,7 +5,7 @@ import { Col, Row } from 'reactstrap'
 export default function Navbar() {
   return (
     <div className="navbar_">
-      <Row className="">
+      <Row className="m-0">
         <Col md={6} className=""></Col>
         <Col md={6} className="">
           <div className="navbar_div">

@@ -50,7 +50,7 @@ export default function SendMessage() {
               value={form.title}
               onChange={(e) => handle(e)}
             />
-            <select
+            {/* <select
               className="input_field p-2 mt-3"
               type="select"
               id="member_type"
@@ -58,6 +58,18 @@ export default function SendMessage() {
               onChange={(e) => handle(e)}
             >
               <option>Member Type</option>
+              <option value="1">1</option>
+              <option value="1">1</option>
+              <option value="1">1</option>
+            </select> */}
+            <select
+              className="input_field p-2 mt-3"
+              type="select"
+              id="member_type"
+              value={form.member_type}
+              onChange={(e) => handle(e)}
+            >
+              <option>Locations</option>
               <option value="1">1</option>
               <option value="1">1</option>
               <option value="1">1</option>
@@ -88,7 +100,7 @@ export default function SendMessage() {
               value={form.target_farmer}
               onChange={(e) => handle(e)}
             >
-              <option>Target Farmer</option>
+              <option>Target by products</option>
               <option value="1">1</option>
               <option value="1">1</option>
               <option value="1">1</option>
@@ -100,7 +112,7 @@ export default function SendMessage() {
               value={form.target}
               onChange={(e) => handle(e)}
             >
-              <option>Location</option>
+              <option>Target by location</option>
               <option value="1">1</option>
               <option value="1">1</option>
               <option value="1">1</option>
