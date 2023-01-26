@@ -5,7 +5,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      {JSON.stringify({user})}
+      {/* {JSON.stringify({user})} */}
       Dashboard
     </div>
   )

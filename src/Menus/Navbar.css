@@ -10,10 +10,6 @@
   background-color: white;
 }
 
-.ass_name {
-  display: inline;
-  font-weight: bold;
-}
 
 .navbar_div {
   /* display: flex; */
@@ -27,7 +23,3 @@
     float: right;
 }
 
-.profile {
-  width: 40px;
-  border-radius: 50%;
-}
