@@ -48,7 +48,7 @@ export default function Registration() {
         newData[e.target.id ] = e.target.value
         SetForm(newData)
         console.log(newData);
-  }
+  } 
   return (
     <div>
       <div className="sign-in-body">
