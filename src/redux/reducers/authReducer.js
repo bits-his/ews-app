@@ -1,5 +1,5 @@
 // USERsReducer.js
-import { CREATE_USER, UPDATE_USER, UPDATE_USERS, AUTH_USER, LOGOUT } from '../actions/constants'
+import { CREATE_USER, UPDATE_USER, UPDATE_USERS, AUTH_USER, LOGOUT, AUTH_ERROR } from '../actions/constants'
 
 const defaultState = {
 	authenticated: false,
@@ -21,6 +21,11 @@ const authReducer = (state = defaultState, action = {}) => {
 				...state,
 				user: action.payload.user,
 				authenticated: action.payload.success
+			};
+		case AUTH_ERROR:
+			return {
+				...state,
+				errors: action.payload
 			};
 		case UPDATE_USER:
 			return {

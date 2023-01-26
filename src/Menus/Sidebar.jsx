@@ -67,19 +67,19 @@ export default function Sidebar() {
             </span>
           </p>
         </div>{' '}
-          {showSubMenu ? (
-            <div className="submenu">
-              <p className="submenu_item" onClick={() => goto('/send-message')}>
-                <MdCreate size="1.2rem" /> Create message
-              </p>
-              <p className="submenu_item">
-                <BiSend size="1.2rem" /> Sent message
-              </p>
-              <p className="submenu_item">
-                <MdCancelScheduleSend size="1.2rem" /> Failed message
-              </p>
-            </div>
-          ) : null}
+        {showSubMenu ? (
+          <div className="submenu">
+            <p className="submenu_item" onClick={() => goto('/send-message')}>
+              <MdCreate size="1.2rem" /> Create message
+            </p>
+            <p className="submenu_item">
+              <BiSend size="1.2rem" /> Sent message
+            </p>
+            <p className="submenu_item">
+              <MdCancelScheduleSend size="1.2rem" /> Failed message
+            </p>
+          </div>
+        ) : null}
         <div>
           <p className="sidebar_item_p">
             <span>
@@ -119,7 +119,7 @@ export default function Sidebar() {
         {/* ))} */}
       </div>
       <div className="logout_div">
-        <p className="sidebar_item_l" onClick={()=>dispatch(logout(goto))}>
+        <p className="sidebar_item_l" onClick={() => dispatch(logout(goto))}>
           <span>
             <AiOutlineLogout size="2.5rem" className="sidebar_icon_2" />
           </span>

@@ -10,7 +10,10 @@ export default function Registration() {
   const goto = useNavigate()
 
   // const [value, setValue] = useState(null)
+  const [loading, setLoading] = useState('')
+  const [error, setError] = useState({})
   const [display, setDisplay] = useState(false)
+
   const form = {
     name: '',
     email: '',
@@ -26,27 +29,38 @@ export default function Registration() {
 
   const submit = (e) => {
     e.preventDefault()
+
     _post(
       `users/create`,
       registrationForm,
       (resp) => {
         console.log(resp)
+        if (resp.success) {
+          goto('/dashboard')
+        } else {
+          setError(resp)
+        }
       },
       (e) => {
         console.log(e)
       },
     )
+    // }
   }
 
   return (
     <div>
       <div className="sign-in-body">
         <form className="">
+          {/* {JSON.stringify(error)} */}
           <>
             <Row>
               {/* <Col md={1}></Col> */}
               <Col md={12}>
                 <div className="form-row">
+                  <p style={{ color: 'red', fontSize: 12, margin: 0 }}>
+                    {error.name}
+                  </p>
                   <input
                     className="mb-4 input_field p-3"
                     type="text"
@@ -58,6 +72,9 @@ export default function Registration() {
                   />
                 </div>
                 <div className="form-row">
+                  <p style={{ color: 'red', fontSize: 12, margin: 0 }}>
+                    {error.phone1}
+                  </p>
                   <input
                     className="mb-4 input_field p-3"
                     type="tel"
@@ -69,6 +86,9 @@ export default function Registration() {
                   />
                 </div>
                 <div className="form-row">
+                  <p style={{ color: 'red', fontSize: 12, margin: 0 }}>
+                    {error.email}
+                  </p>
                   <input
                     className="mb-4 input_field p-3"
                     type="email"
@@ -80,24 +100,25 @@ export default function Registration() {
                   />
                 </div>
                 <div className="form-row">
-                  <div className="d-flex">
-                    <input
-                      className="mb-4 input_field p-3"
-                      type={display ? 'password' : 'text'}
-                      id="password"
-                      name="password"
-                      value={registrationForm.password}
-                      onChange={handleChange}
-                      placeholder="Password"
-                    />
-                    <i
-                      className={
-                        display ? 'fa fa-eye' : 'fa-solid fa-eye-low-vision'
-                      }
-                      style={{ marginLeft: -43, marginTop: 30 }}
-                      onClick={() => setDisplay(!display)}
-                    ></i>
-                  </div>
+                  <p style={{ color: 'red', fontSize: 12, margin: 0 }}>
+                    {error.password}
+                  </p>
+                  <input
+                    className="mb-4 input_field p-3"
+                    type={display ? 'password' : 'text'}
+                    id="password"
+                    name="password"
+                    value={registrationForm.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                  />
+                  <i
+                    className={
+                      display ? 'fa fa-eye' : 'fa-solid fa-eye-low-vision'
+                    }
+                    style={{ marginLeft: -43, marginTop: 30 }}
+                    onClick={() => setDisplay(!display)}
+                  ></i>
                 </div>
                 <div>
                   <button

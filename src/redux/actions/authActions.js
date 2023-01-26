@@ -1,6 +1,6 @@
 import { server_url, _post, _get } from '../../utils/Helper';
 import store from '../store';
-import {ERROR_LOG, AUTH_USER, LOGOUT } from './constants'
+import {ERROR_LOG, AUTH_USER, LOGOUT, AUTH_ERROR } from './constants'
 
 export function signup(objs = {}, success = (f) => f, error = (f) => f) {
   return (dispatch) => {
@@ -81,16 +81,22 @@ export function login({ email, password }, success=(f)=>f, error=(f)=>f) {
               }
             })
             .catch((err) => {
+              dispatch({type:AUTH_ERROR,
+              payload:err})
               error(err);
             });
         } else {
-          dispatch({ type: ERROR_LOG, payload: data.message });
           error(data);
+          dispatch({type:AUTH_ERROR,payload:data})
+            
+          dispatch({ type: ERROR_LOG, payload: data });
         }
       })
       .catch((err) => {
         //   dispatch({ type: LOADING_LOGIN });
-        // console.log(err)
+        // console.log(err)'
+        
+        dispatch({type:AUTH_ERROR,payload:err})
         error(err);
       });
   };
