@@ -36,7 +36,18 @@
   font-weight: bold;
   font-size: large;
 }
-
+.button{
+  float: right;
+  align-items: center;
+  background-color: var(--primaryColor);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 5px 15px;
+  outline: 2px solid var(--secondaryColor);
+  outline-offset: 3px;
+  box-shadow: 0 8px 12px 0 var(--primaryColor);
+}
 .buttons_div {
   display: flex;
   gap: 10px;
