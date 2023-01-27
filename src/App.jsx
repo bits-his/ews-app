@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { init } from './redux/actions/authActions';
 import './Styles/AppStyles.css'
+// import reactLogo from "./assets/react.svg";
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
