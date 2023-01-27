@@ -2,7 +2,11 @@ import React from "react";
 import { Table } from "reactstrap";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-export default function FarmerTable({ data = [], handleDelete = (f) => f }) {
+export default function FarmerTable({
+  data = [],
+  handleDelete = (f) => f,
+  handleSubmit = (f) => f,
+}) {
   return (
     <>
       <Table hover>
@@ -30,10 +34,10 @@ export default function FarmerTable({ data = [], handleDelete = (f) => f }) {
         </tbody>
       </Table>
       <div>
-       <button className="primary_button mt-4 button">
-            Submit
-          </button>
-        </div>
+        <button className="primary_button mt-4 button" onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
     </>
   );
 }
