@@ -6,6 +6,7 @@
   background-color: var(--primaryColor);
   color: white;
   height: 100vh;
+  overflow-y: auto;
 }
 .sidebar_item_p {
   padding: 10px;
@@ -31,7 +32,6 @@
   cursor: pointer;
 }
 .logo {
-  margin: 0px 10px 0px 10px;
   width: 150px;
   /* margin-left: auto;
   margin-right: auto; */
@@ -68,9 +68,9 @@
 }
 
 .logout_div {
-  border-radius: 20px;
+  /* border-radius: 20px; */
   /* margin: 20px; */
-  /* background-color: #244f80; */
+  background-color: var(--primaryColor);
   height: fit-content;
   width: fit-content;
   position: fixed;
@@ -88,4 +88,24 @@
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   background-color: #1a4d87;
+}
+
+.ass_name {
+  text-align: center;
+  /* margin-left: 50px !important; */
+  /* font-size: bol; */
+}
+
+.logo_menu {
+  display: flex;
+  margin: 0px 10px 0px 10px;
+
+  align-items: center;
+}
+
+.profile2{
+  width: 40px;
+  border-radius: 50%;
+  margin: 0px 10px 0px 10px;
+
 }

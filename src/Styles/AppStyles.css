@@ -5,6 +5,7 @@
 .dashboard_card {
   border-radius: 15px !important;
   /* border: none !important; */
+  overflow-y: auto;
   height: 95vh !important;
 }
 .primary_button {
@@ -46,4 +47,27 @@
   outline: 2px solid var(--secondaryColor);
   outline-offset: 3px;
   box-shadow: 0 8px 12px 0 var(--primaryColor);
+}
+.buttons_div {
+  display: flex;
+  gap: 10px;
+}
+.message_button {
+  background-color: #1a4d87;
+  border: none;
+  padding: 5px;
+  font-size: 12px;
+  border-radius: 5px;
+  transition: 300ms;
+  color: white;
+}
+.message_button:hover {
+  background-color: var(--primaryColor);
+}
+.profile {
+  width: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
 }
