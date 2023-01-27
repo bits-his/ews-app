@@ -60,3 +60,9 @@
   margin-right: auto;
   border-radius: 50%;
 }
+
+.profile_name {
+  font-weight: bold;
+  color: var(--primaryColor);
+  font-size: 30px;
+}

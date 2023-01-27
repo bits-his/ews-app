@@ -135,7 +135,7 @@ export default function OnboardFarmers() {
           </Col>
         </Row>
         <div>
-          <button className="primary_button mt-4">Submit</button>
+          <button className="primary_button mt-4" onClick={()=>{console.log(form)}}>Submit</button>
         </div>
       </Card>
     </div>

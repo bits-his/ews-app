@@ -25,9 +25,11 @@ export default function Sidebar() {
     <div className="sidebar">
       <div>
         <img src={logo} alt="logo" className="logo" />
-        <img src={profile} alt="profile" className="profile mt-3" />
-        <div>
-          <p className="ass_name">Association Name</p>
+        <div onClick={()=>goto('/profile')} className='profile_div'>
+          <img src={profile} alt="profile" className="profile mt-3" />
+          <div>
+            <p className="ass_name">Association Name</p>
+          </div>
         </div>
         <div className="mt-3">
           {/* {sidebar.map((item) => ( */}
@@ -79,7 +81,6 @@ export default function Sidebar() {
               <span style={{ marginLeft: 5 }}>Admin</span>
             </p>
           </div>
-          
           <div onClick={() => goto('/farmers')}>
             <p className="sidebar_item_p">
               <span>

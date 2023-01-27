@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { BiChevronRight } from 'react-icons/bi'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { Row, Col, Button } from 'reactstrap'
+import { login } from '../redux/actions/authActions'
 import { server_url, _post } from '../utils/Helper'
 import './Register.css'
 
 export default function Registration() {
   const goto = useNavigate()
-
+  const dispatch = useDispatch()
   // const [value, setValue] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState({})
@@ -30,14 +32,28 @@ export default function Registration() {
   const submit = (e) => {
     e.preventDefault()
     setLoading(true)
+
     _post(
       `users/create`,
       registrationForm,
       (resp) => {
         console.log(resp)
-        if (resp.success) {
-          setLoading(false)
-          goto('/profile')
+        if (resp.user.id) {
+          // setLoading(false)
+          dispatch(
+            login(
+              registrationForm,
+              (resp) => {
+                if (resp.success) {
+                  setLoading(false)
+                  goto('/profile')
+                }
+              },
+              (error) => {
+                console.log(error)
+              },
+            ),
+          )
         } else {
           setLoading(false)
           setError(resp)
