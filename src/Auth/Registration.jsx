@@ -37,7 +37,7 @@ export default function Registration() {
         console.log(resp)
         if (resp.success) {
           setLoading(false)
-          goto('/dashboard')
+          goto('/profile')
         } else {
           setLoading(false)
           setError(resp)
@@ -125,7 +125,7 @@ export default function Registration() {
                 </div>
                 <div>
                   <button
-                    type="submit "
+                    type="submit"
                     className="primary_button"
                     style={{ width: '100%' }}
                     onClick={submit}

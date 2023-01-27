@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../redux/actions/authActions'
 import { useDispatch, useSelector } from 'react-redux'
-export default function Signin() {
+export default function SignIn() {
   const goto = useNavigate()
   const {
     auth: { errors },

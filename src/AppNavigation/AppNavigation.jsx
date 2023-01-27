@@ -7,6 +7,7 @@ import Message from '../Messages/Message'
 import SendMessage from '../Messages/SendMessages'
 import Farmers from '../Farmers/Farmers'
 import OnboardFarmers from '../Farmers/OnboradFarmers'
+import Profile from '../Profile/Profile'
 
 function AppNavigation() {
   let element = useRoutes([
@@ -37,7 +38,11 @@ function AppNavigation() {
         },
         {
           path: '/onboard-farmers',
-          element: <OnboardFarmers/>,
+          element: <OnboardFarmers />,
+        },
+        {
+          path: '/profile',
+          element: <Profile />,
         },
       ],
     },
