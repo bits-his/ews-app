@@ -39,7 +39,7 @@
   font-weight: bold;
   font-size: large;
 }
-.button{
+.button {
   float: right;
   align-items: center;
   background-color: var(--primaryColor);
@@ -81,7 +81,7 @@
   font-size: 30px;
 }
 
-.view_farmer_button{
+.view_farmer_button {
   background-color: #001f4360;
   color: white;
   border: none;
@@ -89,6 +89,21 @@
   font-size: 12px;
   transition: 500ms;
 }
-.view_farmer_button:hover{
+.view_farmer_button:hover {
   background-color: #001f43;
+}
+
+.mic {
+  background-color: #1a4d87;
+  color: white;
+  border-radius: 50%;
+  padding: 7px;
+  transition: 500ms;
+}
+
+.mic:hover{
+  cursor: pointer;
+  background-color: var(--primaryColor);
+}
+.voice_message{
 }

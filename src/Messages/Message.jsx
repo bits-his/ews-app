@@ -54,7 +54,7 @@ export default function Message() {
 
           <button
             className="message_button"
-            onClick={() => setShowTable(true)}
+            onClick={() => setShowTable(true)}  
             style={{ backgroundColor: showTable ? primaryColor : null }}
           >
             <MdCancelScheduleSend size="1.2rem" /> Failed
