@@ -16,11 +16,14 @@
   padding: 5px 15px;
   outline: 2px solid var(--secondaryColor);
   outline-offset: 3px;
+  transition: 500ms;
   box-shadow: 0 8px 12px 0 var(--primaryColor);
 }
 .primary_button:hover {
   cursor: pointer;
-  font-weight: bold;
+  /* outline: 2px solid var(--primaryColor);
+  outline-offset: 3px; */
+  box-shadow: none;
 }
 
 .card_title {
@@ -76,4 +79,16 @@
   font-weight: bold;
   color: var(--primaryColor);
   font-size: 30px;
+}
+
+.view_farmer_button{
+  background-color: #001f4360;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 12px;
+  transition: 500ms;
+}
+.view_farmer_button:hover{
+  background-color: #001f43;
 }

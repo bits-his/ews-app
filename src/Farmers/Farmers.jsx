@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Card, Col, Row, Table } from 'reactstrap'
 import store from '../redux/store'
 import { _get, _post } from '../utils/Helper'
-// import {HiOutlineEllipsisVertical} from 'react-icons/hi'
+import { FaEllipsisV } from 'react-icons/fa'
 
 export default function Farmers() {
   const goto = useNavigate()
@@ -41,7 +41,7 @@ export default function Farmers() {
   return (
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
-        {JSON.stringify({ farmers })}
+        {/* {JSON.stringify({ farmers })} */}
         <Row>
           <Col md={6}>
             <h3 className="card_title">Farmers</h3>
@@ -64,7 +64,10 @@ export default function Farmers() {
               <th>Farm Address</th>
               <th>Phone Number</th>
               <th>Products</th>
-              <th>Actions</th>
+              <th>Action</th>
+              {/* <th>
+                <span style={{ float: 'right' }}>Actions</span>
+              </th> */}
             </tr>
           </thead>
           <tbody>
@@ -72,13 +75,19 @@ export default function Farmers() {
               <tr>
                 <th scope="row">{index + 1}</th>
                 <td>
-                  {item.fname}{' '}
-                  {item.lname}
+                  {item.fname} {item.lname}
                 </td>
                 <td>{item.f_address}</td>
                 <td>{item.products}</td>
                 <td>{item.phone}</td>
-                {/* <td><HiOutlineEllipsisVertical/></td> */}
+                <td>
+                  <button className="view_farmer_button">View</button>
+                </td>
+                {/* <td>
+                  <div style={{ float: 'right', cursor: 'pointer' }}>
+                    <FaEllipsisV />
+                  </div>
+                </td> */}
               </tr>
             ))}
           </tbody>

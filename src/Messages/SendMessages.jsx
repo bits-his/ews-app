@@ -10,32 +10,27 @@ export default function SendMessage() {
 
   const [form, setForm] = useState({
     title: '',
-    // org_name: '',
     member_type: '',
-    // target_farmer: '',
-    // target: '',
     messages: '',
+    farming_category: multiSelections,
   })
   const [filter, setFilter] = useState([])
   let joinMemberType = filter.map((i) => i.member_type).join(',')
 
   const handleAdd = (e) => {
+    form.farming_category = multiSelections.toString()
     e.preventDefault()
     console.log({
       title: form.title,
+      farming_category: form.farming_category,
       member_type: joinMemberType,
       messages: form.messages,
     })
-    if (form.title === '' || form.messages === '') {
-      alert('Input Value')
-    }
     if (form.title && form.messages) {
       setForm({
         title: '',
-        // org_name: '',
+        farming_category: '',
         member_type: '',
-        // target_farmer: '',
-        // target: '',
         messages: '',
       })
     }
@@ -90,41 +85,15 @@ export default function SendMessage() {
               value={form.title}
               onChange={(e) => handle(e)}
             />
-            {/* <select
-              className="input_field p-2 mt-3"
-              type="select"
-              id="member_type"
-              value={form.member_type}
-              onChange={(e) => handle(e)}
-            >
-              <option>Member Type</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-            </select> */}
-            {/* <select
-              className="input_field p-2 mt-3"
-              type="select"
-              id="member_type"
-              value={form.member_type}
-              onChange={(e) => {
-                handle(e)
-                // getFilter()
-              }}
-            >
-              <option>Farming Category</option>
-              <option value="1">1</option>
-              <option value="Ahmad">ahmad</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select> */}
+
+            {JSON.stringify(multiSelections)}
             <Typeahead
               id="basic-typeahead-multiple"
               labelKey="name"
               multiple
               onChange={setMultiSelections}
               options={['Livestock', 'Cash crops']}
-              placeholder="Farming Category"
+              placeholder="Target regions, locations, products, etc..."
               selected={multiSelections}
               name="farming type"
               className="input_field p-2 mt-4"
@@ -139,41 +108,7 @@ export default function SendMessage() {
               onChange={(e) => handle(e)}
             />
           </Col>
-          {/* <Col md={6}>
-            <input
-              className="input_field p-2 mt-3"
-              type="text"
-              id="org_name"
-              placeholder="Organization Name"
-              value={form.org_name}
-              onChange={(e) => handle(e)}
-            />
-            <select
-              className="input_field p-2 mt-3"
-              type="select"
-              id="target_farmer"
-              value={form.target_farmer}
-              onChange={(e) => handle(e)}
-            >
-              <option>Target by products</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-            </select>
-            <select
-              className="input_field p-2 mt-3"
-              type="select2
-              id="target"
-              value={form.target}
-              onChange={(e) => handle(e)}
-            >
-              <option>Target by location</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-            </select>
-          </Col> */}
-          <Col md={6} className="mt-3">
+          {/* <Col md={6} className="mt-3">
             {filter.map((i, id) => (
               <span
                 style={{
@@ -205,7 +140,7 @@ export default function SendMessage() {
                 />
               </span>
             ))}
-          </Col>
+          </Col> */}
         </Row>
         <Row>
           <Col md={6}>
