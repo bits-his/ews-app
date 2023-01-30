@@ -1,60 +1,65 @@
-import React, { useState } from "react";
-import { Card, Col, Row } from "reactstrap";
-import { BsPlus } from "react-icons/bs";
-import TableFarmer from "../Farmers/FarmerTable";
-import { Typeahead } from "react-bootstrap-typeahead";
-import { _post } from "../utils/Helper";
-
+import React, { useState } from 'react'
+import { Card, Col, Row } from 'reactstrap'
+import { BsPlus } from 'react-icons/bs'
+import TableFarmer from '../Farmers/FarmerTable'
+import { Typeahead } from 'react-bootstrap-typeahead'
+import { _post } from '../utils/Helper'
+import { useNavigate } from 'react-router-dom'
 export default function OnboardFarmers() {
+  const goto = useNavigate()
   const _form = {
-    // csv: '',
-    // excel: '',
-    fname: "",
-    lname: "",
-    lga: "",
-    state: "",
-    phone: "",
-    address: "",
-    products: "",
-    f_address: "",
-  };
-  const [form, setForm] = useState(_form);
-  const [data, setData] = useState([]);
-
-  const [multiSelections, setMultiSelections] = useState([]);
+    fname: '',
+    lname: '',
+    lga: '',
+    state: '',
+    phone: '',
+    address: '',
+    products: '',
+    f_address: '',
+  }
+  const [form, setForm] = useState(_form)
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [multiSelections, setMultiSelections] = useState([])
 
   const handleChange = ({ target: { name, value } }) =>
-    setForm((p) => ({ ...p, [name]: value }));
+    setForm((p) => ({ ...p, [name]: value }))
 
   const handleAdd = () => {
-    setData((p) => [...p, { ...form, products: multiSelections.join(",") }]);
-    setForm(_form);
-  };
+    setData((p) => [...p, { ...form, products: multiSelections.join(',') }])
+    setForm(_form)
+  }
 
   const handleDelete = (idx) => {
-    let arr = data.filter((i, id) => id !== idx);
-    setData(arr);
-  };
+    let arr = data.filter((i, id) => id !== idx)
+    setData(arr)
+  }
 
   const handleSubmit = () => {
+    setLoading(true)
     _post(
-      "farmers",
+      'farmers?query_type=INSERT',
       data,
       (res) => {
-        alert("sucess");
-        console.log(res);
+        if(res.success){
+          goto('/farmers')
+        }
+        // alert('sucess')
+        setLoading(false)
+        console.log(res)
       },
       (err) => {
-        console.log(err);
-        alert(err);
-      }
-    );
-  };
+        setLoading(false)
+        console.log(err)
+        // alert(err)
+      },
+    )
+  }
   return (
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
         <h3 className="card_title">Onboard Farmer</h3>
-        {JSON.stringify(data)}
+        {/* {JSON.stringify(data)} */}
         <Row>
           <Col md={6}>
             <input
@@ -123,7 +128,7 @@ export default function OnboardFarmers() {
               labelKey="name"
               multiple
               onChange={setMultiSelections}
-              options={["Livestock", "Cash crops"]}
+              options={['Livestock', 'Cash crops']}
               placeholder="Farming types"
               selected={multiSelections}
               name="farming type"
@@ -145,9 +150,10 @@ export default function OnboardFarmers() {
                 data={data}
                 handleDelete={handleDelete}
                 handleSubmit={handleSubmit}
+                loading={loading}
               />
             ) : (
-              ""
+              ''
             )}
           </Col>
         </Row>
@@ -158,5 +164,5 @@ export default function OnboardFarmers() {
         </div>
       </Card>
     </div>
-  );
+  )
 }

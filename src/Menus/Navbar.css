@@ -10,16 +10,14 @@
   background-color: white;
 }
 
-
 .navbar_div {
   /* display: flex; */
   height: 50px;
   /* align-items: center; */
 }
 
-.name_profile{
-    margin-top: 5px;
-    margin-right: 10px;
-    float: right;
+.name_profile {
+  margin-top: 5px;
+  margin-right: 10px;
+  float: right;
 }
-

@@ -3,8 +3,11 @@ import { Card, Col, Form, Input, Row } from 'reactstrap'
 import { CgClose } from 'react-icons/cg'
 import { RxText } from 'react-icons/rx'
 import { MdCancelScheduleSend, MdKeyboardVoice } from 'react-icons/md'
+import { Typeahead } from 'react-bootstrap-typeahead'
 
 export default function SendMessage() {
+  const [multiSelections, setMultiSelections] = useState([])
+
   const [form, setForm] = useState({
     title: '',
     // org_name: '',
@@ -60,21 +63,21 @@ export default function SendMessage() {
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
       <h3 className="card_title mb-4">Send Message</h3>
       <div className="buttons_div">
-          <button
-            className="message_button"
-            onClick={() => goto('/send-message')}
-          >
-            <MdKeyboardVoice size="1.2rem" /> Voice message
-          </button>
+        <button
+          className="message_button"
+          onClick={() => goto('/send-message')}
+        >
+          <MdKeyboardVoice size="1.2rem" /> Voice message
+        </button>
 
-          <button
-            className="message_button"
-            // onClick={() => setShowTable(false)}
-            // style={{ backgroundColor: !showTable ? primaryColor : null }}
-          >
-            <RxText size="1.2rem" /> Text Message
-          </button>
-        </div>
+        <button
+          className="message_button"
+          // onClick={() => setShowTable(false)}
+          // style={{ backgroundColor: !showTable ? primaryColor : null }}
+        >
+          <RxText size="1.2rem" /> Text Message
+        </button>
+      </div>
       <Form onSubmit={handleAdd}>
         {/* {JSON.stringify(kkk)} */}
         <Row>
@@ -99,7 +102,7 @@ export default function SendMessage() {
               <option value="1">1</option>
               <option value="1">1</option>
             </select> */}
-            <select
+            {/* <select
               className="input_field p-2 mt-3"
               type="select"
               id="member_type"
@@ -114,7 +117,18 @@ export default function SendMessage() {
               <option value="Ahmad">ahmad</option>
               <option value="3">3</option>
               <option value="4">4</option>
-            </select>
+            </select> */}
+            <Typeahead
+              id="basic-typeahead-multiple"
+              labelKey="name"
+              multiple
+              onChange={setMultiSelections}
+              options={['Livestock', 'Cash crops']}
+              placeholder="Farming Category"
+              selected={multiSelections}
+              name="farming type"
+              className="input_field p-2 mt-4"
+            />
             <textarea
               className="input_field mt-3 p-2"
               type="textarea"

@@ -1,6 +1,6 @@
 import { server_url, _post, _get } from '../../utils/Helper';
 import store from '../store';
-import {ERROR_LOG, AUTH_USER, LOGOUT, AUTH_ERROR } from './constants'
+import { ERROR_LOG, AUTH_USER, LOGOUT, AUTH_ERROR } from './constants'
 
 export function signup(objs = {}, success = (f) => f, error = (f) => f) {
   return (dispatch) => {
@@ -56,7 +56,7 @@ export function signup(objs = {}, success = (f) => f, error = (f) => f) {
   };
 }
 
-export function login({ email, password }, success=(f)=>f, error=(f)=>f) {
+export function login({ email, password }, success = (f) => f, error = (f) => f) {
   return (dispatch) => {
     //   dispatch({ type: types.LOADING });
     fetch(`${server_url}/users/login`, {
@@ -81,22 +81,24 @@ export function login({ email, password }, success=(f)=>f, error=(f)=>f) {
               }
             })
             .catch((err) => {
-              dispatch({type:AUTH_ERROR,
-              payload:err})
+              dispatch({
+                type: AUTH_ERROR,
+                payload: err
+              })
               error(err);
             });
         } else {
           error(data);
-          dispatch({type:AUTH_ERROR,payload:data})
-            
+          dispatch({ type: AUTH_ERROR, payload: data })
+
           dispatch({ type: ERROR_LOG, payload: data });
         }
       })
       .catch((err) => {
         //   dispatch({ type: LOADING_LOGIN });
         // console.log(err)'
-        
-        dispatch({type:AUTH_ERROR,payload:err})
+
+        dispatch({ type: AUTH_ERROR, payload: err })
         error(err);
       });
   };
