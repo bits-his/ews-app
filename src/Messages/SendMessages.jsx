@@ -5,59 +5,45 @@ import { RxText } from 'react-icons/rx'
 import { MdCancelScheduleSend, MdKeyboardVoice } from 'react-icons/md'
 import { Typeahead } from 'react-bootstrap-typeahead'
 import { primaryColor } from '../Colors'
+import Locations from './Locations'
+import Sizes from './Sizes'
+import Crops from './Crops'
 
 export default function SendMessage() {
-  const [multiSelections, setMultiSelections] = useState([])
+  const [selectLocation, setSelectLocation] = useState([])
+  const [selectSize, setSelectSize] = useState([])
+  const [selectCrop, setSelectCrop] = useState([])
   const [messageType, setMessageType] = useState(false)
-
-  const [form, setForm] = useState({
+  const _form = {
+    target: '',
     title: '',
-    member_type: '',
-    messages: '',
-    farming_category: multiSelections,
-  })
-  const [filter, setFilter] = useState([])
-  let joinMemberType = filter.map((i) => i.member_type).join(',')
-
-  const handleAdd = (e) => {
-    form.farming_category = multiSelections.toString()
-    e.preventDefault()
-    console.log({
-      title: form.title,
-      farming_category: form.farming_category,
-      member_type: joinMemberType,
-      messages: form.messages,
-    })
-    if (form.title && form.messages) {
-      setForm({
-        title: '',
-        farming_category: '',
-        member_type: '',
-        messages: '',
-      })
-    }
-    setFilter([])
+    body: '',
   }
-
-  function handle(e) {
-    const newData = { ...form }
-    newData[e.target.id] = e.target.value
-    setForm(newData)
-    // console.log(newData)
+  const [form, setForm] = useState(_form)
+  const handleChange = ({ target: { name, value } }) =>
+    setForm((p) => ({ ...p, [name]: value }))
+  const submitMessage = () => {
+    console.log(form)
   }
-
-  const handleDelete = (index) => {
-    let arr = filter.filter((a, b) => b !== index)
-    setFilter(arr)
-  }
-
-  useEffect(() => {
-    if (form.member_type !== '') {
-      setFilter((p) => [...p, { member_type: form.member_type }])
-    }
-  }, [form.member_type])
   return (
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
+      {/* <Typeahead
+              id="basic-typeahead-multiple"
+              labelKey="name"
+              multiple
+              onChange={setMultiSelections}
+              options={[
+                'Farming Category',
+                'Location',
+                'Size',
+                'Products',
+                'Crops',
+              ]}
+              placeholder="Target regions, locations, products, etc..."
+              selected={multiSelections}
+              name="farming type"
+              className="input_field p-2 mt-4"
+            /> */}
       <h3 className="card_title mb-4">Send Message</h3>
       <div className="buttons_div">
         <button
@@ -75,99 +61,92 @@ export default function SendMessage() {
           <MdKeyboardVoice size="1.2rem" /> Voice message
         </button>
       </div>
-      <Form onSubmit={handleAdd}>
-        {/* {JSON.stringify(kkk)} */}
-        <Row>
-          <Col md={6}>
-            {!messageType ? (
-              <div>
-                <input
-                  className="input_field p-2 mt-3"
-                  type="text"
-                  id="title"
-                  placeholder="Message Title"
-                  value={form.title}
-                  onChange={(e) => handle(e)}
-                />
-
-                {/* {JSON.stringify(multiSelections)} */}
-                <Typeahead
+      {/* {JSON.stringify(kkk)} */}
+      <Row>
+        <Col md={6}>
+          {!messageType ? (
+            <div>
+              {/* {JSON.stringify(multiSelections)} */}
+              {/* <Typeahead
                   id="basic-typeahead-multiple"
                   labelKey="name"
                   multiple
                   onChange={setMultiSelections}
-                  options={['Livestock', 'Cash crops']}
-                  placeholder="Target regions, locations, products, etc..."
+                  options={[
+                    'Farming Category',
+                    'Location',
+                    'Size',
+                    'Products',
+                    'Crops',
+                  ]}
+                  placeholder="Target regions, locations, crops, etc..."
                   selected={multiSelections}
                   name="farming type"
                   className="input_field p-2 mt-4"
-                />
-                <textarea
-                  className="input_field mt-3 p-2"
-                  type="textarea"
-                  id="messages"
-                  rows="10"
-                  placeholder="Write message"
-                  value={form.messages}
-                  onChange={(e) => handle(e)}
-                />
-                <button
-                  className="primary_button mt-3"
-                  style={{ float: 'right' }}
-                >
-                  Send
-                </button>
-              </div>
-            ) : (
-              <div className="voice_message mt-3">
-                <MdKeyboardVoice className="mic" size="3rem" />
-                <button className="primary_button ms-3">Send</button>
-              </div>
-            )}
-          </Col>
-          {/* <Col md={6} className="mt-3">
-            {filter.map((i, id) => (
-              <span
-                style={{
-                  letterSpacing: 1,
-                  backgroundColor: '#244f80',
-                  color: '#fff',
-                  padding: 8,
-                  fontSize: 12,
-                  marginRight: 10,
-                  lineHeight: 3,
-                  borderRadius: 5,
-                  opacity: '0.6',
-                }}
+                /> */}
+              <select
+                className="input_field p-2 mt-4"
+                name="target"
+                value={form.target}
+                onChange={handleChange}
               >
-                {' '}
-                {i.member_type}
-                <CgClose
-                  onClick={() => handleDelete(id)}
-                  style={{
-                    marginLeft: 7,
-                    color: '#fff',
-                    cursor: 'pointer',
-                    fontSize: 23,
-                    fontWeight: 'bolder',
-                    // paddingBottom: '3'
-                  }}
-                  title="cancel"
-                  size="1rem"
-                />
-              </span>
-            ))}
-          </Col> */}
-        </Row>
-        {/* <Row>
-          <Col md={6}>
-            <button className="primary_button mt-3" style={{ float: 'right' }}>
-              Send
-            </button>
-          </Col>
-          <Col md={6}></Col>
-        </Row> */}
-      </Form>
+                <option>Target regions, location, crops...</option>
+                <option>Farming Category</option>
+                <option>Location</option>
+                <option>Size</option>
+                <option>Products</option>
+                <option>Crops</option>
+              </select>
+              <input
+                className="input_field p-2 mt-4"
+                type="text"
+                id="title"
+                placeholder="Message Title"
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+              />
+              <textarea
+                className="input_field mt-3 p-2"
+                type="textarea"
+                id="messages"
+                rows="10"
+                placeholder="Write message"
+                name="body"
+                value={form.body}
+                onChange={handleChange}
+              />
+              <button
+                className="primary_button mt-3"
+                style={{ float: 'right' }}
+                onClick={submitMessage}
+              >
+                Send
+              </button>
+            </div>
+          ) : (
+            <div className="voice_message mt-4">
+              <MdKeyboardVoice className="mic" size="3rem" />
+              <div>
+                <button className="primary_button mt-5">Send</button>
+              </div>
+            </div>
+          )}
+        </Col>
+        <Col md={6}>
+          <div className="filtered_div p-2 mt-4">
+            <Locations
+              multiSelections={selectLocation}
+              onChange={setSelectLocation}
+            />
+            <Sizes multiSelections={selectSize} onChange={setSelectSize} />
+            <Crops multiSelections={selectCrop} onChange={setSelectCrop} />
+            <p style={{ fontWeight: 'bold', color: primaryColor }} className="">
+              Active Filters
+            </p>
+          </div>
+        </Col>
+      </Row>
     </Card>
   )
 }

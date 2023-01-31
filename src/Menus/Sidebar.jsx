@@ -34,7 +34,7 @@ export default function Sidebar() {
           />
           <FaBars
             style={{
-              marginTop: 20,
+              marginTop: 20,  
               fontSize: 25,
               cursor: 'pointer',
               marginLeft: isOpen ? '10px' : '',
