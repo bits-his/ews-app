@@ -85,8 +85,7 @@ export default function SendMessage() {
               value={form.title}
               onChange={(e) => handle(e)}
             />
-
-            {JSON.stringify(multiSelections)}
+            {/* {JSON.stringify(multiSelections)} */}
             <Typeahead
               id="basic-typeahead-multiple"
               labelKey="name"
