@@ -11,16 +11,16 @@ export default function Crops({ options, onClick, onChange, multiSelections }) {
             multiple
             // onChange={setMultiSelections}
             options={['Maize', 'Rice']}
-            onClick={onClick}
+          
             onChange={onChange}
             placeholder="Select Crops."
             selected={multiSelections}
             name="farming type"
-            className="input_field p-2"
+            className="input_field"
           />
         </Col>
         <Col md={2}>
-          <button className="primary_button">Add</button>
+          <button className="primary_button" onClick={onClick}>Add</button>
         </Col>
       </Row>
     </div>

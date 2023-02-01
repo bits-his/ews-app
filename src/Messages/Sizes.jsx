@@ -10,17 +10,17 @@ export default function Sizes({ options, onClick, onChange, multiSelections }) {
             labelKey="name"
             multiple
             // onChange={setMultiSelections}
-            options={['Large Scale', 'Small Scale']}
-            onClick={onClick}
+            options={['Large Scale', 'Small Scale', 'fasdf', 'fasdf', 'fasdfs','fasfsd']}
+           
             onChange={onChange}
             placeholder="Select Size."
             selected={multiSelections}
             name="farming type"
-            className="input_field p-2"
+            className="input_field"
           />
         </Col>
         <Col md={2}>
-          <button className="primary_button">Add</button>
+          <button className="primary_button" onClick={onClick}>Add</button>
         </Col>
       </Row>
     </div>

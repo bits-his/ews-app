@@ -13,20 +13,30 @@ export default function OnboardFarmers() {
     lga: '',
     state: '',
     phone: '',
-    address: '',
-    products: '',
-    f_address: '',
+    f_type: '',
+    crops: '',
+    scale: '',
   }
   const [form, setForm] = useState(_form)
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const [multiSelections, setMultiSelections] = useState([])
+  const [multiSelections1, setMultiSelections1] = useState([])
+  const [multiSelections2, setMultiSelections2] = useState([])
 
   const handleChange = ({ target: { name, value } }) =>
     setForm((p) => ({ ...p, [name]: value }))
 
   const handleAdd = () => {
-    setData((p) => [...p, { ...form, products: multiSelections.join(',') }])
+    setData((p) => [
+      ...p,
+      {
+        ...form,
+        f_type: multiSelections.join(','),
+        crops: multiSelections1.join(','),
+        scale: multiSelections2.join(','),
+      },
+    ])
     setForm(_form)
   }
 
@@ -36,24 +46,25 @@ export default function OnboardFarmers() {
   }
 
   const handleSubmit = () => {
-    setLoading(true)
-    _post(
-      'farmers?query_type=INSERT',
-      data,
-      (res) => {
-        if(res.success){
-          goto('/farmers')
-        }
-        // alert('sucess')
-        setLoading(false)
-        console.log(res)
-      },
-      (err) => {
-        setLoading(false)
-        console.log(err)
-        // alert(err)
-      },
-    )
+    // setLoading(true)
+    // _post(
+    //   'farmers?query_type=INSERT',
+    //   data,
+    //   (res) => {
+    //     if (res.success) {
+    //       goto('/farmers')
+    //     }
+    //     // alert('sucess')
+    //     setLoading(false)
+    //     console.log(res)
+    //   },
+    //   (err) => {
+    //     setLoading(false)
+    //     console.log(err)
+    //     // alert(err)
+    //   },
+    // )
+    console.log(data)
   }
   return (
     <div>
@@ -112,37 +123,75 @@ export default function OnboardFarmers() {
               onChange={handleChange}
             />
 
-            <input
+            {/* <input
               className="input_field p-2 mt-4"
               placeholder="Farmer Address"
               type="address"
               name="address"
               value={form.address}
               onChange={handleChange}
-            />
+            /> */}
 
             {/*
              */}
+            {/* <Row>
+              <Col md={4}> */}
             <Typeahead
               id="basic-typeahead-multiple"
               labelKey="name"
               multiple
               onChange={setMultiSelections}
-              options={['Livestock', 'Cash crops']}
+              options={[
+                'Livestock',
+                'Cash crops',
+                'Irrigation',
+                'Seasonal',
+                'Livestock',
+                'Cash crops',
+                'Subsistence',
+              ]}
               placeholder="Farming types"
               selected={multiSelections}
               name="farming type"
               className="input_field p-2 mt-4"
             />
+            {/* </Col>
+              <Col md={4}> */}
+            <Typeahead
+              id="basic-typeahead-multiple"
+              labelKey="name"
+              multiple
+              onChange={setMultiSelections1}
+              options={['Rice', 'Maize']}
+              placeholder="Crops"
+              selected={multiSelections1}
+              name="farming type"
+              className="input_field p-2 mt-4"
+            />
+            {/* </Col>
+              <Col md={4}> */}
+            <Typeahead
+              id="basic-typeahead-multiple"
+              labelKey="name"
+              multiple
+              onChange={setMultiSelections2}
+              options={['Large Scale', 'Medium Scale', 'Small Scale']}
+              placeholder="Scale"
+              selected={multiSelections2}
+              name="farming type"
+              className="input_field p-2 mt-4"
+            />
+            {/* </Col>
+            </Row> */}
 
-            <input
+            {/* <input
               className="input_field p-2 mt-4"
               placeholder="Farm Address"
               type="address"
               name="f_address"
               value={form.f_address}
               onChange={handleChange}
-            />
+            /> */}
           </Col>
           <Col md={6}>
             {data.length ? (

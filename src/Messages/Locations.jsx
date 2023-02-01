@@ -21,7 +21,7 @@ export default function Locations({
             placeholder="Select Locations."
             selected={multiSelections}
             name="farming type"
-            className="input_field p-2"
+            className="input_field"
           />
         </Col>
         <Col md={2}>

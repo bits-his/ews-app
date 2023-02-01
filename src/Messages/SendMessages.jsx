@@ -13,37 +13,88 @@ export default function SendMessage() {
   const [selectLocation, setSelectLocation] = useState([])
   const [selectSize, setSelectSize] = useState([])
   const [selectCrop, setSelectCrop] = useState([])
+
   const [messageType, setMessageType] = useState(false)
+
+  const [selectedFilter, setSelectedFilter] = useState([])
+
   const _form = {
     target: '',
+    sizes: '',
     title: '',
     body: '',
   }
+
   const [form, setForm] = useState(_form)
+
   const handleChange = ({ target: { name, value } }) =>
     setForm((p) => ({ ...p, [name]: value }))
   const submitMessage = () => {
     console.log(form)
   }
+
+  const handleFilter = () => {
+    // if(selectedFilter.length){
+    //   console.log("Herrrrrrrrrrrrrrrrrrr")
+    //   const _arr = [];
+    //   selectedFilter?.filter((item)=>item.filterType===form.target).forEach((item)=>{
+    //     _arr.push({...item,filterTerms:[...selectSize]})
+    //   })
+    //   console.log(_arr)
+    //   console.log(form.target)
+    //   console.log(selectedFilter)
+    //   let old=selectedFilter.filter(item=>item.filterType!==form.target)
+    //   setSelectedFilter([..._arr,...old])
+    // }else{
+    //   setSelectedFilter([
+    //         {
+    //           filterType: form.target,
+    //           filterTerms:
+    //             form.target === 'Sizes'
+    //               ? selectSize
+    //               : form.target === 'Crops'
+    //               ? selectCrop
+    //               : '',
+    //         },
+    //       ])
+    // }
+
+    if (selectedFilter.length) {
+      let newArr = []
+      selectedFilter.forEach((filter) => {
+        if (filter.filterType === form.target) {
+          newArr.push({
+            ...filter,
+            filterTerms:
+              form.target === 'Sizes'
+                ? selectSize
+                : form.target === 'Crops'
+                ? selectCrop
+                : '',
+          })
+        } else {
+          newArr.push(filter)
+        }
+      })
+      setSelectedFilter(newArr)
+    } else {
+      setSelectedFilter([
+        {
+          filterType: form.target,
+          filterTerms:
+            form.target === 'Sizes'
+              ? selectSize
+              : form.target === 'Crops'
+              ? selectCrop
+              : '',
+        },
+      ])
+    }
+  }
   return (
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
-      {/* <Typeahead
-              id="basic-typeahead-multiple"
-              labelKey="name"
-              multiple
-              onChange={setMultiSelections}
-              options={[
-                'Farming Category',
-                'Location',
-                'Size',
-                'Products',
-                'Crops',
-              ]}
-              placeholder="Target regions, locations, products, etc..."
-              selected={multiSelections}
-              name="farming type"
-              className="input_field p-2 mt-4"
-            /> */}
+      {JSON.stringify(selectedFilter)}
+      {/* {JSON.stringify(selectedCrops)} */}
       <h3 className="card_title mb-4">Send Message</h3>
       <div className="buttons_div">
         <button
@@ -61,40 +112,19 @@ export default function SendMessage() {
           <MdKeyboardVoice size="1.2rem" /> Voice message
         </button>
       </div>
-      {/* {JSON.stringify(kkk)} */}
       <Row>
         <Col md={6}>
           {!messageType ? (
             <div>
-              {/* {JSON.stringify(multiSelections)} */}
-              {/* <Typeahead
-                  id="basic-typeahead-multiple"
-                  labelKey="name"
-                  multiple
-                  onChange={setMultiSelections}
-                  options={[
-                    'Farming Category',
-                    'Location',
-                    'Size',
-                    'Products',
-                    'Crops',
-                  ]}
-                  placeholder="Target regions, locations, crops, etc..."
-                  selected={multiSelections}
-                  name="farming type"
-                  className="input_field p-2 mt-4"
-                /> */}
               <select
                 className="input_field p-2 mt-4"
                 name="target"
                 value={form.target}
                 onChange={handleChange}
               >
-                <option>Target regions, location, crops...</option>
-                <option>Farming Category</option>
-                <option>Location</option>
-                <option>Size</option>
-                <option>Products</option>
+                <option>Target locations, crops, sizes...</option>
+                <option>Sizes</option>
+                <option>Locations</option>
                 <option>Crops</option>
               </select>
               <input
@@ -135,15 +165,32 @@ export default function SendMessage() {
         </Col>
         <Col md={6}>
           <div className="filtered_div p-2 mt-4">
-            <Locations
-              multiSelections={selectLocation}
-              onChange={setSelectLocation}
-            />
-            <Sizes multiSelections={selectSize} onChange={setSelectSize} />
-            <Crops multiSelections={selectCrop} onChange={setSelectCrop} />
-            <p style={{ fontWeight: 'bold', color: primaryColor }} className="">
+            {form.target === 'Sizes' ? (
+              <Sizes
+                multiSelections={selectSize}
+                onChange={setSelectSize}
+                onClick={handleFilter}
+              />
+            ) : form.target === 'Crops' ? (
+              <Crops
+                multiSelections={selectCrop}
+                onChange={setSelectCrop}
+                onClick={handleFilter}
+              />
+            ) : null}
+            <p
+              style={{ fontWeight: 'bold', color: primaryColor }}
+              className="mt-3"
+            >
               Active Filters
             </p>
+            <ul>
+              {selectedFilter?.map((item) => (
+                <li>
+                  {item.filterType}: {item.filterTerms}
+                </li>
+              ))}
+            </ul>
           </div>
         </Col>
       </Row>
