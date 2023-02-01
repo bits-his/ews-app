@@ -1,11 +1,12 @@
-import React from "react";
-import { Table } from "reactstrap";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import React from 'react'
+import { Table } from 'reactstrap'
+import { RiDeleteBin6Line } from 'react-icons/ri'
 
 export default function FarmerTable({
   data = [],
   handleDelete = (f) => f,
   handleSubmit = (f) => f,
+  loading
 }) {
   return (
     <>
@@ -14,7 +15,7 @@ export default function FarmerTable({
           <tr>
             <th>#</th>
             <th>Full Name</th>
-            <th>Product</th>
+            <th>LGA</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -25,7 +26,7 @@ export default function FarmerTable({
               <td>
                 {item.fname} {item.lname}
               </td>
-              <td>{item.products}</td>
+              <td>{item.lga}</td>
               <td>
                 <RiDeleteBin6Line onClick={() => handleDelete(id)} />
               </td>
@@ -34,10 +35,14 @@ export default function FarmerTable({
         </tbody>
       </Table>
       <div>
-        <button className="primary_button mt-4 button" onClick={handleSubmit}>
-          Submit
+        <button
+          className="primary_button mt-4 button"
+          onClick={handleSubmit}
+          loading={loading}
+        >
+          {loading ? <span>Loading...</span> : <span>Submit</span>}
         </button>
       </div>
     </>
-  );
+  )
 }

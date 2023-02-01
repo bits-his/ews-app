@@ -16,11 +16,14 @@
   padding: 5px 15px;
   outline: 2px solid var(--secondaryColor);
   outline-offset: 3px;
+  transition: 500ms;
   box-shadow: 0 8px 12px 0 var(--primaryColor);
 }
 .primary_button:hover {
   cursor: pointer;
-  font-weight: bold;
+  /* outline: 2px solid var(--primaryColor);
+  outline-offset: 3px; */
+  box-shadow: none;
 }
 
 .card_title {
@@ -36,7 +39,7 @@
   font-weight: bold;
   font-size: large;
 }
-.button{
+.button {
   float: right;
   align-items: center;
   background-color: var(--primaryColor);
@@ -76,4 +79,56 @@
   font-weight: bold;
   color: var(--primaryColor);
   font-size: 30px;
+}
+
+.view_farmer_button {
+  background-color: #001f4360;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 12px;
+  transition: 500ms;
+}
+.view_farmer_button:hover {
+  background-color: #001f43;
+}
+
+.mic {
+  background-color: #1a4d87;
+  color: white;
+  border-radius: 50%;
+  padding: 7px;
+  transition: 500ms;
+}
+
+.mic:hover {
+  cursor: pointer;
+  background-color: var(--primaryColor);
+}
+.voice_message {
+}
+
+.filtered_div {
+  background-color: rgb(242, 242, 242);
+  border-radius: 5px;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

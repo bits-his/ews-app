@@ -3,205 +3,197 @@ import { Card, Col, Form, Input, Row } from 'reactstrap'
 import { CgClose } from 'react-icons/cg'
 import { RxText } from 'react-icons/rx'
 import { MdCancelScheduleSend, MdKeyboardVoice } from 'react-icons/md'
+import { Typeahead } from 'react-bootstrap-typeahead'
+import { primaryColor } from '../Colors'
+import Locations from './Locations'
+import Sizes from './Sizes'
+import Crops from './Crops'
 
 export default function SendMessage() {
-  const [form, setForm] = useState({
+  const [selectLocation, setSelectLocation] = useState([])
+  const [selectSize, setSelectSize] = useState([])
+  const [selectCrop, setSelectCrop] = useState([])
+
+  const [messageType, setMessageType] = useState(false)
+
+  const [selectedFilter, setSelectedFilter] = useState([])
+
+  const _form = {
+    target: '',
+    sizes: '',
     title: '',
-    // org_name: '',
-    member_type: '',
-    // target_farmer: '',
-    // target: '',
-    messages: '',
-  })
-  const [filter, setFilter] = useState([])
-  let joinMemberType = filter.map((i) => i.member_type).join(',')
+    body: '',
+  }
 
-  const handleAdd = (e) => {
-    e.preventDefault()
-    console.log({
-      title: form.title,
-      member_type: joinMemberType,
-      messages: form.messages,
-    })
-    if (form.title === '' || form.messages === '') {
-      alert('Input Value')
-    }
-    if (form.title && form.messages) {
-      setForm({
-        title: '',
-        // org_name: '',
-        member_type: '',
-        // target_farmer: '',
-        // target: '',
-        messages: '',
+  const [form, setForm] = useState(_form)
+
+  const handleChange = ({ target: { name, value } }) =>
+    setForm((p) => ({ ...p, [name]: value }))
+  const submitMessage = () => {
+    console.log(form)
+  }
+
+  const handleFilter = () => {
+    // if(selectedFilter.length){
+    //   console.log("Herrrrrrrrrrrrrrrrrrr")
+    //   const _arr = [];
+    //   selectedFilter?.filter((item)=>item.filterType===form.target).forEach((item)=>{
+    //     _arr.push({...item,filterTerms:[...selectSize]})
+    //   })
+    //   console.log(_arr)
+    //   console.log(form.target)
+    //   console.log(selectedFilter)
+    //   let old=selectedFilter.filter(item=>item.filterType!==form.target)
+    //   setSelectedFilter([..._arr,...old])
+    // }else{
+    //   setSelectedFilter([
+    //         {
+    //           filterType: form.target,
+    //           filterTerms:
+    //             form.target === 'Sizes'
+    //               ? selectSize
+    //               : form.target === 'Crops'
+    //               ? selectCrop
+    //               : '',
+    //         },
+    //       ])
+    // }
+
+    if (selectedFilter.length) {
+      let newArr = []
+      selectedFilter.forEach((filter) => {
+        if (filter.filterType === form.target) {
+          newArr.push({
+            ...filter,
+            filterTerms:
+              form.target === 'Sizes'
+                ? selectSize
+                : form.target === 'Crops'
+                ? selectCrop
+                : '',
+          })
+        } else {
+          newArr.push(filter)
+        }
       })
+      setSelectedFilter(newArr)
+    } else {
+      setSelectedFilter([
+        {
+          filterType: form.target,
+          filterTerms:
+            form.target === 'Sizes'
+              ? selectSize
+              : form.target === 'Crops'
+              ? selectCrop
+              : '',
+        },
+      ])
     }
-    setFilter([])
   }
-
-  function handle(e) {
-    const newData = { ...form }
-    newData[e.target.id] = e.target.value
-    setForm(newData)
-    // console.log(newData)
-  }
-
-  const handleDelete = (index) => {
-    let arr = filter.filter((a, b) => b !== index)
-    setFilter(arr)
-  }
-
-  useEffect(() => {
-    if (form.member_type !== '') {
-      setFilter((p) => [...p, { member_type: form.member_type }])
-    }
-  }, [form.member_type])
   return (
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
+      {JSON.stringify(selectedFilter)}
+      {/* {JSON.stringify(selectedCrops)} */}
       <h3 className="card_title mb-4">Send Message</h3>
       <div className="buttons_div">
-          <button
-            className="message_button"
-            onClick={() => goto('/send-message')}
-          >
-            <MdKeyboardVoice size="1.2rem" /> Voice message
-          </button>
-
-          <button
-            className="message_button"
-            // onClick={() => setShowTable(false)}
-            // style={{ backgroundColor: !showTable ? primaryColor : null }}
-          >
-            <RxText size="1.2rem" /> Text Message
-          </button>
-        </div>
-      <Form onSubmit={handleAdd}>
-        {/* {JSON.stringify(kkk)} */}
-        <Row>
-          <Col md={6}>
-            <input
-              className="input_field p-2 mt-3"
-              type="text"
-              id="title"
-              placeholder="Message Title"
-              value={form.title}
-              onChange={(e) => handle(e)}
-            />
-            {/* <select
-              className="input_field p-2 mt-3"
-              type="select"
-              id="member_type"
-              value={form.member_type}
-              onChange={(e) => handle(e)}
-            >
-              <option>Member Type</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-            </select> */}
-            <select
-              className="input_field p-2 mt-3"
-              type="select"
-              id="member_type"
-              value={form.member_type}
-              onChange={(e) => {
-                handle(e)
-                // getFilter()
-              }}
-            >
-              <option>Farming Category</option>
-              <option value="1">1</option>
-              <option value="Ahmad">ahmad</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-            <textarea
-              className="input_field mt-3 p-2"
-              type="textarea"
-              id="messages"
-              rows="10"
-              placeholder="Write message"
-              value={form.messages}
-              onChange={(e) => handle(e)}
-            />
-          </Col>
-          {/* <Col md={6}>
-            <input
-              className="input_field p-2 mt-3"
-              type="text"
-              id="org_name"
-              placeholder="Organization Name"
-              value={form.org_name}
-              onChange={(e) => handle(e)}
-            />
-            <select
-              className="input_field p-2 mt-3"
-              type="select"
-              id="target_farmer"
-              value={form.target_farmer}
-              onChange={(e) => handle(e)}
-            >
-              <option>Target by products</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-            </select>
-            <select
-              className="input_field p-2 mt-3"
-              type="select2
-              id="target"
-              value={form.target}
-              onChange={(e) => handle(e)}
-            >
-              <option>Target by location</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-            </select>
-          </Col> */}
-          <Col md={6} className="mt-3">
-            {filter.map((i, id) => (
-              <span
-                style={{
-                  letterSpacing: 1,
-                  backgroundColor: '#244f80',
-                  color: '#fff',
-                  padding: 8,
-                  fontSize: 12,
-                  marginRight: 10,
-                  lineHeight: 3,
-                  borderRadius: 5,
-                  opacity: '0.6',
-                }}
+        <button
+          className="message_button"
+          onClick={() => setMessageType(false)}
+          style={{ backgroundColor: !messageType ? primaryColor : null }}
+        >
+          <RxText size="1.2rem" /> Text Message
+        </button>
+        <button
+          className="message_button"
+          style={{ backgroundColor: messageType ? primaryColor : null }}
+          onClick={() => setMessageType(true)}
+        >
+          <MdKeyboardVoice size="1.2rem" /> Voice message
+        </button>
+      </div>
+      <Row>
+        <Col md={6}>
+          {!messageType ? (
+            <div>
+              <select
+                className="input_field p-2 mt-4"
+                name="target"
+                value={form.target}
+                onChange={handleChange}
               >
-                {' '}
-                {i.member_type}
-                <CgClose
-                  onClick={() => handleDelete(id)}
-                  style={{
-                    marginLeft: 7,
-                    color: '#fff',
-                    cursor: 'pointer',
-                    fontSize: 23,
-                    fontWeight: 'bolder',
-                    // paddingBottom: '3'
-                  }}
-                  title="cancel"
-                  size="1rem"
-                />
-              </span>
-            ))}
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <button className="primary_button mt-3" style={{ float: 'right' }}>
-              Send
-            </button>
-          </Col>
-          <Col md={6}></Col>
-        </Row>
-      </Form>
+                <option>Target locations, crops, sizes...</option>
+                <option>Sizes</option>
+                <option>Locations</option>
+                <option>Crops</option>
+              </select>
+              <input
+                className="input_field p-2 mt-4"
+                type="text"
+                id="title"
+                placeholder="Message Title"
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+              />
+              <textarea
+                className="input_field mt-3 p-2"
+                type="textarea"
+                id="messages"
+                rows="10"
+                placeholder="Write message"
+                name="body"
+                value={form.body}
+                onChange={handleChange}
+              />
+              <button
+                className="primary_button mt-3"
+                style={{ float: 'right' }}
+                onClick={submitMessage}
+              >
+                Send
+              </button>
+            </div>
+          ) : (
+            <div className="voice_message mt-4">
+              <MdKeyboardVoice className="mic" size="3rem" />
+              <div>
+                <button className="primary_button mt-5">Send</button>
+              </div>
+            </div>
+          )}
+        </Col>
+        <Col md={6}>
+          <div className="filtered_div p-2 mt-4">
+            {form.target === 'Sizes' ? (
+              <Sizes
+                multiSelections={selectSize}
+                onChange={setSelectSize}
+                onClick={handleFilter}
+              />
+            ) : form.target === 'Crops' ? (
+              <Crops
+                multiSelections={selectCrop}
+                onChange={setSelectCrop}
+                onClick={handleFilter}
+              />
+            ) : null}
+            <p
+              style={{ fontWeight: 'bold', color: primaryColor }}
+              className="mt-3"
+            >
+              Active Filters
+            </p>
+            <ul>
+              {selectedFilter?.map((item) => (
+                <li>
+                  {item.filterType}: {item.filterTerms}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Col>
+      </Row>
     </Card>
   )
 }
