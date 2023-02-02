@@ -7,16 +7,21 @@ import { FaEllipsisV } from 'react-icons/fa'
 
 export default function Farmers() {
   const goto = useNavigate()
+  const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
   const [farmers, setFarmers] = useState([])
   useEffect(() => {
+    setLoading(true)
     _get(
       'farmers?query_type=VIEW-ALL',
       (response) => {
+        setLoading(false)
         setFarmers(response.results)
         // alert(JSON.stringify(response));
+        console.log({ response })
       },
       (error) => {
+        setLoading(false)
         console.error(error)
       },
     )
@@ -41,7 +46,7 @@ export default function Farmers() {
   return (
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
-        {JSON.stringify({ farmers })}
+        {/* {JSON.stringify({ farmers })} */}
         <Row>
           <Col md={6}>
             <h3 className="card_title">Farmers</h3>
@@ -61,9 +66,12 @@ export default function Farmers() {
             <tr>
               <th>SN</th>
               <th>Full Name</th>
-              <th>Farm Address</th>
               <th>Phone Number</th>
-              <th>Products</th>
+              <th>LGA</th>
+              <th>State</th>
+              <th>Farming Type</th>
+              <th>Crops</th>
+              <th>Scales</th>
               <th>Action</th>
               {/* <th>
                 <span style={{ float: 'right' }}>Actions</span>
@@ -71,25 +79,33 @@ export default function Farmers() {
             </tr>
           </thead>
           <tbody>
-            {farmers.map((item, index) => (
-              <tr>
-                <th scope="row">{index + 1}</th>
-                <td>
-                  {item.fname} {item.lname}
-                </td>
-                <td>{item.f_address}</td>
-                <td>{item.products}</td>
-                <td>{item.phone}</td>
-                <td>
-                  <button className="view_farmer_button">View</button>
-                </td>
-                {/* <td>
+            {loading ? (
+              <span>loading...</span>
+            ) : (
+
+              farmers.map((item, index) => (
+                <tr>
+                  <th scope="row">{index + 1}</th>
+                  <td>
+                    {item.fname} {item.lname}
+                  </td>
+                  <td>{item.phone}</td>
+                  <td>{item.lga}</td>
+                  <td>{item.state}</td>
+                  <td>{item.f_type}</td>
+                  <td>{item.crops}</td>
+                  <td>{item.scales}</td>
+                  <td>
+                    <button className="view_farmer_button">View</button>
+                  </td>
+                  {/* <td>
                   <div style={{ float: 'right', cursor: 'pointer' }}>
                     <FaEllipsisV />
                   </div>
                 </td> */}
-              </tr>
-            ))}
+                </tr>
+              ))
+            )}
           </tbody>
         </Table>
       </Card>
