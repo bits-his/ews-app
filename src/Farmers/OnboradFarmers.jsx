@@ -15,7 +15,7 @@ export default function OnboardFarmers() {
     phone: '',
     f_type: '',
     crops: '',
-    scale: '',
+    scales: '',
   }
   const [form, setForm] = useState(_form)
   const [data, setData] = useState([])
@@ -34,7 +34,7 @@ export default function OnboardFarmers() {
         ...form,
         f_type: multiSelections.join(','),
         crops: multiSelections1.join(','),
-        scale: multiSelections2.join(','),
+        scales: multiSelections2.join(','),
       },
     ])
     setForm(_form)
@@ -46,24 +46,24 @@ export default function OnboardFarmers() {
   }
 
   const handleSubmit = () => {
-    // setLoading(true)
-    // _post(
-    //   'farmers?query_type=INSERT',
-    //   data,
-    //   (res) => {
-    //     if (res.success) {
-    //       goto('/farmers')
-    //     }
-    //     // alert('sucess')
-    //     setLoading(false)
-    //     console.log(res)
-    //   },
-    //   (err) => {
-    //     setLoading(false)
-    //     console.log(err)
-    //     // alert(err)
-    //   },
-    // )
+    setLoading(true)
+    _post(
+      'farmers?query_type=INSERT',
+      data,
+      (res) => {
+        if (res.success) {
+          goto('/farmers')
+        }
+        // alert('sucess')
+        setLoading(false)
+        console.log(res)
+      },
+      (err) => {
+        setLoading(false)
+        console.log(err)
+        // alert(err)
+      },
+    )
     console.log(data)
   }
   return (
@@ -123,19 +123,6 @@ export default function OnboardFarmers() {
               onChange={handleChange}
             />
 
-            {/* <input
-              className="input_field p-2 mt-4"
-              placeholder="Farmer Address"
-              type="address"
-              name="address"
-              value={form.address}
-              onChange={handleChange}
-            /> */}
-
-            {/*
-             */}
-            {/* <Row>
-              <Col md={4}> */}
             <Typeahead
               id="basic-typeahead-multiple"
               labelKey="name"
