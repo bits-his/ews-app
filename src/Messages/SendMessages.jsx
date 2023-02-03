@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Card, Col, Form, Input, Row } from 'reactstrap'
 import { CgClose } from 'react-icons/cg'
 import { RxText } from 'react-icons/rx'
@@ -8,19 +8,19 @@ import { primaryColor } from '../Colors'
 import Locations from './Locations'
 import Sizes from './Sizes'
 import Crops from './Crops'
+import { _get, _post } from '../utils/Helper'
 
 export default function SendMessage() {
+  const [filters, setFilters] = useState({})
+  const [locations, setLocations] = useState([])
+  const [crops, setCrops] = useState([])
   const [selectLocation, setSelectLocation] = useState([])
   const [selectSize, setSelectSize] = useState([])
   const [selectCrop, setSelectCrop] = useState([])
-
+  const [matchedFarmers, setMatchedFarmers] = useState(0)
   const [messageType, setMessageType] = useState(false)
-
-  const [selectedFilter, setSelectedFilter] = useState([])
-
   const _form = {
     target: '',
-    sizes: '',
     title: '',
     body: '',
   }
@@ -29,72 +29,82 @@ export default function SendMessage() {
 
   const handleChange = ({ target: { name, value } }) =>
     setForm((p) => ({ ...p, [name]: value }))
-  const submitMessage = () => {
-    console.log(form)
-  }
+ 
 
-  const handleFilter = () => {
-    // if(selectedFilter.length){
-    //   console.log("Herrrrrrrrrrrrrrrrrrr")
-    //   const _arr = [];
-    //   selectedFilter?.filter((item)=>item.filterType===form.target).forEach((item)=>{
-    //     _arr.push({...item,filterTerms:[...selectSize]})
-    //   })
-    //   console.log(_arr)
-    //   console.log(form.target)
-    //   console.log(selectedFilter)
-    //   let old=selectedFilter.filter(item=>item.filterType!==form.target)
-    //   setSelectedFilter([..._arr,...old])
-    // }else{
-    //   setSelectedFilter([
-    //         {
-    //           filterType: form.target,
-    //           filterTerms:
-    //             form.target === 'Sizes'
-    //               ? selectSize
-    //               : form.target === 'Crops'
-    //               ? selectCrop
-    //               : '',
-    //         },
-    //       ])
-    // }
-
-    if (selectedFilter.length) {
-      let newArr = []
-      selectedFilter.forEach((filter) => {
-        if (filter.filterType === form.target) {
-          newArr.push({
-            ...filter,
-            filterTerms:
-              form.target === 'Sizes'
-                ? selectSize
-                : form.target === 'Crops'
-                ? selectCrop
-                : '',
-          })
-        } else {
-          newArr.push(filter)
+  const getLocations = useCallback(() => {
+    _get(
+      form.target === 'Locations'
+        ? `locations?query_type=view-all&data=lgas`
+        : `farmers/crops?query_type=view-all&data=crops`,
+      (response) => {
+        // setLoading(false)
+        if (form.target === 'Locations') {
+          setLocations(response.results)
+        } else if (form.target === 'Crops') {
+          setCrops(response.results)
         }
-      })
-      setSelectedFilter(newArr)
-    } else {
-      setSelectedFilter([
-        {
-          filterType: form.target,
-          filterTerms:
-            form.target === 'Sizes'
-              ? selectSize
-              : form.target === 'Crops'
-              ? selectCrop
-              : '',
-        },
-      ])
-    }
+        // alert(JSON.stringify(response));
+        console.log({ response })
+      },
+      (error) => {
+        // setLoading(false)
+        console.error(error)
+      },
+    )
+  }, [form.target])
+
+  useEffect(() => {
+    getLocations()
+  }, [getLocations])
+
+  const getFarmers = useCallback(() => {
+    _get(
+      `farmers?query_type=count-by-filters&lga=${selectLocation
+        .map((l) => l.name)
+        .toString()}&crops=${selectCrop.map((c) => c.name)}&sizes=${selectSize.map((s)=>s)}`,
+      (response) => {
+        // setLoading(false)
+        if (response.results && response.results.length) {
+          setMatchedFarmers(response.results[0].matched_farmers)
+        }
+
+        // alert(JSON.stringify(response));
+        console.log({ response })
+      },
+      (error) => {
+        // setLoading(false)
+        console.error(error)
+      },
+    )
+  }, [selectLocation, selectCrop])
+
+  useEffect(() => {
+    getFarmers()
+  }, [getFarmers])
+
+  const handleSubmit = () => {
+    alert('hhghgh')
+    _post(
+      `farmers?query_type=send-msg&lga=${selectLocation
+        .map((l) => l.name)
+        .toString()}&crops=${selectCrop.map((c) => c.name)}&sizes=${selectSize.map((s)=>s)}`,
+        form,
+      (response) => {
+        // setLoading(false)
+        // alert(JSON.stringify(response));
+        console.log({ response,msg:'SUBMITTED' })
+      },
+      (error) => {
+        // setLoading(false)
+        console.error(error)
+      },
+    )
   }
   return (
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
-      {JSON.stringify(selectedFilter)}
-      {/* {JSON.stringify(selectedCrops)} */}
+      {/* {JSON.stringify(filters)} */}
+      {JSON.stringify({ selectLocation, selectCrop, selectSize })}
+      {/* {JSON.stringify(setCrops)} */}
       <h3 className="card_title mb-4">Send Message</h3>
       <div className="buttons_div">
         <button
@@ -149,7 +159,7 @@ export default function SendMessage() {
               <button
                 className="primary_button mt-3"
                 style={{ float: 'right' }}
-                onClick={submitMessage}
+                onClick={handleSubmit}
               >
                 Send
               </button>
@@ -158,24 +168,35 @@ export default function SendMessage() {
             <div className="voice_message mt-4">
               <MdKeyboardVoice className="mic" size="3rem" />
               <div>
-                <button className="primary_button mt-5">Send</button>
+                <button className="primary_button mt-5" onClick={''}>Send</button>
               </div>
             </div>
           )}
         </Col>
         <Col md={6}>
           <div className="filtered_div p-2 mt-4">
+            {/* {JSON.stringify(selectSize)}
+            {JSON.stringify(selectCrop)}
+            {JSON.stringify(selectLocation)} */}
             {form.target === 'Sizes' ? (
               <Sizes
                 multiSelections={selectSize}
                 onChange={setSelectSize}
-                onClick={handleFilter}
+                onClick={() => handleAdd('Sizes')}
               />
             ) : form.target === 'Crops' ? (
               <Crops
                 multiSelections={selectCrop}
                 onChange={setSelectCrop}
-                onClick={handleFilter}
+                onClick={() => handleAdd('Crops')}
+                options={crops}
+              />
+            ) : form.target === 'Locations' ? (
+              <Locations
+                multiSelections={selectLocation}
+                onChange={setSelectLocation}
+                onClick={() => handleAdd('Locations')}
+                options={locations}
               />
             ) : null}
             <p
@@ -184,13 +205,33 @@ export default function SendMessage() {
             >
               Active Filters
             </p>
-            <ul>
-              {selectedFilter?.map((item) => (
-                <li>
-                  {item.filterType}: {item.filterTerms}
-                </li>
-              ))}
-            </ul>
+            {selectLocation.length > 0 ? (
+              <p>
+                Locations:{' '}
+                {selectLocation.map((l) => (
+                  <span className="filter_items">{l.name}</span>
+                ))}
+              </p>
+            ) : null}
+            {selectCrop.length > 0 ? (
+              <p>
+                Crops:{' '}
+                {selectCrop.map((c) => (
+                  <span className="filter_items">{c.name}</span>
+                ))}
+              </p>
+            ) : null}
+            {selectSize.length > 0 ? (
+              <p>
+                Scales:{' '}
+                {selectSize.map((s) => (
+                  <span className="filter_items">{s}</span>
+                ))}
+              </p>
+            ) : null}
+            {matchedFarmers > 0 ? (
+              <p>{matchedFarmers} Farmers selected</p>
+            ) : null}
           </div>
         </Col>
       </Row>

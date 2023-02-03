@@ -132,3 +132,11 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+.filter_items{
+  background-color: #001f4364;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+  margin-right: 5px;
+}

@@ -9,13 +9,13 @@ export default function Locations({
   return (
     <div>
       <Row className="" style={{ display: 'flex', alignItems: 'center' }}>
-        <Col md={10}>
+        <Col md={12}>
           <Typeahead
             id="basic-typeahead-multiple"
             labelKey="name"
             multiple
             // onChange={setMultiSelections}
-            options={['Kano', 'Abuja']}
+            options={options}
             onClick={onClick}
             onChange={onChange}
             placeholder="Select Locations."
@@ -24,9 +24,9 @@ export default function Locations({
             className="input_field"
           />
         </Col>
-        <Col md={2}>
+        {/* <Col md={2}>
           <button className="primary_button">Add</button>
-        </Col>
+        </Col> */}
       </Row>
     </div>
   )

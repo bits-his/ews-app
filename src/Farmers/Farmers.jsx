@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, Col, Row, Table } from 'reactstrap'
-import store from '../redux/store'
+// import store from '../redux/store'
 import { _get, _post } from '../utils/Helper'
 import { FaEllipsisV } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 
 export default function Farmers() {
   const goto = useNavigate()
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
   const [farmers, setFarmers] = useState([])
+  const { user } = useSelector((state) => state.auth)
   useEffect(() => {
     setLoading(true)
     _get(
-      'farmers?query_type=VIEW-ALL',
+      `farmers?query_type=VIEW-ALL&org_id=${user.org_id}`,
       (response) => {
         setLoading(false)
         setFarmers(response.results)
@@ -44,9 +46,10 @@ export default function Farmers() {
   //   handleGet();
   // }, []);
   return (
+
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
-        {/* {JSON.stringify({ farmers })} */}
+        {JSON.stringify({ user })}
         <Row>
           <Col md={6}>
             <h3 className="card_title">Farmers</h3>
@@ -82,7 +85,6 @@ export default function Farmers() {
             {loading ? (
               <span>loading...</span>
             ) : (
-
               farmers.map((item, index) => (
                 <tr>
                   <th scope="row">{index + 1}</th>

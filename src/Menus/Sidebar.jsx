@@ -10,7 +10,7 @@ import logo from '../Images/Knowtify.png'
 import './Sidebar.css'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../redux/actions/authActions'
 import profile from '../Images/profile.jpg'
 import { FaBars } from 'react-icons/fa'
@@ -21,9 +21,11 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true)
   const toggle = () => setIsOpen(!isOpen)
   const goto = useNavigate()
+  const { user } = useSelector((state) => state.auth)
 
   return (
     <div className="sidebar" style={{ width: isOpen ? '' : '80px' }}>
+      {/* {JSON.stringify(user)} */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <img
@@ -34,7 +36,7 @@ export default function Sidebar() {
           />
           <FaBars
             style={{
-              marginTop: 20,  
+              marginTop: 20,
               fontSize: 25,
               cursor: 'pointer',
               marginLeft: isOpen ? '10px' : '',
@@ -59,7 +61,7 @@ export default function Sidebar() {
               className="ass_name"
               style={{ display: isOpen ? 'block' : 'none' }}
             >
-              Association Name
+              {user.name}
             </p>
           </div>
         </div>
