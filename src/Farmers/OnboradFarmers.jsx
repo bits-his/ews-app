@@ -74,7 +74,7 @@ export default function OnboardFarmers() {
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
         <h3 className="card_title">Onboard Farmer</h3>
-        {JSON.stringify(data)}
+        {/* {JSON.stringify(data)} */}
         <Row>
           <Col md={6}>
             <div className="mt-3">

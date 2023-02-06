@@ -9,6 +9,7 @@ import Locations from './Locations'
 import Sizes from './Sizes'
 import Crops from './Crops'
 import { _get, _post } from '../utils/Helper'
+import Languages from './Languages'
 
 export default function SendMessage() {
   const [filters, setFilters] = useState({})
@@ -16,6 +17,7 @@ export default function SendMessage() {
   const [crops, setCrops] = useState([])
   const [selectLocation, setSelectLocation] = useState([])
   const [selectSize, setSelectSize] = useState([])
+  const [selectLanguage, setSelectLanguage] = useState([])
   const [selectCrop, setSelectCrop] = useState([])
   const [matchedFarmers, setMatchedFarmers] = useState(0)
   const [messageType, setMessageType] = useState(false)
@@ -30,6 +32,20 @@ export default function SendMessage() {
   const handleChange = ({ target: { name, value } }) =>
     setForm((p) => ({ ...p, [name]: value }))
 
+  const setAll = () => {
+    setFilters((p) => ({
+      ...p,
+      title: form.title,
+      message: form.body,
+      filter: {
+        size: selectSize,
+        crop: selectCrop,
+        location: selectLocation.map((item) => item.name),
+        language: selectLanguage,
+      },
+    }))
+  }
+  // setForm((p) => ({ ...p, [name]: value }))
   const getLocations = useCallback(() => {
     _get(
       form.target === 'Locations'
@@ -84,7 +100,9 @@ export default function SendMessage() {
   }, [getFarmers])
 
   const handleSubmit = () => {
-    alert('hhghgh')
+    // alert('hhghgh')
+    setAll()
+    console.log(filters)
     _post(
       `farmers?query_type=send-msg&lga=${selectLocation
         .map((l) => l.name)
@@ -96,6 +114,7 @@ export default function SendMessage() {
         // setLoading(false)
         // alert(JSON.stringify(response));
         console.log({ response, msg: 'SUBMITTED' })
+        console.log(form)
       },
       (error) => {
         // setLoading(false)
@@ -103,11 +122,16 @@ export default function SendMessage() {
       },
     )
   }
+  const locationName = selectLocation.map((item) => item.name)
+
   return (
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
-      {/* {JSON.stringify(filters)} */}
-      {/* {JSON.stringify({ selectLocation, selectCrop, selectSize })} */}
-      {/* {JSON.stringify(setCrops)} */}
+      {JSON.stringify({ filters })}
+      {/* {JSON.stringify({ locationName })}
+      {JSON.stringify({ selectCrop })}
+      {JSON.stringify({ selectSize })}
+      {JSON.stringify({ selectLanguage })} */}
+      {JSON.stringify(setCrops)}
       <h3 className="card_title mb-4">Send Message</h3>
       <div className="buttons_div">
         <button
@@ -135,10 +159,11 @@ export default function SendMessage() {
                 value={form.target}
                 onChange={handleChange}
               >
-                <option>Target locations, crops, sizes...</option>
+                <option>Target locations, crops, sizes, and language...</option>
                 <option>Sizes</option>
                 <option>Locations</option>
                 <option>Crops</option>
+                <option>Language</option>
               </select>
               <input
                 className="input_field p-2 mt-4"
@@ -203,6 +228,13 @@ export default function SendMessage() {
                 onClick={() => handleAdd('Locations')}
                 options={locations}
               />
+            ) : form.target === 'Language' ? (
+              <Languages
+                multiSelections={selectLanguage}
+                onChange={setSelectLanguage}
+                onClick={() => handleAdd('Languages')}
+                options={''}
+              />
             ) : null}
             <p
               style={{ fontWeight: 'bold', color: primaryColor }}
@@ -230,6 +262,14 @@ export default function SendMessage() {
               <p>
                 Scales:{' '}
                 {selectSize.map((s) => (
+                  <span className="filter_items">{s}</span>
+                ))}
+              </p>
+            ) : null}
+            {selectLanguage.length > 0 ? (
+              <p>
+                Language:{' '}
+                {selectLanguage.map((s) => (
                   <span className="filter_items">{s}</span>
                 ))}
               </p>
