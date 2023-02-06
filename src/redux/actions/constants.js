@@ -9,3 +9,4 @@ export const AUTH_USER = 'AUTH_USER'
 export const LOGOUT = 'LOGOUT'
 export const UPDATE_USERS = 'UPDATE_USERS'
 export const AUTH_ERROR = 'AUTH_ERRORiuijjk'
+export const ONBOARDINGERROR = "ONBOARDINGERROR";

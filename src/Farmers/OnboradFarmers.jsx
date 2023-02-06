@@ -1,74 +1,82 @@
-import React, { useState } from 'react'
-import { Card, Col, Row } from 'reactstrap'
-import { BsPlus } from 'react-icons/bs'
-import TableFarmer from '../Farmers/FarmerTable'
-import { Typeahead } from 'react-bootstrap-typeahead'
-import { _post } from '../utils/Helper'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import React, { useState } from "react";
+import { Card, Col, Row } from "reactstrap";
+import { BsPlus } from "react-icons/bs";
+import TableFarmer from "../Farmers/FarmerTable";
+import { Typeahead } from "react-bootstrap-typeahead";
+import { _post } from "../utils/Helper";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 export default function OnboardFarmers() {
-  const goto = useNavigate()
-  const { user } = useSelector((state) => state.auth)
+  const goto = useNavigate();
+  const { user } = useSelector((state) => state.auth);
   const _form = {
-    fname: '',
-    lname: '',
-    lga: '',
-    state: '',
-    phone: '',
-    f_type: '',
-    crops: '',
-    scales: '',
+    fname: "",
+    lname: "",
+    lga: "",
+    state: "",
+    phone: "",
+    f_type: "",
+    crops: "",
+    scales: "",
     org_id: user.org_id,
-  }
-  const [form, setForm] = useState(_form)
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [multiSelections, setMultiSelections] = useState([])
-  const [multiSelections1, setMultiSelections1] = useState([])
-  const [multiSelections2, setMultiSelections2] = useState([])
+  };
+  const [form, setForm] = useState(_form);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [multiSelections, setMultiSelections] = useState([]);
+  const [multiSelections1, setMultiSelections1] = useState([]);
+  const [multiSelections2, setMultiSelections2] = useState([]);
 
-  const handleChange = ({ target: { name, value } }) =>
-    setForm((p) => ({ ...p, [name]: value }))
+  const handleChange = ({ target: { name, value } }) => {
+    setForm((p) => ({ ...p, [name]: value }));
+  };
+  // const checkForm = (name) => {
+
+  // }
 
   const handleAdd = () => {
-    setData((p) => [
-      ...p,
-      {
-        ...form,
-        f_type: multiSelections.join(','),
-        crops: multiSelections1.join(','),
-        scales: multiSelections2.join(','),
-      },
-    ])
-    setForm(_form)
-  }
+    if (form.fname === "") {
+      setCheck(true);
+    } else {
+      setData((p) => [
+        ...p,
+        {
+          ...form,
+          f_type: multiSelections.join(","),
+          crops: multiSelections1.join(","),
+          scales: multiSelections2.join(","),
+        },
+      ]);
+      setForm(_form);
+    }
+  };
 
   const handleDelete = (idx) => {
-    let arr = data.filter((i, id) => id !== idx)
-    setData(arr)
-  }
+    let arr = data.filter((i, id) => id !== idx);
+    setData(arr);
+  };
 
   const handleSubmit = () => {
-    setLoading(true)
+    setLoading(true);
     _post(
-      'farmers?query_type=INSERT',
+      "farmers?query_type=INSERT",
       data,
       (res) => {
         if (res.success) {
-          goto('/farmers')
+          goto("/farmers");
         }
         // alert('sucess')
-        setLoading(false)
-        console.log(res)
+        setLoading(false);
+        console.log(res);
       },
       (err) => {
-        setLoading(false)
-        console.log(err)
+        setLoading(false);
+        console.log(err);
         // alert(err)
-      },
-    )
-    console.log(data)
-  }
+      }
+    );
+    console.log(data);
+  };
 
   return (
     <div>
@@ -78,9 +86,6 @@ export default function OnboardFarmers() {
         <Row>
           <Col md={6}>
             <div className="mt-3">
-              {/* <p className="text-danger m-0" style={{ fontSize: 12 }}>
-                {formError.fname}
-              </p> */}
               <input
                 className="input_field p-2"
                 placeholder="First Name"
@@ -91,9 +96,6 @@ export default function OnboardFarmers() {
               />
             </div>
             <div className="mt-3">
-              {/* <p className="text-danger m-0" style={{ fontSize: 12 }}>
-                {formError.lname && formError.lname}
-              </p> */}
               <input
                 className="input_field p-2"
                 placeholder="Last Name"
@@ -107,9 +109,6 @@ export default function OnboardFarmers() {
             <Row>
               <Col md={6}>
                 <div className="mt-3">
-                  {/* <p className="text-danger m-0" style={{ fontSize: 12 }}>
-                    {formError.lga && formError.lga}
-                  </p> */}
                   <input
                     className="input_field p-2"
                     placeholder="Local Government"
@@ -122,9 +121,6 @@ export default function OnboardFarmers() {
               </Col>
               <Col md={6}>
                 <div className="mt-3">
-                  {/* <p className="text-danger m-0" style={{ fontSize: 12 }}>
-                    {formError.state && formError.state}
-                  </p> */}
                   <input
                     className="input_field p-2"
                     placeholder="State"
@@ -137,9 +133,6 @@ export default function OnboardFarmers() {
               </Col>
             </Row>
             <div className="mt-3">
-              {/* <p className="text-danger m-0" style={{ fontSize: 12 }}>
-                {<formError className="phone"> </formError> && formError.phone}
-              </p> */}
               <input
                 className="input_field p-2"
                 placeholder="Phone"
@@ -156,13 +149,13 @@ export default function OnboardFarmers() {
                 multiple
                 onChange={setMultiSelections}
                 options={[
-                  'Livestock',
-                  'Cash crops',
-                  'Irrigation',
-                  'Seasonal',
-                  'Livestock',
-                  'Cash crops',
-                  'Subsistence',
+                  "Livestock",
+                  "Cash crops",
+                  "Irrigation",
+                  "Seasonal",
+                  "Livestock",
+                  "Cash crops",
+                  "Subsistence",
                 ]}
                 placeholder="Farming types"
                 selected={multiSelections}
@@ -170,15 +163,14 @@ export default function OnboardFarmers() {
                 className="input_field p-2"
               />
             </div>
-            {/* </Col>
-              <Col md={4}> */}
+
             <div className="mt-3">
               <Typeahead
                 id="basic-typeahead-multiple"
                 labelKey="name"
                 multiple
                 onChange={setMultiSelections1}
-                options={['Rice', 'Maize']}
+                options={["Rice", "Maize"]}
                 placeholder="Crops"
                 selected={multiSelections1}
                 name="farming type"
@@ -193,24 +185,13 @@ export default function OnboardFarmers() {
                 labelKey="name"
                 multiple
                 onChange={setMultiSelections2}
-                options={['Large Scale', 'Medium Scale', 'Small Scale']}
+                options={["Large Scale", "Medium Scale", "Small Scale"]}
                 placeholder="Scale"
                 selected={multiSelections2}
                 name="farming type"
                 className="input_field p-2"
               />
             </div>
-            {/* </Col>
-            </Row> */}
-
-            {/* <input
-              className="input_field p-2"
-              placeholder="Farm Address"
-              type="address"
-              name="f_address"
-              value={form.f_address}
-              onChange={handleChange}
-            /> */}
           </Col>
           <Col md={6}>
             {data.length ? (
@@ -221,7 +202,7 @@ export default function OnboardFarmers() {
                 loading={loading}
               />
             ) : (
-              ''
+              ""
             )}
           </Col>
         </Row>
@@ -232,5 +213,5 @@ export default function OnboardFarmers() {
         </div>
       </Card>
     </div>
-  )
+  );
 }
