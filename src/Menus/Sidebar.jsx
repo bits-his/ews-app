@@ -27,13 +27,6 @@ export default function Sidebar() {
   const { user } = useSelector((state) => state.auth)
 
   return (
-<<<<<<< HEAD
-    <div className="sidebar" style={{width: isOpen ? '250px' : '80px'}}>
-      <div>
-        <div style={{display:'flex', justifyContent: 'space-around'}}> 
-          <img src={logo} alt="logo" className="logo" style={{display: isOpen ? 'block' : 'none'}}/>
-          <FaBars style={{marginTop: 20, fontSize: 25, cursor: 'pointer', marginLeft: isOpen ? '10px': ''}} onClick= {toggle} />
-=======
     <div className="sidebar" style={{ width: isOpen ? '' : '80px' }}>
       {/* {JSON.stringify(user)} */}
       <div>
@@ -53,22 +46,17 @@ export default function Sidebar() {
             }}
             onClick={toggle}
           />
->>>>>>> 6e3e20425efda26d953f6059f17192f72a2e9fd0
         </div>
         
         <div onClick={()=>goto('/profile')} className='profile_div' style={{ paddingTop: isOpen ? '': '30px'}}>
           <img src={profile} alt="profile" className="profile mt-3" style={{width: isOpen ? '' : '50px'}}/>
           <div>
-<<<<<<< HEAD
-            <p className="ass_name" style={{display: isOpen ? 'block' : 'none'}}>Association Name</p>
-=======
             <p
               className="ass_name"
               style={{ display: isOpen ? 'block' : 'none' }}
             >
               {user.name}
             </p>
->>>>>>> 6e3e20425efda26d953f6059f17192f72a2e9fd0
           </div>
         </div>
         <div className="mt-3" style={{paddingTop: isOpen ? '' : '55px' }}>

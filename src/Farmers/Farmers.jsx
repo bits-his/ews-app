@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Card, Col, Row, Table } from 'reactstrap'
+import { Card, Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Modal, ModalBody, ModalFooter, Row, Button, Table } from 'reactstrap'
 // import store from '../redux/store'
 import { _get, _post } from '../utils/Helper'
-import { FaEllipsisV } from 'react-icons/fa'
+import { IoMdMore } from 'react-icons/io'
 import { useSelector } from 'react-redux'
+import EditModal from './EditModal'
 
 export default function Farmers() {
   const goto = useNavigate()
@@ -12,13 +13,19 @@ export default function Farmers() {
   const [data, setData] = useState([])
   const [farmers, setFarmers] = useState([])
   const { user } = useSelector((state) => state.auth)
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
   useEffect(() => {
     setLoading(true)
     _get(
       `farmers?query_type=VIEW-ALL&org_id=${user.org_id}`,
       (response) => {
         setLoading(false)
-        setFarmers(response.results)
+        let newArr = []
+        response.results.forEach(i => newArr.push({...i, dropDown: false}))
+        setFarmers(newArr)
         // alert(JSON.stringify(response));
         console.log({ response })
       },
@@ -28,6 +35,22 @@ export default function Farmers() {
       },
     )
   }, [0])
+
+  const handleToggle = (i) => {
+    let arr = []
+    farmers.forEach((item, idx) => {
+      if (idx === i) {
+       if (item.dropDown) {
+         arr.push({...item, dropDown: false})
+       }else{
+         arr.push({...item, dropDown: true})
+       }
+      }else{
+        arr.push(item)
+      }
+    })
+   setFarmers(arr)
+  }
   //
   const handleGet = () => {}
   //   _post(
@@ -49,7 +72,7 @@ export default function Farmers() {
 
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
-        {JSON.stringify({ user })}
+        {/* {JSON.stringify({ farmers })} */}
         <Row>
           <Col md={6}>
             <h3 className="card_title">Farmers</h3>
@@ -98,7 +121,20 @@ export default function Farmers() {
                   <td>{item.crops}</td>
                   <td>{item.scales}</td>
                   <td>
-                    <button className="view_farmer_button">View</button>
+                    <div className="d-flex">
+                      <Dropdown isOpen={item.dropDown} toggle={() => handleToggle(index)} direction='down'>
+                        <DropdownToggle caret>Menu</DropdownToggle>
+                        <DropdownMenu >
+                          <DropdownItem onClick={toggle}>Edit</DropdownItem>
+                            <Modal isOpen={modal} toggle={toggle} size='md'>
+                              <ModalBody>
+                                <EditModal />
+                              </ModalBody>
+                            </Modal>
+                          <DropdownItem>Delete</DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                    </div>
                   </td>
                   {/* <td>
                   <div style={{ float: 'right', cursor: 'pointer' }}>
