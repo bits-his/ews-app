@@ -15,7 +15,7 @@ export default function FarmerTable({
           <tr>
             <th>#</th>
             <th>Full Name</th>
-            <th>Product</th>
+            <th>LGA</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -26,7 +26,7 @@ export default function FarmerTable({
               <td>
                 {item.fname} {item.lname}
               </td>
-              <td>{item.products}</td>
+              <td>{item.lga}</td>
               <td>
                 <RiDeleteBin6Line onClick={() => handleDelete(id)} />
               </td>

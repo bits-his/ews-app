@@ -4,24 +4,22 @@ export default function Sizes({ options, onClick, onChange, multiSelections }) {
   return (
     <div>
       <Row className="" style={{ display: 'flex', alignItems: 'center' }}>
-        <Col md={10}>
+        <Col md={12}>
           <Typeahead
             id="basic-typeahead-multiple"
             labelKey="name"
             multiple
-            // onChange={setMultiSelections}
-            options={['Large Scale', 'Small Scale']}
-            onClick={onClick}
+            options={['Large Scale', 'Medium Scale', 'Small Scale']}
             onChange={onChange}
             placeholder="Select Size."
             selected={multiSelections}
             name="farming type"
-            className="input_field p-2"
+            className="input_field"
           />
         </Col>
-        <Col md={2}>
-          <button className="primary_button">Add</button>
-        </Col>
+        {/* <Col md={2}>
+          <button className="primary_button" onClick={onClick}>Add</button>
+        </Col> */}
       </Row>
     </div>
   )

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { BiChevronRight } from 'react-icons/bi'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { Row, Col, Button } from 'reactstrap'
@@ -10,10 +10,13 @@ import './Register.css'
 
 export default function Registration() {
   const goto = useNavigate()
+  // const {
+  //   auth: { errors },
+  // } = useSelector((s) => s)
   const dispatch = useDispatch()
+  const [errors, setError] = useState({})
   // const [value, setValue] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState({})
   const [display, setDisplay] = useState(false)
 
   const form = {
@@ -37,8 +40,8 @@ export default function Registration() {
       `users/create`,
       registrationForm,
       (resp) => {
-        console.log(resp)
-        if (resp.user.id) {
+        // alert(JSON.stringify(resp))
+        if (resp.user && resp.user.id) {
           // setLoading(false)
           dispatch(
             login(
@@ -47,6 +50,13 @@ export default function Registration() {
                 if (resp.success) {
                   setLoading(false)
                   goto('/profile')
+                } else {
+                  setLoading(false)
+                  alert(resp.success)
+                  setNameResult(resp.name)
+                  setPhoneResult(resp.phone1)
+                  setEmailResult(resp.email)
+                  setPasswordResult(resp.password)
                 }
               },
               (error) => {
@@ -71,14 +81,14 @@ export default function Registration() {
     <div>
       <div className="sign-in-body">
         <form className="">
-          {/* {JSON.stringify(error)} */}
+          {/* {JSON.stringify(errors)} */}
           <>
             <Row>
               {/* <Col md={1}></Col> */}
               <Col md={12}>
                 <div className="form-row">
                   <p style={{ color: 'red', fontSize: 12, margin: 0 }}>
-                    {error.name}
+                    {errors.name}
                   </p>
                   <input
                     className="mb-4 input_field p-3"
@@ -92,7 +102,7 @@ export default function Registration() {
                 </div>
                 <div className="form-row">
                   <p style={{ color: 'red', fontSize: 12, margin: 0 }}>
-                    {error.phone1}
+                    {errors.phone1}
                   </p>
                   <input
                     className="mb-4 input_field p-3"
@@ -106,7 +116,7 @@ export default function Registration() {
                 </div>
                 <div className="form-row">
                   <p style={{ color: 'red', fontSize: 12, margin: 0 }}>
-                    {error.email}
+                    {errors.email}
                   </p>
                   <input
                     className="mb-4 input_field p-3"
@@ -120,7 +130,7 @@ export default function Registration() {
                 </div>
                 <div className="form-row">
                   <p style={{ color: 'red', fontSize: 12, margin: 0 }}>
-                    {error.password}
+                    {errors.password}
                   </p>
                   <input
                     className="mb-4 input_field p-3"

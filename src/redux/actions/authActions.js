@@ -96,7 +96,7 @@ export function login({ email, password }, success = (f) => f, error = (f) => f)
       })
       .catch((err) => {
         //   dispatch({ type: LOADING_LOGIN });
-        // console.log(err)'
+        console.log(err)
 
         dispatch({ type: AUTH_ERROR, payload: err })
         error(err);
