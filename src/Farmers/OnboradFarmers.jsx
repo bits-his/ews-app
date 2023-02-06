@@ -1,71 +1,81 @@
-import React, { useState } from 'react'
-import { Card, Col, Row } from 'reactstrap'
-import { BsPlus } from 'react-icons/bs'
-import TableFarmer from '../Farmers/FarmerTable'
-import { Typeahead } from 'react-bootstrap-typeahead'
-import { _post } from '../utils/Helper'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import { Card, Col, Row } from "reactstrap";
+import { BsPlus } from "react-icons/bs";
+import TableFarmer from "../Farmers/FarmerTable";
+import { Typeahead } from "react-bootstrap-typeahead";
+import { _post } from "../utils/Helper";
+import { useNavigate } from "react-router-dom";
 export default function OnboardFarmers() {
-  const goto = useNavigate()
+  const goto = useNavigate();
   const _form = {
-    fname: '',
-    lname: '',
-    lga: '',
-    state: '',
-    phone: '',
-    f_type: '',
-    crops: '',
-    scales: '',
-  }
-  const [form, setForm] = useState(_form)
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [multiSelections, setMultiSelections] = useState([])
-  const [multiSelections1, setMultiSelections1] = useState([])
-  const [multiSelections2, setMultiSelections2] = useState([])
+    fname: "",
+    lname: "",
+    lga: "",
+    state: "",
+    phone: "",
+    f_type: "",
+    crops: "",
+    scales: "",
+  };
+  const [form, setForm] = useState(_form);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [multiSelections, setMultiSelections] = useState([]);
+  const [multiSelections1, setMultiSelections1] = useState([]);
+  const [multiSelections2, setMultiSelections2] = useState([]);
+  const [check, setCheck] = useState(false);
 
-  const handleChange = ({ target: { name, value } }) =>
-    setForm((p) => ({ ...p, [name]: value }))
+  const handleChange = ({ target: { name, value } }) => {
+    setForm((p) => ({ ...p, [name]: value }));
+  };
+  // const checkForm = (name) => {
+
+  // }
 
   const handleAdd = () => {
-    setData((p) => [
-      ...p,
-      {
-        ...form,
-        f_type: multiSelections.join(','),
-        crops: multiSelections1.join(','),
-        scales: multiSelections2.join(','),
-      },
-    ])
-    setForm(_form)
-  }
+    if (form.fname === "") {
+      setCheck(true);
+    } else {
+      setData((p) => [
+        ...p,
+        {
+          ...form,
+          f_type: multiSelections.join(","),
+          crops: multiSelections1.join(","),
+          scales: multiSelections2.join(","),
+        },
+      ]);
+      setForm(_form);
+    }
+  };
 
   const handleDelete = (idx) => {
-    let arr = data.filter((i, id) => id !== idx)
-    setData(arr)
-  }
+    let arr = data.filter((i, id) => id !== idx);
+    setData(arr);
+  };
 
   const handleSubmit = () => {
-    setLoading(true)
+    setLoading(true);
     _post(
-      'farmers?query_type=INSERT',
+      "farmers?query_type=INSERT",
       data,
       (res) => {
         if (res.success) {
-          goto('/farmers')
+          goto("/farmers");
         }
         // alert('sucess')
-        setLoading(false)
-        console.log(res)
+        setLoading(false);
+        console.log(res);
       },
       (err) => {
-        setLoading(false)
-        console.log(err)
+        setLoading(false);
+        console.log(err);
         // alert(err)
-      },
-    )
-    console.log(data)
-  }
+      }
+    );
+    console.log(data);
+  };
+
   return (
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
@@ -73,6 +83,11 @@ export default function OnboardFarmers() {
         {/* {JSON.stringify(data)} */}
         <Row>
           <Col md={6}>
+            {check && (
+              <p style={{ color: "red", margin: 0, fontSize: 12 }}>
+                Full name is required
+              </p>
+            )}
             <input
               className="input_field p-2 mt-4"
               placeholder="First Name"
@@ -129,13 +144,13 @@ export default function OnboardFarmers() {
               multiple
               onChange={setMultiSelections}
               options={[
-                'Livestock',
-                'Cash crops',
-                'Irrigation',
-                'Seasonal',
-                'Livestock',
-                'Cash crops',
-                'Subsistence',
+                "Livestock",
+                "Cash crops",
+                "Irrigation",
+                "Seasonal",
+                "Livestock",
+                "Cash crops",
+                "Subsistence",
               ]}
               placeholder="Farming types"
               selected={multiSelections}
@@ -149,7 +164,7 @@ export default function OnboardFarmers() {
               labelKey="name"
               multiple
               onChange={setMultiSelections1}
-              options={['Rice', 'Maize']}
+              options={["Rice", "Maize"]}
               placeholder="Crops"
               selected={multiSelections1}
               name="farming type"
@@ -162,7 +177,7 @@ export default function OnboardFarmers() {
               labelKey="name"
               multiple
               onChange={setMultiSelections2}
-              options={['Large Scale', 'Medium Scale', 'Small Scale']}
+              options={["Large Scale", "Medium Scale", "Small Scale"]}
               placeholder="Scale"
               selected={multiSelections2}
               name="farming type"
@@ -189,7 +204,7 @@ export default function OnboardFarmers() {
                 loading={loading}
               />
             ) : (
-              ''
+              ""
             )}
           </Col>
         </Row>
@@ -200,5 +215,5 @@ export default function OnboardFarmers() {
         </div>
       </Card>
     </div>
-  )
+  );
 }
