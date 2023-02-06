@@ -29,7 +29,6 @@ export default function SendMessage() {
 
   const handleChange = ({ target: { name, value } }) =>
     setForm((p) => ({ ...p, [name]: value }))
- 
 
   const getLocations = useCallback(() => {
     _get(
@@ -61,7 +60,9 @@ export default function SendMessage() {
     _get(
       `farmers?query_type=count-by-filters&lga=${selectLocation
         .map((l) => l.name)
-        .toString()}&crops=${selectCrop.map((c) => c.name)}&sizes=${selectSize.map((s)=>s)}`,
+        .toString()}&crops=${selectCrop.map(
+        (c) => c.name,
+      )}&sizes=${selectSize.map((s) => s)}`,
       (response) => {
         // setLoading(false)
         if (response.results && response.results.length) {
@@ -87,12 +88,14 @@ export default function SendMessage() {
     _post(
       `farmers?query_type=send-msg&lga=${selectLocation
         .map((l) => l.name)
-        .toString()}&crops=${selectCrop.map((c) => c.name)}&sizes=${selectSize.map((s)=>s)}`,
-        form,
+        .toString()}&crops=${selectCrop.map(
+        (c) => c.name,
+      )}&sizes=${selectSize.map((s) => s)}`,
+      form,
       (response) => {
         // setLoading(false)
         // alert(JSON.stringify(response));
-        console.log({ response,msg:'SUBMITTED' })
+        console.log({ response, msg: 'SUBMITTED' })
       },
       (error) => {
         // setLoading(false)
@@ -103,7 +106,7 @@ export default function SendMessage() {
   return (
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
       {/* {JSON.stringify(filters)} */}
-      {JSON.stringify({ selectLocation, selectCrop, selectSize })}
+      {/* {JSON.stringify({ selectLocation, selectCrop, selectSize })} */}
       {/* {JSON.stringify(setCrops)} */}
       <h3 className="card_title mb-4">Send Message</h3>
       <div className="buttons_div">
@@ -168,7 +171,9 @@ export default function SendMessage() {
             <div className="voice_message mt-4">
               <MdKeyboardVoice className="mic" size="3rem" />
               <div>
-                <button className="primary_button mt-5" onClick={''}>Send</button>
+                <button className="primary_button mt-5" onClick={''}>
+                  Send
+                </button>
               </div>
             </div>
           )}
