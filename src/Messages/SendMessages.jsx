@@ -27,41 +27,7 @@ export default function SendMessage() {
   }
   return (
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
-<<<<<<< HEAD
-      <h3 className="card_title mb-4">Send Message</h3>
-      <div className="buttons_div">
-        <button
-          className="message_button"
-          onClick={() => goto('/send-message')}
-        >
-          <MdKeyboardVoice size="1.2rem" /> Voice message
-        </button>
-
-        <button
-          className="message_button"
-          // onClick={() => setShowTable(false)}
-          // style={{ backgroundColor: !showTable ? primaryColor : null }}
-        >
-          <RxText size="1.2rem" /> Text Message
-        </button>
-      </div>
-      <Form onSubmit={handleAdd}>
-        {/* {JSON.stringify(kkk)} */}
-        <Row>
-          <Col md={6}>
-            <input
-              className="input_field p-2 mt-3"
-              type="text"
-              id="title"
-              placeholder="Message Title"
-              value={form.title}
-              onChange={(e) => handle(e)}
-            />
-            {/* {JSON.stringify(multiSelections)} */}
-            <Typeahead
-=======
       {/* <Typeahead
->>>>>>> ecb3e5adddce08c9d9b2ee45326d23daf3001aa7
               id="basic-typeahead-multiple"
               labelKey="name"
               multiple
