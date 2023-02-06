@@ -14,7 +14,7 @@ export default function Farmers() {
   const [farmers, setFarmers] = useState([])
   const { user } = useSelector((state) => state.auth)
   const [modal, setModal] = useState(false);
-
+ const [edit, setEdit] = useState({})
   const toggle = () => setModal(!modal);
 
   useEffect(() => {
@@ -125,10 +125,13 @@ export default function Farmers() {
                       <Dropdown isOpen={item.dropDown} toggle={() => handleToggle(index)} direction='down'>
                         <DropdownToggle caret>Menu</DropdownToggle>
                         <DropdownMenu >
-                          <DropdownItem onClick={toggle}>Edit</DropdownItem>
+                          <DropdownItem onClick={() => {
+                            toggle()
+                            setEdit(item)
+                            }} >Edit</DropdownItem>
                             <Modal isOpen={modal} toggle={toggle} size='md'>
                               <ModalBody>
-                                <EditModal />
+                                <EditModal edit={edit} />
                               </ModalBody>
                             </Modal>
                           <DropdownItem>Delete</DropdownItem>
