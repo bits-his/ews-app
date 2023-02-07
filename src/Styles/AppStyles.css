@@ -151,7 +151,9 @@
   /* height: 24px; */
   border-radius: 40%;
 }
-/* } */
+.delete_drop_down:hover{
+  back
+}
 
 .org_logo {
   position: relative;

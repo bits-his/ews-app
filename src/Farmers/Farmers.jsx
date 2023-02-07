@@ -19,7 +19,7 @@ export default function Farmers() {
  const [edit, setEdit] = useState({})
   const toggle = () => setModal(!modal);
 
-  useEffect(() => {
+  const getData = () => {
     setLoading(true)
     _get(
       `farmers?query_type=VIEW-ALL&org_id=${user.org_id}`,
@@ -36,6 +36,10 @@ export default function Farmers() {
         console.error(error)
       },
     )
+  }
+
+  useEffect(() => {
+    getData()
   }, [0])
 
   const handleToggle = (i) => {
@@ -133,10 +137,10 @@ export default function Farmers() {
                             }} ><BiEdit style={{fontSize: 25, marginRight: 3, marginBottom: 2}}/> Edit</DropdownItem>
                             <Modal isOpen={modal} toggle={toggle} size='md'>
                               <ModalBody>
-                                <EditModal edit={edit} toggle= {toggle}/>
+                                <EditModal edit={edit} toggle= {toggle} getData= {getData}/>
                               </ModalBody>
                             </Modal>
-                          <DropdownItem><MdDeleteOutline style={{fontSize: 25, marginRight: 3, marginBottom: 2}}/>Delete</DropdownItem>
+                          <DropdownItem className='delete_drop_down'><MdDeleteOutline style={{fontSize: 25, marginRight: 3, marginBottom: 2}}/>Delete</DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
                     </div>
