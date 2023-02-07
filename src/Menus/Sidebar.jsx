@@ -20,6 +20,9 @@ export default function Sidebar() {
   const [showSubMenu, setShowSubMenu] = useState(false)
   const [isOpen, setIsOpen] = useState(true)
   const toggle = () => setIsOpen(!isOpen)
+  // const drop = () => {
+  //   setShowSubMenu((p) => !p)
+  // }
   const goto = useNavigate()
   const { user } = useSelector((state) => state.auth)
 
@@ -44,18 +47,9 @@ export default function Sidebar() {
             onClick={toggle}
           />
         </div>
-
-        <div
-          onClick={() => goto('/profile')}
-          className="profile_div"
-          style={{ paddingTop: isOpen ? '' : '30px' }}
-        >
-          <img
-            src={profile}
-            alt="profile"
-            className="profile mt-3"
-            style={{ width: isOpen ? '' : '50px' }}
-          />
+        
+        <div onClick={()=>goto('/profile')} className='profile_div' style={{ paddingTop: isOpen ? '': '30px'}}>
+          <img src={profile} alt="profile" className="profile mt-3" style={{width: isOpen ? '' : '50px'}}/>
           <div>
             <p
               className="ass_name"
@@ -65,7 +59,7 @@ export default function Sidebar() {
             </p>
           </div>
         </div>
-        <div className="mt-3" style={{ paddingTop: isOpen ? '' : '55px' }}>
+        <div className="mt-3" style={{paddingTop: isOpen ? '' : '55px' }}>
           {/* {sidebar.map((item) => ( */}
           <div onClick={() => goto('/dashboard')}>
             <p className="sidebar_item_p">
@@ -73,11 +67,7 @@ export default function Sidebar() {
                 {' '}
                 <GoDashboard size="2.2rem" className="sidebar_icon" />
               </span>
-              <span
-                style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}
-              >
-                Dashboard
-              </span>
+              <span style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none', }}>Dashboard</span>
             </p>
           </div>
           <div onClick={() => goto('/messages')}>
@@ -86,9 +76,7 @@ export default function Sidebar() {
                 {' '}
                 <BsChatLeftText size="2.2rem" className="sidebar_icon" />
               </span>
-              <span
-                style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}
-              >
+              <span style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}>
                 {/* <IoCreateSharp /> */}
                 Message
                 {/* {showSubMenu ? (
@@ -118,11 +106,7 @@ export default function Sidebar() {
                 {' '}
                 <HiOutlineUsers size="2.2rem" className="sidebar_icon" />
               </span>
-              <span
-                style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}
-              >
-                Admin
-              </span>
+              <span style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}>Admin</span>
             </p>
           </div>
           <div onClick={() => goto('/farmers')}>
@@ -131,11 +115,7 @@ export default function Sidebar() {
                 {' '}
                 <GiFarmer size="2.6rem" className="sidebar_icon" />
               </span>
-              <span
-                style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}
-              >
-                Farmers
-              </span>
+              <span style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}>Farmers</span>
             </p>
           </div>
           <div>
@@ -144,11 +124,7 @@ export default function Sidebar() {
                 {' '}
                 <VscFeedback size="2.5rem" className="sidebar_icon" />
               </span>
-              <span
-                style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}
-              >
-                Feedbacks
-              </span>
+              <span style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}>Feedbacks</span>
             </p>
           </div>
           <div>
@@ -157,11 +133,7 @@ export default function Sidebar() {
                 {' '}
                 <CiSettings size="2.5rem" className="sidebar_icon" />
               </span>
-              <span
-                style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}
-              >
-                Settings
-              </span>
+              <span style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}>Settings</span>
             </p>
           </div>
           {/* ))} */}
@@ -171,11 +143,7 @@ export default function Sidebar() {
             <span>
               <AiOutlineLogout size="2.5rem" className="sidebar_icon_2" />
             </span>
-            <span
-              style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}
-            >
-              Log out
-            </span>
+            <span style={{ marginLeft: 5, display: isOpen ? 'inline' : 'none' }}>Log out</span>
           </p>
         </div>
       </div>
