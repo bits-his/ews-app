@@ -27,7 +27,7 @@ export default function Farmers() {
         console.error(error)
       },
     )
-  }, [0])
+  }, [user.org_id])
   //
   const handleGet = () => {}
   //   _post(
@@ -49,7 +49,7 @@ export default function Farmers() {
 
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
-        {JSON.stringify({ user })}
+        {/* {JSON.stringify({ user })} */}
         <Row>
           <Col md={6}>
             <h3 className="card_title">Farmers</h3>
