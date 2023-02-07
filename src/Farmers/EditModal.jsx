@@ -7,7 +7,7 @@ import { _post } from '../utils/Helper'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-export default function EditModal({edit}) {
+export default function EditModal({edit, toggle}) {
   const goto = useNavigate()
   const { user } = useSelector((state) => state.auth)
   const _form = {
@@ -228,7 +228,7 @@ export default function EditModal({edit}) {
           </Col>
         </Row>
         <div style={{justifyContent: 'space-between'}}>
-            <button className="primary_button mt-4">
+            <button className="primary_button mt-4" onClick={toggle}>
                 Cancel
             </button>
             <button className="primary_button mt-4" style={{marginLeft: '320px'}}>

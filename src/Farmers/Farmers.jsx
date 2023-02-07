@@ -123,7 +123,7 @@ export default function Farmers() {
                   <td>
                     <div className="d-flex">
                       <Dropdown isOpen={item.dropDown} toggle={() => handleToggle(index)} direction='down'>
-                        <DropdownToggle caret>Menu</DropdownToggle>
+                        <DropdownToggle><IoMdMore style={{fontSize: 22}} /></DropdownToggle>
                         <DropdownMenu >
                           <DropdownItem onClick={() => {
                             toggle()
@@ -131,7 +131,7 @@ export default function Farmers() {
                             }} >Edit</DropdownItem>
                             <Modal isOpen={modal} toggle={toggle} size='md'>
                               <ModalBody>
-                                <EditModal edit={edit} />
+                                <EditModal edit={edit} toggle= {toggle}/>
                               </ModalBody>
                             </Modal>
                           <DropdownItem>Delete</DropdownItem>
