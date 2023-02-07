@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../redux/actions/authActions'
 import profile from '../Images/profile.jpg'
 import { FaBars } from 'react-icons/fa'
+import { imgUrl } from '../utils/Helper'
 
 export default function Sidebar() {
   const dispatch = useDispatch()
@@ -32,7 +33,7 @@ export default function Sidebar() {
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <img
-            src={logo}
+            src={logo} 
             alt="logo"
             className="logo"
             style={{ display: isOpen ? 'block' : 'none' }}
@@ -49,7 +50,7 @@ export default function Sidebar() {
         </div>
         
         <div onClick={()=>goto('/profile')} className='profile_div' style={{ paddingTop: isOpen ? '': '30px'}}>
-          <img src={profile} alt="profile" className="profile mt-3" style={{width: isOpen ? '' : '50px'}}/>
+          <img  src={user&&user.logo=== ""?profile:`${imgUrl}/${user.logo}`}  alt="profile" className="profile mt-3" style={{width: isOpen ? '' : '50px'}}/>
           <div>
             <p
               className="ass_name"

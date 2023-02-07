@@ -103,8 +103,8 @@ export default function SendMessage() {
     // alert('hhghgh')
     setAll()
     console.log(filters)
-    _post(
-      `farmers?query_type=send-msg&lga=${selectLocation
+    _post(  
+      `send-messages-farmers?query_type=send-msg&lga=${selectLocation
         .map((l) => l.name)
         .toString()}&crops=${selectCrop.map(
         (c) => c.name,
