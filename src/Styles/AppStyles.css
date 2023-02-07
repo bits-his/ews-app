@@ -152,7 +152,7 @@
   border-radius: 40%;
 }
 .delete_drop_down:hover{
-  back
+  background-color: darkred;
 }
 
 .org_logo {
