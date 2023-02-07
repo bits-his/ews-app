@@ -4,6 +4,8 @@ import { Card, Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Modal,
 // import store from '../redux/store'
 import { _get, _post } from '../utils/Helper'
 import { IoMdMore } from 'react-icons/io'
+import { BiEdit } from 'react-icons/bi'
+import { MdDeleteOutline } from 'react-icons/md'
 import { useSelector } from 'react-redux'
 import EditModal from './EditModal'
 
@@ -123,18 +125,18 @@ export default function Farmers() {
                   <td>
                     <div className="d-flex">
                       <Dropdown isOpen={item.dropDown} toggle={() => handleToggle(index)} direction='down'>
-                        <DropdownToggle><IoMdMore style={{fontSize: 22}} /></DropdownToggle>
+                        <DropdownToggle className ="drop_down_menu" style={{backgroundColor: 'transparent', outline: 'none', border: 'none'}}><IoMdMore className ="drop_down_menu_icon"/></DropdownToggle>
                         <DropdownMenu >
                           <DropdownItem onClick={() => {
                             toggle()
                             setEdit(item)
-                            }} >Edit</DropdownItem>
+                            }} ><BiEdit style={{fontSize: 25, marginRight: 3, marginBottom: 2}}/> Edit</DropdownItem>
                             <Modal isOpen={modal} toggle={toggle} size='md'>
                               <ModalBody>
                                 <EditModal edit={edit} toggle= {toggle}/>
                               </ModalBody>
                             </Modal>
-                          <DropdownItem>Delete</DropdownItem>
+                          <DropdownItem><MdDeleteOutline style={{fontSize: 25, marginRight: 3, marginBottom: 2}}/>Delete</DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
                     </div>

@@ -88,7 +88,7 @@ export default function EditModal({edit, toggle}) {
   return (
     <div>
       <div>
-        {JSON.stringify(edit)}
+        {/* {JSON.stringify(edit)} */}
         <Row>
           <Col md={12}>
             <div className="mt-3">
@@ -227,12 +227,12 @@ export default function EditModal({edit, toggle}) {
             /> */}
           </Col>
         </Row>
-        <div style={{justifyContent: 'space-between'}}>
+        <div style={{display: 'flex',justifyContent: 'space-between'}}>
             <button className="primary_button mt-4" onClick={toggle}>
                 Cancel
             </button>
-            <button className="primary_button mt-4" style={{marginLeft: '320px'}}>
-                Save
+            <button className="primary_button mt-4" >
+                Update
             </button>
         </div>
       </div>
