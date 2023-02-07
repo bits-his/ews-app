@@ -19,10 +19,14 @@ export default function Profile() {
     setProfile(user);
   });
 
+  const updateApi = () => {
+    
+  }
+
   return (
     <div>
       {/* {JSON.stringify({ user })} */}
-      {JSON.stringify(profile)}
+      {/* {JSON.stringify(profile)} */}
       <Row>
         <Col md={1}></Col>
         <Col md={4} className="col-lg-3 m-4">
@@ -44,26 +48,6 @@ export default function Profile() {
         </Col>
 
         <Col md={5} className=" mt-4 ">
-          {/* <div className="card-body ">
-            <ul className="list-group list-group-flush rounded-3">
-              <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                <AiTwotonePhone size={30} />
-                <p className="mb-0">1234567</p>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                <MdEmail size={30} />
-                <p className="mb-0">abd@gmail.com</p>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                <FaGlobe size={30} />
-                <p className="mb-0">knowtify.com</p>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                <MdPassword size={30} />
-                <p className="mb-0">1234567dsfdj</p>
-              </li>
-            </ul>
-          </div> */}
           <Card className=" p-4 h-100 shadow-sm">
             <h2>User Profile</h2>
             <div>
@@ -94,6 +78,7 @@ export default function Profile() {
                 name="mail"
                 value={profile.mail}
                 onChange={handleChange}
+                
               />
               <Row>
                 <Col md={6}>
@@ -140,10 +125,6 @@ export default function Profile() {
               <div className="profile_button">
                 <Row>
                   <Col md={4}>
-                    {" "}
-                    {/* <button className="primary_button mt-4 w-100">
-                      Update Info
-                    </button> */}
                     <button
                       className="upload_button mt-3 w-100"
                       onClick={handleAdd}
@@ -153,7 +134,6 @@ export default function Profile() {
                   </Col>
                   <Col md={4}> </Col>
                   <Col md={4}>
-                    {/* <button className="upload_button mt-3 w-100">Cancel</button> */}
                     <button className="primary_button mt-4 w-100">
                       Cancel{" "}
                     </button>
@@ -168,7 +148,4 @@ export default function Profile() {
   );
 }
 {
-  /* <p>{user.phone2}</p>
-              <p>{user.address}</p>
-              <p>{user.website}</p> */
 }
