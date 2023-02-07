@@ -78,7 +78,7 @@
 .profile_name {
   font-weight: bold;
   color: var(--primaryColor);
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .view_farmer_button {
@@ -166,10 +166,25 @@
   background-color: #001f43;
   font-size: 15px;
 }
-.profile_mail{
-  font-size: 20px;
+.profile_mail {
+  font-size: 15px;
   color: grey;
   /* font-weight: bold; */
   /* margin: 0; */
 }
 
+.profile_card {
+  border-radius: 15px !important;
+  overflow-y: auto;
+}
+
+.dashboard_card {
+  border-radius: 15px !important;
+  /* border: none !important; */
+  overflow-y: auto;
+  height: 95vh !important;
+}
+
+.profile_label{
+  font-size: 12px;
+}

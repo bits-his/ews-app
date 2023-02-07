@@ -1,73 +1,53 @@
-import { React, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Card, Col, Row, Label } from "reactstrap";
-import org_logo from "../Images/profile.jpg";
+import { React, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Card, Col, Row, Label } from 'reactstrap'
+import org_logo from '../Images/profile.jpg'
 
-import { TbEdit } from "react-icons/tb";
+import { TbEdit } from 'react-icons/tb'
 export default function Profile() {
-  const { user } = useSelector((p) => p.auth);
-  const [profile, setProfile] = useState(user);
+  const { user } = useSelector((p) => p.auth)
+  const [profile, setProfile] = useState(user)
 
   const handleChange = ({ target: { name, value } }) => {
-    setProfile((p) => ({ ...p, [name]: value }));
-  };
+    setProfile((p) => ({ ...p, [name]: value }))
+  }
   const handleAdd = () => {
-    console.log(profile);
-  };
+    console.log(profile)
+  }
 
   useEffect(() => {
-    setProfile(user);
-  });
+    setProfile(user)
+  })
 
   return (
     <div>
       {/* {JSON.stringify({ user })} */}
-      {JSON.stringify(profile)}
-      <Row>
+      {/* {JSON.stringify(profile)} */}
+      <Row className="m-0">
         <Col md={1}></Col>
-        <Col md={4} className="col-lg-3 m-4">
-          <Card className="mb-4 h-75 shadow-sm">
+        <Col md={4} className="">
+          <Card className="profile_card m-3 shadow-sm p-4">
             <div class="card-body text-center m-0 p-0">
               <div className="card-body text-center ">
                 <p className="profile_name m-0">{user.name}</p>
-                <p style={{ display: "inline-block" }} className="profile_mail">
+                <p style={{ display: 'inline-block' }} className="profile_mail">
                   {user.email}
                 </p>
               </div>
               <img src={org_logo} className="org_logo " width={200} />
               <TbEdit className="edit_button" size={48} />
               <div className="card-body text-center">
-                <button className="upload_button">Upload new photo</button>
+                <button className="upload_button mt-2">Upload new photo</button>
               </div>
             </div>
           </Card>
         </Col>
 
-        <Col md={5} className=" mt-4 ">
-          {/* <div className="card-body ">
-            <ul className="list-group list-group-flush rounded-3">
-              <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                <AiTwotonePhone size={30} />
-                <p className="mb-0">1234567</p>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                <MdEmail size={30} />
-                <p className="mb-0">abd@gmail.com</p>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                <FaGlobe size={30} />
-                <p className="mb-0">knowtify.com</p>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                <MdPassword size={30} />
-                <p className="mb-0">1234567dsfdj</p>
-              </li>
-            </ul>
-          </div> */}
-          <Card className=" p-4 h-100 shadow-sm">
-            <h2>User Profile</h2>
+        <Col md={6} className="">
+          <Card className="profile_card shadow-sm m-3 p-4">
+            <p className="profile_name m-0">User Profile</p>
             <div>
-              <Label className="mt-3 mb-d">Name</Label>
+              <Label className="profile_label mt-3 mb-d">Name</Label>
               <input
                 className="input_field p-2"
                 placeholder="Name"
@@ -76,7 +56,9 @@ export default function Profile() {
                 value={profile.name}
                 onChange={handleChange}
               />
-              <Label className="mt-3 mb-0">Type of organisation</Label>
+              <Label className="profile_label mt-3 mb-0">
+                Type of organisation
+              </Label>
               <input
                 className="input_field p-2"
                 placeholder="Organisation type"
@@ -86,7 +68,7 @@ export default function Profile() {
                 onChange={handleChange}
               />
 
-              <Label className="mt-3 mb-0">Email</Label>
+              <Label className="profile_label mt-3 mb-0">Email</Label>
               <input
                 className="input_field p-2"
                 placeholder="mail"
@@ -97,7 +79,7 @@ export default function Profile() {
               />
               <Row>
                 <Col md={6}>
-                  <Label className="mt-3 mb-0">Phone 1</Label>
+                  <Label className="profile_label mt-3 mb-0">Phone 1</Label>
                   <input
                     className="input_field p-2"
                     placeholder="Phone 1"
@@ -108,7 +90,7 @@ export default function Profile() {
                   />
                 </Col>
                 <Col md={6}>
-                  <Label className="mt-3 mb-0">Phone 1</Label>
+                  <Label className="profile_label mt-3 mb-0">Phone 1</Label>
                   <input
                     className="input_field p-2"
                     placeholder="phone 2"
@@ -119,16 +101,16 @@ export default function Profile() {
                   />
                 </Col>
               </Row>
-              <Label className="mt-3 mb-0">Website</Label>
+              <Label className="profile_label mt-3 mb-0">Website</Label>
               <input
                 className="input_field p-2"
                 placeholder="website"
-                type="text"
+                type="url"
                 name="web"
                 value={profile.web}
                 onChange={handleChange}
               />
-              <Label className="mt-3 mb-0">Password</Label>
+              <Label className="profile_label mt-3 mb-0">Password</Label>
               <input
                 className="input_field p-2"
                 placeholder="Password"
@@ -140,7 +122,7 @@ export default function Profile() {
               <div className="profile_button">
                 <Row>
                   <Col md={4}>
-                    {" "}
+                    {' '}
                     {/* <button className="primary_button mt-4 w-100">
                       Update Info
                     </button> */}
@@ -155,7 +137,7 @@ export default function Profile() {
                   <Col md={4}>
                     {/* <button className="upload_button mt-3 w-100">Cancel</button> */}
                     <button className="primary_button mt-4 w-100">
-                      Cancel{" "}
+                      Cancel{' '}
                     </button>
                   </Col>
                 </Row>
@@ -163,9 +145,10 @@ export default function Profile() {
             </div>
           </Card>
         </Col>
+        <Col md={1}></Col>
       </Row>
     </div>
-  );
+  )
 }
 {
   /* <p>{user.phone2}</p>
