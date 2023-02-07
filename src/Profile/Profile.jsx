@@ -1,27 +1,40 @@
-import { React, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Card, Col, Row, Label } from 'reactstrap'
-import org_logo from '../Images/profile.jpg'
+import { React, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Card, Col, Row, Label } from "reactstrap";
+import org_logo from "../Images/profile.jpg";
 
-import { TbEdit } from 'react-icons/tb'
+import { TbEdit } from "react-icons/tb";
+import { _update } from "../utils/Helper";
 export default function Profile() {
-  const { user } = useSelector((p) => p.auth)
-  const [profile, setProfile] = useState(user)
+  const { user } = useSelector((p) => p.auth);
+  const [profile, setProfile] = useState(user);
 
   const handleChange = ({ target: { name, value } }) => {
-    setProfile((p) => ({ ...p, [name]: value }))
-  }
-  const handleAdd = () => {
-    console.log(profile)
-  }
+    setProfile((p) => ({ ...p, [name]: value }));
+  };
 
   useEffect(() => {
-    setProfile(user)
-  })
+    setProfile(user);
+  });
 
   const updateApi = () => {
-    
-  }
+    _update(
+      `users/${user.id}`,
+      profile,
+      (res) => {
+        if (res.success) {
+          alert("Update sucessfully");
+        }
+        // alert('sucess')
+        console.log(res);
+      },
+      (err) => {
+        setLoading(false);
+        console.log(err);
+        // alert(err)
+      }
+    );
+  };
 
   return (
     <div>
@@ -34,7 +47,7 @@ export default function Profile() {
             <div class="card-body text-center m-0 p-0">
               <div className="card-body text-center ">
                 <p className="profile_name m-0">{user.name}</p>
-                <p style={{ display: 'inline-block' }} className="profile_mail">
+                <p style={{ display: "inline-block" }} className="profile_mail">
                   {user.email}
                 </p>
               </div>
@@ -80,7 +93,6 @@ export default function Profile() {
                 name="mail"
                 value={profile.mail}
                 onChange={handleChange}
-                
               />
               <Row>
                 <Col md={6}>
@@ -129,7 +141,7 @@ export default function Profile() {
                   <Col md={4}>
                     <button
                       className="upload_button mt-3 w-100"
-                      onClick={handleAdd}
+                      onClick={updateApi}
                     >
                       Upload Info
                     </button>
@@ -137,7 +149,7 @@ export default function Profile() {
                   <Col md={4}> </Col>
                   <Col md={4}>
                     <button className="primary_button mt-4 w-100">
-                      Cancel{' '}
+                      Cancel{" "}
                     </button>
                   </Col>
                 </Row>
@@ -148,7 +160,7 @@ export default function Profile() {
         <Col md={1}></Col>
       </Row>
     </div>
-  )
+  );
 }
 {
 }
