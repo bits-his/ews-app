@@ -91,7 +91,7 @@ export default function Farmers() {
 
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
-        {/* {JSON.stringify({ farmers })} */}
+        {JSON.stringify({ farmers })} 
         <Row>
           <Col md={6}>
             <h3 className="card_title">Farmers</h3>

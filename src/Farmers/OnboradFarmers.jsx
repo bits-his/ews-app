@@ -44,7 +44,7 @@ export default function OnboardFarmers() {
           ...form,
           f_type: multiSelections.join(","),
           crops: multiSelections1.join(","),
-          scales: multiSelections2.join(","),
+          scale: multiSelections2.join(","),
         },
       ]);
       setForm(_form);
