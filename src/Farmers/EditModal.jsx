@@ -22,9 +22,9 @@ export default function EditModal({edit, toggle, getData}) {
     org_id: user.org_id,
   }
 
-  let farmingTypeList = edit.f_type.split(', ')
-  let cropList = edit.crops.split(', ')
-  let scalecropList = edit.scale.split(', ')
+  let farmingTypeList = edit.f_type?.split(', ')
+  let cropList = edit.crops?.split(', ')
+  let scalecropList = edit.scale?.split(', ')
 //   farmingTypeListfarmingTypeList{"farmer_id":12,"user_id":14,"org_id":6,"fname":"ABDUL","lname":"ASD","lga":"KURA","state":"KANO","address":"KURA","phone":"0900000000","email":null,"f_type":"LIVESTOCK","scale":"LARGE SCALE","crops":"RICE","f_address":"KURA","created_at":"2023-01-31T23:00:00.000Z","updated_at":"2023-02-06T13:11:39.000Z","dropDown":true}
   const [form, setForm] = useState(edit)
   const [loading, setLoading] = useState(false)
@@ -56,11 +56,17 @@ export default function EditModal({edit, toggle, getData}) {
 //       setForm(_form);
 //     }
 //   };
+let const_form = {
+  ...form,
+          f_type: multiSelections?.join(","),
+          crops: multiSelections1?.join(","),
+          scale: multiSelections2?.join(","),
+}
 
   const handleSubmit = () => {
     _update(
       "farmers/update-farmers",
-      form,
+      const_form,
       (res) => {
         if (res.success) {
           getData()
@@ -74,7 +80,7 @@ export default function EditModal({edit, toggle, getData}) {
         // alert(err)
       },
     )
-    console.log(form)
+    console.log(const_form)
   }
 
   return (
