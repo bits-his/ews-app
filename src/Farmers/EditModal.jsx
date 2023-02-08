@@ -56,11 +56,17 @@ export default function EditModal({edit, toggle, getData}) {
 //       setForm(_form);
 //     }
 //   };
+let const_form = {
+  ...form,
+          f_type: multiSelections?.join(","),
+          crops: multiSelections1?.join(","),
+          scale: multiSelections2?.join(","),
+}
 
   const handleSubmit = () => {
     _update(
       "farmers/update-farmers",
-      form,
+      const_form,
       (res) => {
         if (res.success) {
           getData()
@@ -74,7 +80,7 @@ export default function EditModal({edit, toggle, getData}) {
         // alert(err)
       },
     )
-    console.log(form)
+    console.log(const_form)
   }
 
   return (

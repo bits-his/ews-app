@@ -105,8 +105,8 @@
   cursor: pointer;
   background-color: var(--primaryColor);
 }
-.voice_message {
-}
+/* .voice_message {
+} */
 
 .filtered_div {
   background-color: rgb(242, 242, 242);
