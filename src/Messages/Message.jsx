@@ -10,7 +10,7 @@ import moment from 'moment'
 export default function Message() {
   const { user } = useSelector((state) => state.auth)
   const [messages, setMessages] = useState([])
-
+  const [loading, setLoading] = useState(false)
   const goto = useNavigate()
   const messageCard = [
     {
@@ -26,15 +26,17 @@ export default function Message() {
   const [showTable, setShowTable] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     _get(
       `messages?query_type=VIEW-ALL&org_id=${user.org_id}`,
-      // {org_id:user.org_id}, 
+      // {org_id:user.org_id},
       (response) => {
+        setLoading(false)
         if (response.success) setMessages(response.results)
         console.log({ response })
       },
       (error) => {
-        // setLoading(false)
+        setLoading(false)
         console.error(error)
       },
     )
@@ -103,18 +105,22 @@ export default function Message() {
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                {messages.map((item, index) => (
-                  <tr>
-                    <th scope="row">{index + 1}</th>
-                    <td>{item.title}</td>
-                    <td>{item.body}</td>
-                    <td>Table cell</td>
-                    <td>{moment(item.created_at).calendar()}</td>
-                    <td>Table cell</td>
-                  </tr>
-                ))}
-              </tbody>
+              {loading ? (
+                <sapn>Loading messages...</sapn>
+              ) : (
+                <tbody>
+                  {messages.map((item, index) => (
+                    <tr>
+                      <th scope="row">{index + 1}</th>
+                      <td>{item.title}</td>
+                      <td>{item.body}</td>
+                      <td>Table cell</td>
+                      <td>{moment(item.created_at).calendar()}</td>
+                      <td>Table cell</td>
+                    </tr>
+                  ))}
+                </tbody>
+              )}
             </Table>
           ) : (
             <Table responsive size="sm">

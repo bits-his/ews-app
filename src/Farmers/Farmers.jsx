@@ -249,9 +249,9 @@ export default function Farmers() {
               ))
             )}
 
-            {farmers.length === 0 ? (
+            {/* {farmers.length === 0 ? (
               <span>No farmers registered to this association</span>
-            ) : null}
+            ) : null} */}
           </tbody>
         </Table>
       </Card>

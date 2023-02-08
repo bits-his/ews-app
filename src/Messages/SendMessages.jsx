@@ -11,7 +11,7 @@ import Crops from './Crops'
 import { _get, _post } from '../utils/Helper'
 import Languages from './Languages'
 import { useSelector } from 'react-redux'
-
+import { useNavigate } from 'react-router-dom'
 export default function SendMessage() {
   const [filters, setFilters] = useState({})
   const [locations, setLocations] = useState([])
@@ -24,7 +24,7 @@ export default function SendMessage() {
   const [matchedFarmers, setMatchedFarmers] = useState(0)
   const [messageType, setMessageType] = useState(false)
   const { user } = useSelector((state) => state.auth)
-
+  const goto = useNavigate()
   const _form = {
     user_id: user.id,
     org_id: user.org_id,
@@ -121,6 +121,7 @@ export default function SendMessage() {
         setLoading(false)
         console.log({ response, msg: 'SUBMITTED' })
         console.log(form)
+        goto('/messages')
       },
       (error) => {
         setLoading(false)
@@ -190,24 +191,14 @@ export default function SendMessage() {
                 value={form.body}
                 onChange={handleChange}
               />
-              {loading ? (
-                <button
-                  className="primary_button mt-3"
-                  style={{ float: 'right' }}
-                  onClick={handleSubmit}
-                  disabled
-                >
-                  Sending...
-                </button>
-              ) : (
-                <button
-                  className="primary_button mt-3"
-                  style={{ float: 'right' }}
-                  onClick={handleSubmit}
-                >
-                  Send
-                </button>
-              )}
+
+              <button
+                className="primary_button mt-3"
+                style={{ float: 'right' }}
+                onClick={handleSubmit}
+              >
+                {loading ? <span disabled>Sending...</span> : <span>Send</span>}
+              </button>
             </div>
           ) : (
             <div className="voice_message mt-4">
