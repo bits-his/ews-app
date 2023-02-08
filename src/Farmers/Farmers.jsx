@@ -1,6 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Card, Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Modal, ModalBody, ModalFooter, Row, Button, Table } from 'reactstrap'
+import {
+  Card,
+  Col,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  Row,
+  Button,
+  Table,
+} from 'reactstrap'
 // import store from '../redux/store'
 import { _get, _post } from '../utils/Helper'
 import { IoMdMore } from 'react-icons/io'
@@ -13,9 +26,9 @@ export default function Farmers() {
   const [data, setData] = useState([])
   const [farmers, setFarmers] = useState([])
   const { user } = useSelector((state) => state.auth)
-  const [modal, setModal] = useState(false);
- const [edit, setEdit] = useState({})
-  const toggle = () => setModal(!modal);
+  const [modal, setModal] = useState(false)
+  const [edit, setEdit] = useState({})
+  const toggle = () => setModal(!modal)
 
   useEffect(() => {
     setLoading(true)
@@ -24,7 +37,7 @@ export default function Farmers() {
       (response) => {
         setLoading(false)
         let newArr = []
-        response.results.forEach(i => newArr.push({...i, dropDown: false}))
+        response.results.forEach((i) => newArr.push({ ...i, dropDown: false }))
         setFarmers(newArr)
         // alert(JSON.stringify(response));
         console.log({ response })
@@ -40,16 +53,16 @@ export default function Farmers() {
     let arr = []
     farmers.forEach((item, idx) => {
       if (idx === i) {
-       if (item.dropDown) {
-         arr.push({...item, dropDown: false})
-       }else{
-         arr.push({...item, dropDown: true})
-       }
-      }else{
+        if (item.dropDown) {
+          arr.push({ ...item, dropDown: false })
+        } else {
+          arr.push({ ...item, dropDown: true })
+        }
+      } else {
         arr.push(item)
       }
     })
-   setFarmers(arr)
+    setFarmers(arr)
   }
   //
   const handleGet = () => {}
@@ -69,7 +82,6 @@ export default function Farmers() {
   //   handleGet();
   // }, []);
   return (
-
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
         {/* {JSON.stringify({ farmers })} */}
@@ -122,18 +134,28 @@ export default function Farmers() {
                   <td>{item.scales}</td>
                   <td>
                     <div className="d-flex">
-                      <Dropdown isOpen={item.dropDown} toggle={() => handleToggle(index)} direction='down'>
-                        <DropdownToggle><IoMdMore style={{fontSize: 22}} /></DropdownToggle>
-                        <DropdownMenu >
-                          <DropdownItem onClick={() => {
-                            toggle()
-                            setEdit(item)
-                            }} >Edit</DropdownItem>
-                            <Modal isOpen={modal} toggle={toggle} size='md'>
-                              <ModalBody>
-                                <EditModal edit={edit} toggle= {toggle}/>
-                              </ModalBody>
-                            </Modal>
+                      <Dropdown
+                        isOpen={item.dropDown}
+                        toggle={() => handleToggle(index)}
+                        direction="down"
+                      >
+                        <DropdownToggle>
+                          <IoMdMore style={{ fontSize: 22 }} />
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem
+                            onClick={() => {
+                              toggle()
+                              setEdit(item)
+                            }}
+                          >
+                            Edit
+                          </DropdownItem>
+                          <Modal isOpen={modal} toggle={toggle} size="md">
+                            <ModalBody>
+                              <EditModal edit={edit} toggle={toggle} />
+                            </ModalBody>
+                          </Modal>
                           <DropdownItem>Delete</DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
