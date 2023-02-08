@@ -3,6 +3,7 @@ import { Col, Row } from 'reactstrap'
 export default function Locations({
   options,
   onClick,
+  // onInputChange,
   onChange,
   multiSelections,
 }) {
@@ -22,6 +23,7 @@ export default function Locations({
             selected={multiSelections}
             name="farming type"
             className="input_field"
+            // onInputChange={}
           />
         </Col>
         {/* <Col md={2}>

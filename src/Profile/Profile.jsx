@@ -70,7 +70,7 @@ export default function Profile() {
     <div>
       {/* {JSON.stringify( user )} */}
       {/* {JSON.stringify(profile)} */}
-      <Row>
+      <Row className="m-0">
         <Col md={1}></Col>
         <Col md={4} className="">
           <Card className="profile_card m-3 shadow-sm p-4">

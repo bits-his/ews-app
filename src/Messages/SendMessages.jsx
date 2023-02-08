@@ -14,6 +14,7 @@ import Languages from './Languages'
 export default function SendMessage() {
   const [filters, setFilters] = useState({})
   const [locations, setLocations] = useState([])
+  const [loading, setLoading] = useState(false)
   const [crops, setCrops] = useState([])
   const [selectLocation, setSelectLocation] = useState([])
   const [selectSize, setSelectSize] = useState([])
@@ -82,7 +83,7 @@ export default function SendMessage() {
       (response) => {
         // setLoading(false)
         if (response.results && response.results.length) {
-          setMatchedFarmers(response.results[0].matched_farmers)
+          setMatchedFarmers(response.results[0].total)
         }
 
         // alert(JSON.stringify(response));
@@ -101,23 +102,23 @@ export default function SendMessage() {
 
   const handleSubmit = () => {
     // alert('hhghgh')
+    setLoading(true)
     setAll()
     console.log(filters)
     _post(
-      `send-messages-farmers?query_type=send-msg&lga=${selectLocation
+      `messages?query_type=send-msg&lga=${selectLocation
         .map((l) => l.name)
         .toString()}&crops=${selectCrop.map(
         (c) => c.name,
       )}&sizes=${selectSize.map((s) => s)}`,
       form,
       (response) => {
-        // setLoading(false)
-        // alert(JSON.stringify(response));
+        setLoading(false)
         console.log({ response, msg: 'SUBMITTED' })
         console.log(form)
       },
       (error) => {
-        // setLoading(false)
+        setLoading(false)
         console.error(error)
       },
     )
@@ -189,7 +190,7 @@ export default function SendMessage() {
                 style={{ float: 'right' }}
                 onClick={handleSubmit}
               >
-                Send
+                {loading ? <span>Sending...</span> : <span>Send</span>}
               </button>
             </div>
           ) : (
@@ -227,6 +228,7 @@ export default function SendMessage() {
                 onChange={setSelectLocation}
                 onClick={() => handleAdd('Locations')}
                 options={locations}
+                // onInputChange={getFarmers}
               />
             ) : form.target === 'Language' ? (
               <Languages
