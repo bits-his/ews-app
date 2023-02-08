@@ -139,6 +139,20 @@
   color: white;
   font-size: 12px;
   margin-right: 5px;
+  /* margin-bottom: ; */
+}
+.drop_down_menu_icon{
+  font-size: 22px;
+  color: black;
+}
+.drop_down_menu_icon:hover{
+  background-color: #cccccc;
+  width: 22px;
+  /* height: 24px; */
+  border-radius: 40%;
+}
+.delete_drop_down:hover{
+  background-color: darkred;
 }
 
 .org_logo {

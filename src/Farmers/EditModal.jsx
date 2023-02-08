@@ -3,11 +3,11 @@ import { Card, Col, Row } from 'reactstrap'
 import { BsPlus } from 'react-icons/bs'
 import TableFarmer from '../Farmers/FarmerTable'
 import { Typeahead } from 'react-bootstrap-typeahead'
-import { _post } from '../utils/Helper'
+import { _post, _update } from '../utils/Helper'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-export default function EditModal({edit, toggle}) {
+export default function EditModal({edit, toggle, getData}) {
   const goto = useNavigate()
   const { user } = useSelector((state) => state.auth)
   const _form = {
@@ -27,7 +27,6 @@ export default function EditModal({edit, toggle}) {
   let scalecropList = edit.scale.split(', ')
 //   farmingTypeListfarmingTypeList{"farmer_id":12,"user_id":14,"org_id":6,"fname":"ABDUL","lname":"ASD","lga":"KURA","state":"KANO","address":"KURA","phone":"0900000000","email":null,"f_type":"LIVESTOCK","scale":"LARGE SCALE","crops":"RICE","f_address":"KURA","created_at":"2023-01-31T23:00:00.000Z","updated_at":"2023-02-06T13:11:39.000Z","dropDown":true}
   const [form, setForm] = useState(edit)
-  const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const [multiSelections, setMultiSelections] = useState(farmingTypeList)
   const [multiSelections1, setMultiSelections1] = useState(cropList)
@@ -58,37 +57,30 @@ export default function EditModal({edit, toggle}) {
 //     }
 //   };
 
-  const handleDelete = (idx) => {
-    let arr = data.filter((i, id) => id !== idx);
-    setData(arr);
-  };
-
   const handleSubmit = () => {
-    setLoading(true);
-    _post(
-      "farmers?query_type=INSERT",
-      data,
+    _update(
+      "farmers/update-farmers",
+      form,
       (res) => {
         if (res.success) {
-          goto("/farmers");
+          getData()
+          toggle()
         }
         // alert('sucess')
-        setLoading(false);
         console.log(res);
       },
       (err) => {
-        setLoading(false);
         console.log(err);
         // alert(err)
       },
     )
-    console.log(data)
+    console.log(form)
   }
 
   return (
     <div>
       <div>
-        {JSON.stringify(edit)}
+        {/* {JSON.stringify(edit)} */}
         <Row>
           <Col md={12}>
             <div className="mt-3">
@@ -227,12 +219,12 @@ export default function EditModal({edit, toggle}) {
             /> */}
           </Col>
         </Row>
-        <div style={{justifyContent: 'space-between'}}>
+        <div style={{display: 'flex',justifyContent: 'space-between'}}>
             <button className="primary_button mt-4" onClick={toggle}>
                 Cancel
             </button>
-            <button className="primary_button mt-4" style={{marginLeft: '320px'}}>
-                Save
+            <button className="primary_button mt-4" onClick={handleSubmit}>
+                Update
             </button>
         </div>
       </div>
