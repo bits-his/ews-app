@@ -10,6 +10,7 @@ import Sizes from './Sizes'
 import Crops from './Crops'
 import { _get, _post } from '../utils/Helper'
 import Languages from './Languages'
+import { useSelector } from 'react-redux'
 
 export default function SendMessage() {
   const [filters, setFilters] = useState({})
@@ -22,7 +23,11 @@ export default function SendMessage() {
   const [selectCrop, setSelectCrop] = useState([])
   const [matchedFarmers, setMatchedFarmers] = useState(0)
   const [messageType, setMessageType] = useState(false)
+  const { user } = useSelector((state) => state.auth)
+
   const _form = {
+    user_id: user.id,
+    org_id: user.org_id,
     target: '',
     title: '',
     body: '',
@@ -127,7 +132,7 @@ export default function SendMessage() {
 
   return (
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
-      {JSON.stringify({ filters })}
+      {/* {JSON.stringify({ filters })} */}
       {/* {JSON.stringify({ locationName })}
       {JSON.stringify({ selectCrop })}
       {JSON.stringify({ selectSize })}
@@ -185,13 +190,24 @@ export default function SendMessage() {
                 value={form.body}
                 onChange={handleChange}
               />
-              <button
-                className="primary_button mt-3"
-                style={{ float: 'right' }}
-                onClick={handleSubmit}
-              >
-                {loading ? <span>Sending...</span> : <span>Send</span>}
-              </button>
+              {loading ? (
+                <button
+                  className="primary_button mt-3"
+                  style={{ float: 'right' }}
+                  onClick={handleSubmit}
+                  disabled
+                >
+                  Sending...
+                </button>
+              ) : (
+                <button
+                  className="primary_button mt-3"
+                  style={{ float: 'right' }}
+                  onClick={handleSubmit}
+                >
+                  Send
+                </button>
+              )}
             </div>
           ) : (
             <div className="voice_message mt-4">
