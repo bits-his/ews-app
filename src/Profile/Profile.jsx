@@ -51,7 +51,8 @@ export default function Profile() {
       .then((resp) => resp.json())
       .then((data) => {
         if (data.success) {
-          alert('success')
+          // alert('success')
+          window.location.reload();
         }
         alert(data.msg)
       })
@@ -91,7 +92,7 @@ export default function Profile() {
               ) : (
                 <img
                   src={
-                    user && user.logo === ''
+                    user && user.logo === null
                       ? org_logo
                       : `${imgUrl}/${user.logo}`
                   }

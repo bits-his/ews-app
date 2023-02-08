@@ -50,7 +50,7 @@ export default function Sidebar() {
         </div>
         
         <div onClick={()=>goto('/profile')} className='profile_div' style={{ paddingTop: isOpen ? '': '30px'}}>
-          <img  src={user&&user.logo=== ""?profile:`${imgUrl}/${user.logo}`}  alt="profile" className="profile mt-3" style={{width: isOpen ? '' : '50px'}}/>
+          <img  src={user&&user.logo=== null?profile:`${imgUrl}/${user.logo}`}  alt="profile" className="profile mt-3" style={{width: isOpen ? '' : '50px'}}/>
           <div>
             <p
               className="ass_name"
