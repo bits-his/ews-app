@@ -17,7 +17,7 @@ export default function OnboardFarmers() {
     phone: "",
     f_type: "",
     crops: "",
-    scales: "",
+    scale: "",
     org_id: user.org_id,
   };
   const [form, setForm] = useState(_form);

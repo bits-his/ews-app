@@ -10,10 +10,12 @@ import Sizes from './Sizes'
 import Crops from './Crops'
 import { _get, _post } from '../utils/Helper'
 import Languages from './Languages'
-
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 export default function SendMessage() {
   const [filters, setFilters] = useState({})
   const [locations, setLocations] = useState([])
+  const [loading, setLoading] = useState(false)
   const [crops, setCrops] = useState([])
   const [selectLocation, setSelectLocation] = useState([])
   const [selectSize, setSelectSize] = useState([])
@@ -21,7 +23,11 @@ export default function SendMessage() {
   const [selectCrop, setSelectCrop] = useState([])
   const [matchedFarmers, setMatchedFarmers] = useState(0)
   const [messageType, setMessageType] = useState(false)
+  const { user } = useSelector((state) => state.auth)
+  const goto = useNavigate()
   const _form = {
+    user_id: user.id,
+    org_id: user.org_id,
     target: '',
     title: '',
     body: '',
@@ -82,7 +88,7 @@ export default function SendMessage() {
       (response) => {
         // setLoading(false)
         if (response.results && response.results.length) {
-          setMatchedFarmers(response.results[0].matched_farmers)
+          setMatchedFarmers(response.results[0].total)
         }
 
         // alert(JSON.stringify(response));
@@ -101,23 +107,24 @@ export default function SendMessage() {
 
   const handleSubmit = () => {
     // alert('hhghgh')
+    setLoading(true)
     setAll()
     console.log(filters)
     _post(
-      `farmers?query_type=send-msg&lga=${selectLocation
+      `messages?query_type=send-msg&lga=${selectLocation
         .map((l) => l.name)
         .toString()}&crops=${selectCrop.map(
         (c) => c.name,
       )}&sizes=${selectSize.map((s) => s)}`,
       form,
       (response) => {
-        // setLoading(false)
-        // alert(JSON.stringify(response));
+        setLoading(false)
         console.log({ response, msg: 'SUBMITTED' })
         console.log(form)
+        goto('/messages')
       },
       (error) => {
-        // setLoading(false)
+        setLoading(false)
         console.error(error)
       },
     )
@@ -126,7 +133,7 @@ export default function SendMessage() {
 
   return (
     <Card body className="form_input dashboard_card p-4 shadow-sm m-3">
-      {JSON.stringify({ filters })}
+      {/* {JSON.stringify({ filters })} */}
       {/* {JSON.stringify({ locationName })}
       {JSON.stringify({ selectCrop })}
       {JSON.stringify({ selectSize })}
@@ -184,12 +191,13 @@ export default function SendMessage() {
                 value={form.body}
                 onChange={handleChange}
               />
+
               <button
                 className="primary_button mt-3"
                 style={{ float: 'right' }}
                 onClick={handleSubmit}
               >
-                Send
+                {loading ? <span disabled>Sending...</span> : <span>Send</span>}
               </button>
             </div>
           ) : (
@@ -227,6 +235,7 @@ export default function SendMessage() {
                 onChange={setSelectLocation}
                 onClick={() => handleAdd('Locations')}
                 options={locations}
+                // onInputChange={getFarmers}
               />
             ) : form.target === 'Language' ? (
               <Languages

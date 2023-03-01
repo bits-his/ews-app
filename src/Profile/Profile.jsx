@@ -1,60 +1,123 @@
-import { React, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Card, Col, Row, Label } from "reactstrap";
-import org_logo from "../Images/profile.jpg";
+import { React, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Card, Col, Row, Label } from 'reactstrap'
+import org_logo from '../Images/profile.jpg'
 
-import { TbEdit } from "react-icons/tb";
-import { _update } from "../utils/Helper";
+import { TbEdit } from 'react-icons/tb'
+import { imgUrl, server_url } from '../utils/Helper'
 export default function Profile() {
-  const { user } = useSelector((p) => p.auth);
-  const [profile, setProfile] = useState(user);
+  const { user } = useSelector((p) => p.auth)
+  const [profile, setProfile] = useState(user)
 
   const handleChange = ({ target: { name, value } }) => {
-    setProfile((p) => ({ ...p, [name]: value }));
-  };
+    setProfile((p) => ({ ...p, [name]: value }))
+  }
 
   useEffect(() => {
-    setProfile(user);
-  });
+    setProfile(user)
+  })
 
-  const updateApi = () => {
-    _update(
-      `users/${user.id}`,
-      profile,
-      (res) => {
-        if (res.success) {
-          alert("Update sucessfully");
+  const updateApi = () => {}
+  const [play, setPlay] = useState(null)
+  const [image, setImage] = useState([])
+  function handleImage(e) {
+    const file = e.target.files[0]
+    let reader = new FileReader()
+    reader.onloadend = () => {
+      setImage(e.target.files[0])
+      setPlay(reader.result)
+      console.log(e.target.files[0])
+    }
+
+    reader.readAsDataURL(file)
+    //
+  }
+  const [form, setForm] = useState({
+    name: 'musa',
+    lname: 'kabiru',
+  })
+  let id = user && user.id
+  const handleUpdatPic = () => {
+    const data = new FormData()
+    data.append('image', image)
+    data.append('query_type', 'insert')
+    data.append('id', id)
+    Object.keys(form).forEach((i) => data.append(i, form[i]))
+    // alert(JSON.stringify(data))
+    fetch(`${server_url}/users/profile`, {
+      method: 'POST',
+      body: data,
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.success) {
+          // alert('success')
+          window.location.reload();
         }
-        // alert('sucess')
-        console.log(res);
-      },
-      (err) => {
-        setLoading(false);
-        console.log(err);
-        // alert(err)
-      }
-    );
-  };
+        alert(data.msg)
+      })
+      .catch((err) => {
+        console.log('Bad request')
+        console.log(err)
+        alert('An Error Occured')
+      })
+  }
 
   return (
     <div>
-      {/* {JSON.stringify({ user })} */}
+      {/* {JSON.stringify( user )} */}
       {/* {JSON.stringify(profile)} */}
-      <Row>
+      <Row className="m-0">
         <Col md={1}></Col>
         <Col md={4} className="">
           <Card className="profile_card m-3 shadow-sm p-4">
             <div class="card-body text-center m-0 p-0">
               <div className="card-body text-center ">
                 <p className="profile_name m-0">{user.name}</p>
-                <p style={{ display: "inline-block" }} className="profile_mail">
+                <p style={{ display: 'inline-block' }} className="profile_mail">
                   {user.email}
                 </p>
               </div>
-              <img src={org_logo} className="org_logo " width={200} />
-              <TbEdit className="edit_button" size={48} />
+              {play ? (
+                <img
+                  src={play && play}
+                  alt="`"
+                  className="org_logo "
+                  width={200}
+                  // style={{
+                  //   width: "190px",
+                  //   height: "150px",
+                  // }}
+                />
+              ) : (
+                <img
+                  src={
+                    user && user.logo === null
+                      ? org_logo
+                      : `${imgUrl}/${user.logo}`
+                  }
+                  className="org_logo "
+                  width={200}
+                />
+              )}
+
+              <label for="newProfilePhoto">
+                {' '}
+                <TbEdit className="edit_button" size={48} />
+              </label>
+              <input
+                className="uploadProfileInput"
+                type="file"
+                name="profile_pic"
+                id="newProfilePhoto"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleImage}
+              />
               <div className="card-body text-center">
-                <button className="upload_button mt-2">Upload new photo</button>
+                <button className="upload_button mt-2" onClick={handleUpdatPic}>
+                  Upload new photo
+                </button>
               </div>
             </div>
           </Card>
@@ -149,7 +212,7 @@ export default function Profile() {
                   <Col md={4}> </Col>
                   <Col md={4}>
                     <button className="primary_button mt-4 w-100">
-                      Cancel{" "}
+                      Cancel{' '}
                     </button>
                   </Col>
                 </Row>
@@ -160,7 +223,7 @@ export default function Profile() {
         <Col md={1}></Col>
       </Row>
     </div>
-  );
+  )
 }
 {
 }

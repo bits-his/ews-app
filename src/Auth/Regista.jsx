@@ -3,7 +3,7 @@ import { Row, Col, Card, ButtonGroup, Button } from 'reactstrap'
 import { primaryColor, secondaryColor } from '../Colors'
 import './Register.css'
 import Registration from './Registration'
-import SignIn from './SignIn'
+import SignIn from './Signin.jsx'
 import logo from '../Images/Knowtify1.png'
 export default function Register() {
   const [page, setPage] = useState(false)

@@ -1,6 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Card, Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Modal, ModalBody, ModalFooter, Row, Button, Table } from 'reactstrap'
+import {
+  Card,
+  Col,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  Row,
+  Button,
+  Table,
+} from 'reactstrap'
 // import store from '../redux/store'
 import { _delete, _get, _post } from '../utils/Helper'
 import { IoMdMore } from 'react-icons/io'
@@ -15,12 +28,12 @@ export default function Farmers() {
   const [data, setData] = useState([])
   const [farmers, setFarmers] = useState([])
   const { user } = useSelector((state) => state.auth)
-  const [modal, setModal] = useState(false);
-  const [modal1, setModal1] = useState(false);
+  const [modal, setModal] = useState(false)
+  const [modal1, setModal1] = useState(false)
 
- const [edit, setEdit] = useState({})
-  const toggle = () => setModal(!modal);
-  const toggle1 = () => setModal1(!modal1);
+  const [edit, setEdit] = useState({})
+  const toggle = () => setModal(!modal)
+  const toggle1 = () => setModal1(!modal1)
 
   const getData = () => {
     setLoading(true)
@@ -29,7 +42,7 @@ export default function Farmers() {
       (response) => {
         setLoading(false)
         let newArr = []
-        response.results.forEach(i => newArr.push({...i, dropDown: false}))
+        response.results.forEach((i) => newArr.push({ ...i, dropDown: false }))
         setFarmers(newArr)
         // alert(JSON.stringify(response));
         console.log({ response })
@@ -43,28 +56,28 @@ export default function Farmers() {
 
   useEffect(() => {
     getData()
-  }, [user.id])
+  }, [user.org_id])
 
   const handleToggle = (i) => {
     let arr = []
     farmers.forEach((item, idx) => {
       if (idx === i) {
-       if (item.dropDown) {
-         arr.push({...item, dropDown: false})
-       }else{
-         arr.push({...item, dropDown: true})
-       }
-      }else{
+        if (item.dropDown) {
+          arr.push({ ...item, dropDown: false })
+        } else {
+          arr.push({ ...item, dropDown: true })
+        }
+      } else {
         arr.push(item)
       }
     })
-   setFarmers(arr)
+    setFarmers(arr)
   }
   //
   const handleDelete = () => {
-       _delete(
-      "farmers/delete-farmers",
-      {farmer_id: edit.farmer_id},
+    _delete(
+      'farmers/delete-farmers',
+      { farmer_id: edit.farmer_id },
       (res) => {
         if (res.success) {
           getData()
@@ -72,23 +85,16 @@ export default function Farmers() {
           // alert('sucessful')
         }
         // alert('sucess')
-        console.log(res);
+        console.log(res)
       },
       (err) => {
-        console.log(err);
+        console.log(err)
         // alert(err)
       },
     )
     console.log(form)
   }
-
-  // };
-
-  // useEffect(() => {
-  //   handleGet();
-  // }, []);
   return (
-
     <div>
       <Card className="dashboard_card m-3 shadow-sm p-4">
         {/* {JSON.stringify({ farmers })}  */}
@@ -138,37 +144,98 @@ export default function Farmers() {
                   <td>{item.state}</td>
                   <td>{item.f_type}</td>
                   <td>{item.crops}</td>
-                  <td>{item.scales}</td>
+                  <td>{item.scale}</td>
                   <td>
                     <div className="d-flex">
-                      <Dropdown isOpen={item.dropDown} toggle={() => handleToggle(index)} direction='down'>
-                        <DropdownToggle className ="drop_down_menu" style={{backgroundColor: 'transparent', outline: 'none', border: 'none'}}><IoMdMore className ="drop_down_menu_icon"/></DropdownToggle>
-                        <DropdownMenu >
-                          <DropdownItem onClick={() => {
-                            toggle()
-                            setEdit(item)
-                            }} ><BiEdit style={{fontSize: 25, marginRight: 3, marginBottom: 2}}/> Edit</DropdownItem>
-                            <Modal isOpen={modal} toggle={toggle} size='md'>
-                              <ModalBody>
-                                <EditModal edit={edit} toggle= {toggle} getData= {getData}/>
-                              </ModalBody>
-                            </Modal>
-                          <DropdownItem className='delete_drop_down' 
+                      <Dropdown
+                        isOpen={item.dropDown}
+                        toggle={() => handleToggle(index)}
+                        direction="down"
+                      >
+                        <DropdownToggle
+                          className="drop_down_menu"
+                          style={{
+                            backgroundColor: 'transparent',
+                            outline: 'none',
+                            border: 'none',
+                          }}
+                        >
+                          <IoMdMore className="drop_down_menu_icon" />
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem
+                            onClick={() => {
+                              toggle()
+                              setEdit(item)
+                            }}
+                          >
+                            <BiEdit
+                              style={{
+                                fontSize: 25,
+                                marginRight: 3,
+                                marginBottom: 2,
+                              }}
+                            />{' '}
+                            Edit
+                          </DropdownItem>
+                          <Modal isOpen={modal} toggle={toggle} size="md">
+                            <ModalBody>
+                              <EditModal
+                                edit={edit}
+                                toggle={toggle}
+                                getData={getData}
+                              />
+                            </ModalBody>
+                          </Modal>
+                          <DropdownItem
+                            className="delete_drop_down"
                             onClick={() => {
                               toggle1()
-                               setEdit(item)
-                              }}>
-                            <MdDeleteOutline style={{fontSize: 25, marginRight: 3, marginBottom: 2}}/>Delete</DropdownItem>
-                              <Modal isOpen={modal1} toggle={toggle1} size='sm' style={{padding: 30}}>
-                                <ModalBody>
-                                  <center style={{fontSize: 20}}> Are you sure you want to delete?</center>
-                                  {/* {JSON.stringify(edit)} */}
-                                  <div style={{display: 'flex',justifyContent: 'space-between'}}>
-                                    <button className="primary_button mt-4" onClick={toggle1}>Cancel</button>
-                                    <button className="primary_button mt-4" onClick={() => handleDelete(item)}>Delete</button>
-                                  </div>
-                                </ModalBody >
-                              </Modal>
+                              setEdit(item)
+                            }}
+                          >
+                            <MdDeleteOutline
+                              style={{
+                                fontSize: 25,
+                                marginRight: 3,
+                                marginBottom: 2,
+                              }}
+                            />
+                            Delete
+                          </DropdownItem>
+                          <Modal
+                            isOpen={modal1}
+                            toggle={toggle1}
+                            size="sm"
+                            style={{ padding: 30 }}
+                          >
+                            <ModalBody>
+                              <center style={{ fontSize: 20 }}>
+                                {' '}
+                                Are you sure you want to delete?
+                              </center>
+                              {/* {JSON.stringify(edit)} */}
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                }}
+                              >
+                                <button
+                                  className="primary_button mt-4"
+                                  onClick={toggle1}
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  className="primary_button mt-4"
+                                  onClick={() => handleDelete(item)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            </ModalBody>
+                          </Modal>
                         </DropdownMenu>
                       </Dropdown>
                     </div>
@@ -181,6 +248,10 @@ export default function Farmers() {
                 </tr>
               ))
             )}
+
+            {/* {farmers.length === 0 ? (
+              <span>No farmers registered to this association</span>
+            ) : null} */}
           </tbody>
         </Table>
       </Card>

@@ -167,6 +167,9 @@
   padding: 14px;
   color: #fff;
 }
+label[for="file-input"] {
+  cursor: pointer;
+}
 .edit_button:hover {
   cursor: pointer;
 }
