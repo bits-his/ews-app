@@ -69,8 +69,8 @@ export default function Profile() {
       {/* {JSON.stringify(profile)} */}
       <Row className="m-0">
         <Col md={1}></Col>
-        <Col md={4} className="">
-          <Card className="profile_card m-3 shadow-sm p-4">
+        <Col md={4} className="mt-4">
+          <Card className="profile_card shadow-sm p-4">
             <div class="card-body text-center m-0 p-0">
               <div className="card-body text-center ">
                 <p className="profile_name m-0">{user.name}</p>
@@ -115,7 +115,7 @@ export default function Profile() {
                 onChange={handleImage}
               />
               <div className="card-body text-center">
-                <button className="upload_button mt-2" onClick={handleUpdatPic}>
+                <button className="primary_button mt-2" onClick={handleUpdatPic}>
                   Upload new photo
                 </button>
               </div>
@@ -123,8 +123,8 @@ export default function Profile() {
           </Card>
         </Col>
 
-        <Col md={5} className=" mt-4 ">
-          <Card className=" p-4 h-100 shadow-sm">
+        <Col md={5} className="mt-4 ">
+          <Card className="profile_card p-4 h-100 shadow-sm">
             <h2>User Profile</h2>
             <div>
               <Label className="profile_label mt-3 mb-d">Name</Label>
@@ -203,7 +203,7 @@ export default function Profile() {
                 <Row>
                   <Col md={4}>
                     <button
-                      className="upload_button mt-3 w-100"
+                      className="primary_button mt-4"
                       onClick={updateApi}
                     >
                       Upload Info

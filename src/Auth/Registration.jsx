@@ -31,6 +31,18 @@ export default function Registration() {
   const handleChange = ({ target: { name, value } }) => {
     setRegistration((prev) => ({ ...prev, [name]: value }))
   }
+  // function handleEmailChange(e) {
+  //   setPerson({
+  //     ...person,
+  //     firstName: e.target.value,
+  //   })
+  // }
+  // function handleChange(e) {
+  //   setPerson({
+  //     ...person,
+  //     [e.target.name]: e.target.value
+  //   });
+  // }
 
   const submit = (e) => {
     e.preventDefault()

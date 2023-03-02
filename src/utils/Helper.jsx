@@ -1,5 +1,5 @@
-// export const server_url = 'https://yge.wvi.mybluehost.me/knowtify/api'
-export const server_url = 'http://192.168.0.198:6676/api'
+export const server_url = 'https://yge.wvi.mybluehost.me/knowtify/api'
+// export const server_url = 'http://192.168.0.198:6676/api'
 export const imgUrl = "http://192.168.0.198:6676/uploads";
 import store from '../redux/store'
 

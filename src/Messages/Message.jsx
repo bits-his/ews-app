@@ -11,6 +11,7 @@ export default function Message() {
   const { user } = useSelector((state) => state.auth)
   const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(false)
+
   const goto = useNavigate()
   const messageCard = [
     {
@@ -102,7 +103,7 @@ export default function Message() {
                   <th>Body</th>
                   <th>Targeted</th>
                   <th>Date/Time</th>
-                  <th>Action</th>
+                  {/* <th>Action</th> */}
                 </tr>
               </thead>
               {loading ? (
@@ -116,7 +117,7 @@ export default function Message() {
                       <td>{item.body}</td>
                       <td>Table cell</td>
                       <td>{moment(item.created_at).calendar()}</td>
-                      <td>Table cell</td>
+                      {/* <td>Table cell</td> */}
                     </tr>
                   ))}
                 </tbody>
