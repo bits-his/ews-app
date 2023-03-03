@@ -1,7 +1,7 @@
 import { Typeahead } from 'react-bootstrap-typeahead'
 import { Col, Row } from 'reactstrap'
 export default function Languages({
-  options,
+ 
   onClick,
   onChange,
   multiSelections,

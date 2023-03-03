@@ -1,33 +1,33 @@
 import React, { useState } from 'react'
-import { Card, Col, Row } from 'reactstrap'
-import { BsPlus } from 'react-icons/bs'
-import TableFarmer from '../Farmers/FarmerTable'
+import { Col, Row } from 'reactstrap'
+// import { BsPlus } from 'react-icons/bs'
+// import TableFarmer from '../Farmers/FarmerTable'
 import { Typeahead } from 'react-bootstrap-typeahead'
 import { _post, _update } from '../utils/Helper'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 export default function EditModal({edit, toggle, getData}) {
-  const goto = useNavigate()
-  const { user } = useSelector((state) => state.auth)
-  const _form = {
-    fname: '',
-    lname: '',
-    lga: '',
-    state: '',
-    phone: '',
-    f_type: '',
-    crops: '',
-    scales: '',
-    org_id: user.org_id,
-  }
+  // const goto = useNavigate()
+  // const { user } = useSelector((state) => state.auth)
+  // const _form = {
+  //   fname: '',
+  //   lname: '',
+  //   lga: '',
+  //   state: '',
+  //   phone: '',
+  //   f_type: '',
+  //   crops: '',
+  //   scales: '',
+  //   org_id: user.org_id,
+  // }
 
   let farmingTypeList = edit.f_type?.split(', ')
   let cropList = edit.crops?.split(', ')
   let scalecropList = edit.scale?.split(', ')
 //   farmingTypeListfarmingTypeList{"farmer_id":12,"user_id":14,"org_id":6,"fname":"ABDUL","lname":"ASD","lga":"KURA","state":"KANO","address":"KURA","phone":"0900000000","email":null,"f_type":"LIVESTOCK","scale":"LARGE SCALE","crops":"RICE","f_address":"KURA","created_at":"2023-01-31T23:00:00.000Z","updated_at":"2023-02-06T13:11:39.000Z","dropDown":true}
   const [form, setForm] = useState(edit)
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const [multiSelections, setMultiSelections] = useState(farmingTypeList)
   const [multiSelections1, setMultiSelections1] = useState(cropList)
   const [multiSelections2, setMultiSelections2] = useState(scalecropList)

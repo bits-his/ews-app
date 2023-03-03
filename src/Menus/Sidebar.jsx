@@ -5,7 +5,7 @@ import { HiOutlineUsers } from 'react-icons/hi'
 import { GiFarmer } from 'react-icons/gi'
 import { VscFeedback } from 'react-icons/vsc'
 import { CiSettings } from 'react-icons/ci'
-import { AiOutlineMenuUnfold, AiOutlineMenuFold } from 'react-icons/ai'
+// import { AiOutlineMenuUnfold, AiOutlineMenuFold } from 'react-icons/ai'
 import logo from '../Images/Knowtify.png'
 import './Sidebar.css'
 import { AiOutlineLogout } from 'react-icons/ai'
@@ -18,7 +18,7 @@ import { imgUrl } from '../utils/Helper'
 
 export default function Sidebar() {
   const dispatch = useDispatch()
-  const [showSubMenu, setShowSubMenu] = useState(false)
+  // const [showSubMenu, setShowSubMenu] = useState(false)
   const [isOpen, setIsOpen] = useState(true)
   const toggle = () => setIsOpen(!isOpen)
   // const drop = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Card, CardText, Col, Row, Table } from 'reactstrap'
+import { Card,  Col, Row, Table } from 'reactstrap'
 import { HiOutlinePencil } from 'react-icons/hi'
 import { MdSend, MdCancelScheduleSend } from 'react-icons/md'
 import { primaryColor } from '../Colors'

@@ -9,9 +9,9 @@ import {
   DropdownToggle,
   Modal,
   ModalBody,
-  ModalFooter,
+  // ModalFooter,
   Row,
-  Button,
+  // Button,
   Table,
 } from 'reactstrap'
 // import store from '../redux/store'
@@ -25,7 +25,7 @@ import EditModal from './EditModal'
 export default function Farmers() {
   const goto = useNavigate()
   const [loading, setLoading] = useState(false)
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
   const [farmers, setFarmers] = useState([])
   const { user } = useSelector((state) => state.auth)
   const [modal, setModal] = useState(false)

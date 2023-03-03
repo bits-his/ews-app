@@ -1,7 +1,7 @@
 import React from 'react'
 import './Register.css'
 import { BiChevronRight } from 'react-icons/bi'
-import { Row, Col, Button } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../redux/actions/authActions'

@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 export default function Dashboard() {
-  const {user} = useSelector(p=>p.auth)
+  // const {user} = useSelector(p=>p.auth)
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Row, Col, Card, ButtonGroup, Button } from 'reactstrap'
-import { primaryColor, secondaryColor } from '../Colors'
+import { Row, Col, Card } from 'reactstrap'
+import { secondaryColor } from '../Colors'
 import './Register.css'
 import Registration from './Registration'
 import SignIn from './Signin.jsx'

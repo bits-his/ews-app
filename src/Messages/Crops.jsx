@@ -1,6 +1,6 @@
 import { Typeahead } from 'react-bootstrap-typeahead'
 import { Col, Row } from 'reactstrap'
-export default function Crops({ options, onClick, onChange, multiSelections }) {
+export default function Crops({ options,  onChange, multiSelections }) {
   return (
     <div>
       <Row className="" style={{ display: 'flex', alignItems: 'center' }}>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { BiChevronRight } from 'react-icons/bi'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { Row, Col, Button } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 import { login } from '../redux/actions/authActions'
-import { server_url, _post } from '../utils/Helper'
+import { _post } from '../utils/Helper'
 import './Register.css'
 
 export default function Registration() {
